@@ -1,0 +1,17 @@
+@import "cyborg/variables";
+
+@import "bootstrap";
+
+@import "cyborg/bootswatch";
+
+body {
+    padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+a.icon-link {
+    color: #bbb;
+}

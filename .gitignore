@@ -1,0 +1,54 @@
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/log
+/tmp
+/db/*.sqlite3
+/public/system
+/coverage/
+/spec/tmp
+**.orig
+rerun.txt
+pickle-email-*.html
+config/initializers/secret_token.rb
+config/secrets.yml
+
+## Environment normalisation:
+/.bundle
+/vendor/bundle
+
+# these should all be checked in to normalise the environment:
+# Gemfile.lock, .ruby-version, .ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+
+# Ignore database.yml, the checked in file will be database.yml.example
+# which is copied locally to database.yml where changes are made
+/config/database.yml
+
+# Ignore log files but keep log directory
+/shared/log/*.log
+
+# Ignore Dotenv file
+.env
+
+# Ignore application configuration
+/config/application.yml
+
+# Ignore ST3 workspace file
+sharparam.com.sublime-workspace
+
+# Ignore github config
+config/github.yml
+
+# Ignore devise config
+config/devise.yml
+
+# Ignore sitemaps (generated on deploy by sitemap_generator)
+public/sitemap*.xml*
+
+# SMTP config
+config/smtp.yml
