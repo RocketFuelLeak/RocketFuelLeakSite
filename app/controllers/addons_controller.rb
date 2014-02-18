@@ -66,6 +66,6 @@ class AddonsController < ApplicationController
     end
 
     def load_addon
-      @addon = Addon.build(addon_params)
+      @addon = Addon.new(addon_params)
     end
 end
