@@ -5,7 +5,8 @@
 @import "cyborg/bootswatch";
 
 body {
-    padding-bottom: 20px;
+    //padding-bottom: 20px;
+    background: image-url('patterns/burried.png') repeat;
 }
 
 .navbar {
@@ -14,4 +15,19 @@ body {
 
 a.icon-link {
     color: #bbb;
+}
+
+.container {
+    .notice-container {
+        margin-top: 10px;
+    }
+}
+
+.thumbnail {
+    background: transparent;
+    border-color: #444;
+}
+
+.form-control {
+    color: black;
 }

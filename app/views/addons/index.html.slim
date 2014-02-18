@@ -1,0 +1,64 @@
+.row
+    .col-md-3.pull-right
+        h3 Installing AddOns
+        p Depending on what you are using, installation instructions are a bit different.
+        h4 Curse links (Curse client)
+        ol
+            li
+             | Make sure you have the
+             =<> link_to 'Curse client', 'http://www.curse.com/client'
+             | installed and running.
+            li
+             | Click the download button (<i class="glyphicon glyphicon-download-alt"></i>) found in the AddOn panels
+               on this page next to the "Curse" button.
+            li Let the Curse client download and install the AddOn for you
+            li Done!
+        h4 WoWInterface links
+        ol
+            li
+             | Click the download button (<i class="glyphicon glyphicon-download-alt"></i>) found in the AddOn panels
+               on this page next to the "WoWInterface" button.
+            li This will prompt you to save or open a ZIP file. It's recommended to save it somewhere, like your desktop.
+            li
+             | Extract the archive to your WoW AddOn directory, which is usually
+             br
+             kbd C:\Users\Public\Games\World of Warcraft\Interface\AddOns
+            li Restart the WoW client if it's currently running and log back in.
+            li That's it! The AddOn should now be installed and enabled.
+    .col-md-9
+        h1
+         | AddOns
+         - if can? :create, Addon
+            = link_to 'New AddOn', new_addon_path, class: 'pull-right btn btn-success'
+        p
+         | On this page you can find the AddOns that we recommend you have installed for a nicer raid experience.
+           Each AddOn will have either a Curse or WoWInterface link coupled with a direct download button to make it
+           easier for you to obtain and install the addons.
+    .col-md-9
+        - @addons.each do |addon|
+            .col-md-6
+                .thumbnail
+                    img src="#{addon.image}" alt="Image of #{addon.name}"
+                    .caption
+                        h3
+                         = addon.name
+                         - if addon.required?
+                            span.label.label-info< Required for raiding
+                        p = addon.description
+                        p
+                            - if addon.curse?
+                                .btn-group
+                                    = link_to 'Curse', addon.curse, class: 'btn btn-primary'
+                                    - if addon.curse_download?
+                                        = link_to addon.curse_download, class: 'btn btn-primary' do
+                                            i.glyphicon.glyphicon-download-alt
+                            - if addon.wowinterface.present?
+                                .btn-group
+                                    =< link_to 'WoWInterface', addon.wowinterface, class: 'btn btn-primary'
+                                    - if addon.wowinterface_download?
+                                        = link_to addon.wowinterface_download, class: 'btn btn-primary' do
+                                            i.glyphicon.glyphicon-download-alt
+                            - if can? :edit, addon
+                                =< link_to 'Edit', edit_addon_path(addon), class: 'btn btn-default'
+                            - if can? :destroy, addon
+                                =< link_to 'Delete', addon, method: :delete, class: 'btn btn-default', data: { confirm: 'Are you sure?' }

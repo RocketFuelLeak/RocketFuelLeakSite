@@ -19,11 +19,11 @@ html
         .container
             .row
                 .col-md-12
-                    h1 Rocket Fuel Leak @ Stormreaver-EU
+                    h1.text-center Rocket Fuel Leak
             .navbar.navbar-inverse role="navigation"
                 .container-fluid
                     .navbar-header
-                        button[type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"]
+                        button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
                             span.sr-only Toggle Navigation
                             / This is the story of how a repetitive 3-liner turned into a 2-liner
                             - 3.times do
@@ -33,9 +33,16 @@ html
                         ul.nav.navbar-nav
                             li class="#{current_page?(root_path) && 'active'}"
                                 = link_to 'Home', root_path
+                            li.disabled: a.disabled News
+                            li.disabled: a.disabled Forums
+                            li class="#{current_page?(addons_path) && 'active'}"
+                                = link_to 'AddOns', addons_path
+                            li class="#{current_page?(epgp_path) && 'active'}"
+                                = link_to 'EPGP', epgp_path
                             li class="#{current_page?(about_path) && 'active'}"
                                 = link_to 'About', about_path
-                        /ul.nav.navbar-nav.navbar-right
+                        ul.nav.navbar-nav.navbar-right
+                            li.disabled: a.disabled Sign in
                         /    - if user_signed_in?
                         /        li
                         /            a class="dropdown-toggle" data-toggle="dropdown" href="#"
@@ -47,9 +54,9 @@ html
                         /    - else
                         /        li = link_to 'Sign in', new_user_session_path
             - if !flash.empty?
-                .error-container
+                .notice-container
                     - flash.each do |level, msg|
-                        div[class="#{flash_class(level)} alert-dismissable"]
+                        div class="#{flash_class(level)} alert-dismissable"
                             button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
                             == msg
             == content_for?(:content) ? yield(:content) : yield
@@ -57,17 +64,17 @@ html
             footer
                 p.pull-left Copyright &copy; 2014 by Rocket Fuel Leak.
                 p.pull-right
-                    a.icon-link href="http://google.com/+RocketFuelLeak" title="Google+ Page"
-                        i.fa.fa-google-plus.fa-2x.fa-fw
                     / TODO: Find a reddit icon
                     /a.icon-link href="http://reddit.com/r/RocketFuelLeak" title="subreddit"
                     /    i.fa
+                    a.icon-link href="https://facebook.com/RocketFuelLeak" title="Facebook Page"
+                        i.fa.fa-facebook.fa-2x.fa-fw
+                    a.icon-link href="https://www.google.com/+RocketFuelLeakWoW" title="Google+ Page"
+                        i.fa.fa-google-plus.fa-2x.fa-fw
                     a.icon-link href="http://twitter.com/RocketFuelLeak" title="@RocketFuelLeak on Twitter"
                         i.fa.fa-twitter.fa-2x.fa-fw
                     a.icon-link href="http://www.youtube.com/user/RocketFuelLeak" title="YouTube Channel"
                         i.fa.fa-youtube.fa-2x.fa-fw
-                    a.icon-link href="https://facebook.com/RocketFuelLeak" title="Facebook Page"
-                        i.fa.fa-facebook.fa-2x.fa-fw
                     a.icon-link href="mailto:info@rocketfuelleak.com" title="Email us!"
-                        i.fa.fa-envelope-o.fa-2x.fa-fw
+                        i.fa.fa-envelope.fa-2x.fa-fw
         = render 'layouts/analytics'

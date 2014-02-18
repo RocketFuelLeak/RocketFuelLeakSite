@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @post.title
+p
+  strong Content:
+  = @post.content
+p
+  strong Published:
+  = @post.published
+p
+  strong Published at:
+  = @post.published_at
+p
+  strong User:
+  = @post.user
+
+= link_to 'Edit', edit_post_path(@post)
+'|
+= link_to 'Back', posts_path

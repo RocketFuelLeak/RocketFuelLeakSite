@@ -1,0 +1,15 @@
+= simple_form_for @addon do |f|
+    = f.error_notification
+
+    .form-inputs
+        = f.input :name, label: false, placeholder: 'Name'
+        = f.input :description, label: false, placeholder: 'Description'
+        = f.input :image, label: false, placeholder: 'URL to thumbnail'
+        = f.input :curse, label: false, placeholder: 'Curse Link'
+        = f.input :curse_download, label: false, placeholder: 'Direct link to curse client download'
+        = f.input :wowinterface, label: false, placeholder: 'WoWInterface Link'
+        = f.input :wowinterface_download, label: false, placeholder: 'Direct link to WoWI download'
+        = f.input :required, label: 'Required?'
+
+    .form-actions
+        = f.button :submit, class: 'btn-primary'
