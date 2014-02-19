@@ -75,6 +75,19 @@ RocketFuelLeakSite::Application.configure do
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: SMTP_CONFIG['server'],
+    port: SMTP_CONFIG['port'],
+    domain: SMTP_CONFIG['domain'],
+    user_name: SMTP_CONFIG['username'],
+    password: SMTP_CONFIG['password'],
+    authentication: SMTP_CONFIG['authentication'],
+    enable_starttls_auto: SMTP_CONFIG['autotls']
+  }
+
   config.action_mailer.default_url_options = { :host => 'rocketfuelleak.com' }
 
   # Use default logging formatter so that PID and timestamp are not suppressed.

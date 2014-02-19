@@ -27,6 +27,19 @@ RocketFuelLeakSite::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: SMTP_CONFIG['server'],
+    port: SMTP_CONFIG['port'],
+    domain: SMTP_CONFIG['domain'],
+    user_name: SMTP_CONFIG['username'],
+    password: SMTP_CONFIG['password'],
+    authentication: SMTP_CONFIG['authentication'],
+    enable_starttls_auto: SMTP_CONFIG['autotls']
+  }
+
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   Slim::Engine.set_default_options pretty: true

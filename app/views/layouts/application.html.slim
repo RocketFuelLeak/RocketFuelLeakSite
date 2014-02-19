@@ -62,7 +62,11 @@ html
             == content_for?(:content) ? yield(:content) : yield
             hr
             footer
-                p.pull-left Copyright &copy; 2014 by Rocket Fuel Leak.
+                p.pull-left
+                 | Copyright &copy; 2014 by Rocket Fuel Leak &mdash;
+                 =<> link_to 'Privacy Policy', privacy_path
+                 | &mdash;
+                 =< link_to 'Terms of Service', tos_path
                 p.pull-right
                     / TODO: Find a reddit icon
                     /a.icon-link href="http://reddit.com/r/RocketFuelLeak" title="subreddit"
@@ -73,7 +77,7 @@ html
                         i.fa.fa-google-plus.fa-2x.fa-fw
                     a.icon-link href="http://twitter.com/RocketFuelLeak" title="@RocketFuelLeak on Twitter"
                         i.fa.fa-twitter.fa-2x.fa-fw
-                    a.icon-link href="http://www.youtube.com/user/RocketFuelLeak" title="YouTube Channel"
+                    a.icon-link href="http://www.youtube.com/RocketFuelLeak" title="YouTube Channel"
                         i.fa.fa-youtube.fa-2x.fa-fw
                     a.icon-link href="mailto:info@rocketfuelleak.com" title="Email us!"
                         i.fa.fa-envelope.fa-2x.fa-fw

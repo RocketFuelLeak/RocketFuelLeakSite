@@ -1,0 +1,22 @@
+development:
+    server: "smtp.example.com"
+    port: 1337
+    domain: "example.com"
+    username: "foobar@example.com"
+    password: "password"
+    authentication: "plain"
+    autotls: true
+test:
+    server: "smtp.example.com"
+    port: 1337
+    username: "foobar@example.com"
+    password: "password"
+    authentication: "plain"
+    autotls: true
+production:
+    server: "smtp.example.com"
+    port: 1337
+    username: "foobar@example.com"
+    password: "password"
+    authentication: "plain"
+    autotls: true

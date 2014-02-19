@@ -41,8 +41,11 @@ config/secrets.yml
 # Ignore ST3 workspace file
 *.sublime-workspace
 
-# Ignore github config
+# Ignore omniauth configs
 config/github.yml
+config/google.yml
+config/facebook.yml
+config/twitter.yml
 
 # Ignore devise config
 config/devise.yml

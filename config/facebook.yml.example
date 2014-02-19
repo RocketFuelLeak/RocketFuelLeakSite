@@ -1,0 +1,9 @@
+development:
+    app_id: "xxxxx"
+    app_secret: "xxxxx"
+test:
+    app_id: "xxxxx"
+    app_secret: "xxxxx"
+production:
+    app_id: "xxxxx"
+    app_secret: "xxxxx"

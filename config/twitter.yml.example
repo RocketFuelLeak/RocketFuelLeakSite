@@ -1,0 +1,9 @@
+development:
+    api_key: "xxxxx"
+    api_secret: "xxxxx"
+test:
+    api_key: "xxxxx"
+    api_secret: "xxxxx"
+production:
+    api_key: "xxxxx"
+    api_secret: "xxxxx"

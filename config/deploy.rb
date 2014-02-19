@@ -36,7 +36,10 @@ namespace :deploy do
         run "mkdir -p #{shared_path}/config"
         put File.read("config/database.yml.example"), "#{shared_path}/config/database.yml"
         put File.read("config/secrets.yml.example"), "#{shared_path}/config/secrets.yml"
+        put File.read("config/github.yml.example"), "#{shared_path}/config/github.yml"
+        put File.read("config/facebook.yml.example"), "#{shared_path}/config/facebook.yml"
         put File.read("config/devise.yml.example"), "#{shared_path}/config/devise.yml"
+        put File.read("config/smtp.yml.example"), "#{shared_path}/config/smtp.yml"
         puts "Now edit the config files in #{shared_path}."
     end
 
@@ -45,9 +48,10 @@ namespace :deploy do
     task :symlink_configs, roles: :app do
         run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
         run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
-        #run "ln -nfs #{shared_path}/config/github.yml #{release_path}/config/github.yml"
+        run "ln -nfs #{shared_path}/config/github.yml #{release_path}/config/github.yml"
+        run "ln -nfs #{shared_path}/config/facebook.yml #{release_path}/config/facebook.yml"
         run "ln -nfs #{shared_path}/config/devise.yml #{release_path}/config/devise.yml"
-        #run "ln -nfs #{shared_path}/config/smtp.yml #{release_path}/config/smtp.yml"
+        run "ln -nfs #{shared_path}/config/smtp.yml #{release_path}/config/smtp.yml"
     end
 
     after "deploy:finalize_update", "deploy:symlink_configs"
