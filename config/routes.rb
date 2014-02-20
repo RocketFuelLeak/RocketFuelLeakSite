@@ -7,8 +7,8 @@ RocketFuelLeakSite::Application.routes.draw do
   get 'about' => 'pages#about'
 
   get 'privacy' => 'pages#privacy'
-  get 'tos' => 'pages#tos'
+  get 'terms' => 'pages#terms'
 
-  resources :news, controller: 'posts', as: :news
+  resources :news, controller: 'posts', as: :posts
   resources :addons
 end

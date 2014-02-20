@@ -42,17 +42,17 @@ html
                             li class="#{current_page?(about_path) && 'active'}"
                                 = link_to 'About', about_path
                         ul.nav.navbar-nav.navbar-right
-                            li.disabled: a.disabled Sign in
-                        /    - if user_signed_in?
-                        /        li
-                        /            a class="dropdown-toggle" data-toggle="dropdown" href="#"
-                        /             | #{current_user.username} <b class="caret"></b>
-                        /            ul.dropdown-menu
-                        /                li = link_to 'Profile', current_user
-                        /                li = link_to 'Edit Profile', edit_user_registration_path
-                        /                li = link_to 'Sign out', destroy_user_session_path, method: :delete
-                        /    - else
-                        /        li = link_to 'Sign in', new_user_session_path
+                            - if user_signed_in?
+                                li
+                                    a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                     | #{current_user.username}
+                                     b.caret<
+                                    ul.dropdown-menu
+                                        li = link_to 'Profile', current_user
+                                        li = link_to 'Change password', edit_user_password_path
+                                        li = link_to 'Sign out', destroy_user_session_path, method: :delete
+                            - else
+                                li: a href="#" data-toggle="modal" data-target="#sign-in-modal" Sign in
             - if !flash.empty?
                 .notice-container
                     - flash.each do |level, msg|
@@ -66,7 +66,7 @@ html
                  | Copyright &copy; 2014 by Rocket Fuel Leak &mdash;
                  =<> link_to 'Privacy Policy', privacy_path
                  | &mdash;
-                 =< link_to 'Terms of Service', tos_path
+                 =< link_to 'Terms and Conditions', terms_path
                 p.pull-right
                     / TODO: Find a reddit icon
                     /a.icon-link href="http://reddit.com/r/RocketFuelLeak" title="subreddit"
@@ -81,4 +81,33 @@ html
                         i.fa.fa-youtube.fa-2x.fa-fw
                     a.icon-link href="mailto:info@rocketfuelleak.com" title="Email us!"
                         i.fa.fa-envelope.fa-2x.fa-fw
+        - unless user_signed_in?
+            #sign-in-modal.modal.fade role="dialog" aria-labelledby="sign-in-modal-title" aria-hidden=true
+                .modal-dialog.modal-sm
+                    .modal-content
+                        = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'modal-form' }) do |f|
+                            .modal-header
+                                button.close type="button" data-dismiss="modal" aria-hidden=true &times;
+                                h4#sign-in-modal-title.modal-title Sign in
+                            .modal-body
+                                p Sign in with a provider:
+                                p.text-center
+                                    = link_to omniauth_authorize_path(resource_name, :facebook), class: 'btn btn-primary' do
+                                        i.fa.fa-facebook.fa-2x.fa-fw
+                                    =< link_to omniauth_authorize_path(resource_name, :twitter), class: 'btn btn-primary' do
+                                        i.fa.fa-twitter.fa-2x.fa-fw
+                                    =< link_to omniauth_authorize_path(resource_name, :google_oauth2), class: 'btn btn-danger' do
+                                        i.fa.fa-google-plus.fa-2x.fa-fw
+                                    =< link_to omniauth_authorize_path(resource_name, :github), class: 'btn btn-default' do
+                                        i.fa.fa-github-alt.fa-2x.fa-fw
+                                p &hellip;or log in with your account:
+                                = f.input :email, label: false, placeholder: 'Email', required: true, autofocus: true
+                                = f.input :password, label: false, placeholder: 'Password', required: true
+                                = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+                                p
+                                 | Not a user?
+                                 =< link_to 'Sign up!', new_user_registration_path
+                            .modal-footer
+                                button.btn.btn-default type="button" data-dismiss="modal" Close
+                                = f.button :submit, "Sign in", class: 'btn-primary'
         = render 'layouts/analytics'

@@ -11,6 +11,6 @@ class PagesController < ApplicationController
     def privacy
     end
 
-    def tos
+    def terms
     end
 end

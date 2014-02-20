@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
 
     before_save :check_published_state
 
+    resourcify
+
     def check_published_state
         if self.published == true
             self.published_at = Time.now

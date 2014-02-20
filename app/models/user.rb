@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
     # Include default devise modules. Others available are:
     # :lockable and :timeoutable
     devise :database_authenticatable, :registerable, :omniauthable,
@@ -7,7 +8,10 @@ class User < ActiveRecord::Base
 
     has_many :posts
 
-    validates :username, presence: true, uniqueness: { case_sensitive: false }
+    validates :username, presence: true, uniqueness: { case_sensitive: false },
+              format: { with: /\A[A-Z][a-z]+\z/ }
+
+    validates_acceptance_of :terms_read, accept: true
 
     def self.from_omniauth(auth)
         where(auth.slice(:provider, :uid)).first_or_create do |user|
