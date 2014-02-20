@@ -4,14 +4,22 @@
         = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
             = f.error_notification
             .form-inputs
-                = f.input :username, label: false, placeholder: 'Username', required: true, autofocus: true
+                = f.input :username, label: false, placeholder: 'Username', required: true, autofocus: true,
+                    input_html: { data: { toggle: 'tooltip', trigger: 'focus', placement: 'bottom', container: 'body',
+                            title: 'Minimum 3 characters, letters only, must start with capital letter and contain only lowercase letters' } }
                 = f.input :email, label: false, placeholder: 'Email', required: true
                 - if f.object.password_required?
-                    = f.input :password, label: false, placeholder: 'Password', required: true
+                    = f.input :password, label: false, placeholder: 'Password', required: true,
+                        input_html: { data: { toggle: 'tooltip', trigger: 'focus', placement: 'bottom', container: 'body',
+                            title: 'Must be between 8 and 128 characters long (inclusive)' } }
                     = f.input :password_confirmation, label: false, placeholder: 'Confirm password', required: true
                 p You will be able to add and manage World of Warcraft characters after your account has been created.
+                p
+                    a href="#" data-toggle="tooltip" title="Test tooltip" Hover over this
                 = f.input :terms_read,
                     label: ("I have read and agree to the #{link_to 'Terms and Conditions', terms_path}").html_safe
             .form-actions
                 = f.button :submit, "Sign up", class: 'btn-primary btn-block'
         = render "devise/shared/links"
+javascript:
+    $('input[data-toggle="tooltip"]').tooltip();
