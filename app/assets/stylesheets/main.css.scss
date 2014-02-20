@@ -43,3 +43,23 @@ p a.btn {
 ol.terms-sublist {
     list-style-type: lower-alpha;
 }
+
+img {
+    &.img-responsive-centered {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 10px;
+    }
+
+    &.img-responsive-thumbnail-centered {
+        @extend .img-thumbnail;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
