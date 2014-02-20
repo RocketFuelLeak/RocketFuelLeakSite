@@ -18,7 +18,7 @@ module ApplicationHelper
     end
 
     def markdown(text)
-        renderer = HTMLWithPygments.new(hard_wrap: true, filter_html: true)
+        renderer = HTMLWithPygments.new(hard_wrap: true, filter_html: true, with_toc_data: true)
         options = {
             autolink: true,
             no_intra_emphasis: true,
