@@ -4,9 +4,27 @@
 
 @import "cyborg/bootswatch";
 
+$footer-height: 90px;
+
+html, body {
+    height: 100%;
+}
+
 body {
-    //padding-bottom: 20px;
-    background: image-url('patterns/burried.png') repeat;
+    background: image-url('wow/background_5.4.jpg') no-repeat top center fixed #000;
+    background-size: cover;
+}
+
+#main-wrap {
+    background: rgba(0, 0, 0, 0.9);
+    min-height: 100%;
+    height: auto;
+    margin-bottom: (-$footer-height);
+    padding-bottom: $footer-height;
+}
+
+#footer-wrap {
+    min-height: $footer-height;
 }
 
 .navbar {
