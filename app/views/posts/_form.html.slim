@@ -10,22 +10,23 @@
             #post-tab-edit.tab-pane.active.fade.in
                 .markdown-box-actions
                     .btn-group
-                        a.btn.btn-default.bold-btn: i.fa.fa-bold.fa-fw
-                        a.btn.btn-default.italic-btn: i.fa.fa-italic.fa-fw
-                        a.btn.btn-default.underline-btn: i.fa.fa-underline.fa-fw
-                        a.btn.btn-default.strike-btn: i.fa.fa-strikethrough.fa-fw
+                        a.btn.btn-default data-action="bold": i.fa.fa-bold.fa-fw
+                        a.btn.btn-default data-action="italic": i.fa.fa-italic.fa-fw
+                        a.btn.btn-default data-action="underline": i.fa.fa-underline.fa-fw
+                        a.btn.btn-default data-action="strikethrough": i.fa.fa-strikethrough.fa-fw
                     .btn-group
-                        a.btn.btn-default.link-btn: i.fa.fa-link.fa-fw
-                        a.btn.btn-default.img-btn: i.fa.fa-picture-o.fa-fw
+                        a.btn.btn-default data-action="link": i.fa.fa-link.fa-fw
+                        a.btn.btn-default data-action="image": i.fa.fa-picture-o.fa-fw
                     .btn-group
-                        a.btn.btn-default.paragraph-btn P
-                        a.btn.btn-default.heading1-btn H1
-                        a.btn.btn-default.heading2-btn H2
-                        a.btn.btn-default.heading3-btn H3
+                        a.btn.btn-default data-action="paragraph" P
+                        a.btn.btn-default data-action="heading" data-action-param="1" H1
+                        a.btn.btn-default data-action="heading" data-action-param="2" H2
+                        a.btn.btn-default data-action="heading" data-action-param="3" H3
                 = f.input :content, label: false, placeholder: 'Content', input_html: { rows: 10, class: 'markdown-box' }
             #post-tab-preview.tab-pane.fade
-                p.text-center: strong Please note that the preview may not be 100% accurate.
-                #post-preview-target.markdown-preview.well.well-sm
+                p.text-center: strong Please note that this preview may not be 100% accurate.
+                .news-post.well.well-sm
+                    #post-preview-target
         = f.input :published, hint: 'Published posts will be visible to everyone'
     .form-actions
         = f.button :submit, class: 'btn-primary btn-block'

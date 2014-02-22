@@ -132,12 +132,6 @@ textarea.markdown-box {
     padding-top: 10px;
 }
 
-.markdown-preview {
-    img {
-        @extend .img-responsive-thumbnail-centered;
-    }
-}
-
 @media (min-width: 0) {
     #footer-copy-text, #footer-social-text {
         text-align: center;
