@@ -1,0 +1,21 @@
+.news-post
+      h1.news-post-title = link_to post.title, post
+      p.news-post-meta
+       i.fa.fa-clock-o>
+       abbr title="#{post.published? ? post.published_at : post.created_at}"
+        => time_ago_in_words post.published? ? post.published_at : post.created_at
+        | ago
+       i.fa.fa-user<>
+       = post.user
+       /i.glyphicon.glyphicon-tag<>
+       /| Test
+       - unless post.published
+            span.label.label-danger< This post has not been published
+       - if can? :update, post
+            =< link_to 'Edit', edit_post_path(post)
+       - if can? :destroy, post
+            =< link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }
+      - if @truncate_posts
+            = markdown(truncate(post.content, length: 500, separator: ' ', omission: "...\n\n[*Continue reading*](#{post_path(post)})", escape: false))
+      - else
+            = markdown(post.content)

@@ -1,11 +1,24 @@
 .row
     .col-md-8
-        h1 Welcome to Rocket Fuel Leak's guild site!
+        h1 Welcome to Rocket Fuel Leak
+        p &hellip; Where the Raids are fun and the boys are gay, having laughs in chat every day!
+        p The raids are epic and the dungeons are fast, when it comes to Warcraft, we're upper class!
+        p
+         | We're a fun social guild who have an amazing core heroic raiding team,
+           and we are also recruiting for a second team for much fun!
+           If you need any help in game always contact Tasee our amazing leader,
+           or any of the officers Seylaina, Vintra, Shottyy or Woop!
+        p
+         | Always Remember, we might be named after an annoying debuff, but this guild is anything but annoying.
+           In fact, we are the opposite of our namesake, we are super speedy awesome fun!
     .col-md-3.col-md-offset-1
         .col-md-12
             h3.text-center News
-            p TODO: List recent news items here
-            p.text-center = link_to 'Read more news', posts_path
+            - if @posts.empty?
+                p.text-muted.text-center No recent posts :(
+            - else
+                = render partial: 'post', collection: @posts
+                p.text-center = link_to 'Read more news', posts_path
         .col-md-12.text-center
             h3 Rankings
             = link_to 'http://www.wowprogress.com/guild/eu/stormreaver/Rocket+Fuel+Leak/rating.tier16_10' do

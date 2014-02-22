@@ -1,0 +1,13 @@
+- title 'News'
+- content_for :content do
+    .row
+        .col-md-9
+            h1
+             | News
+             - if can? :create, Post
+                = link_to 'New Post', new_post_path, class: 'btn btn-success pull-right'
+            == yield
+        .col-md-3
+            = render 'sidebar'
+
+= render template: 'layouts/application'

@@ -5,11 +5,22 @@ class PostsController < ApplicationController
     # GET /posts
     # GET /posts.json
     def index
+        if can? :read_drafts, Post
+            @posts = @posts.recent
+        else
+            @posts = @posts.recently_published
+        end
+
+        respond_to do |format|
+            format.html { @posts = @posts.page(params[:page]).per(10) }
+            format.json { }
+        end
     end
 
     # GET /posts/1
     # GET /posts/1.json
     def show
+        authorize! :read_drafts, @post unless @post.published
     end
 
     # GET /posts/new
@@ -65,6 +76,6 @@ class PostsController < ApplicationController
         end
 
         def load_post
-            @post = Post.new(post_params)
+            @post = current_user.posts.build(post_params)
         end
 end

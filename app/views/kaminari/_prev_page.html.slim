@@ -1,0 +1,5 @@
+- if current_page.first?
+    li.prev.disabled: span = t('views.pagination.previous').html_safe
+- else
+    li.prev
+        == link_to t('views.pagination.previous').html_safe, url, :rel => 'prev', :remote => remote

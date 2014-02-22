@@ -1,27 +1,5 @@
-h1 Listing posts
-
-table
-  tr
-    th Title
-    th Content
-    th Published
-    th Published at
-    th User
-    th
-    th
-    th
-
-  - @posts.each do |post|
-    tr
-      td = post.title
-      td = post.content
-      td = post.published
-      td = post.published_at
-      td = post.user
-      td = link_to 'Show', post
-      td = link_to 'Edit', edit_post_path(post)
-      td = link_to 'Destroy', post, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Post', new_post_path
+- if @posts.empty?
+    h3.text-muted.text-center There are no news posts :(
+- else
+    = render @posts, locals: { truncate_posts: true }
+    = paginate @posts

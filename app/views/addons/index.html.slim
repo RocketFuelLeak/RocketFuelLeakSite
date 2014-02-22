@@ -58,7 +58,7 @@
                                     - if addon.wowinterface_download?
                                         = link_to addon.wowinterface_download, class: 'btn btn-primary' do
                                             i.glyphicon.glyphicon-download-alt
-                            - if can? :edit, addon
+                            - if can? :update, addon
                                 =< link_to 'Edit', edit_addon_path(addon), class: 'btn btn-default'
                             - if can? :destroy, addon
                                 =< link_to 'Delete', addon, method: :delete, class: 'btn btn-default', data: { confirm: 'Are you sure?' }

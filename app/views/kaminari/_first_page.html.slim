@@ -1,0 +1,5 @@
+- if current_page.first?
+    li.first.disabled: span = t('views.pagination.first').html_safe
+- else
+    li.first
+        == link_to t('views.pagination.first').html_safe, url, :remote => remote

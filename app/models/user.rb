@@ -44,4 +44,8 @@ class User < ActiveRecord::Base
             super
         end
     end
+
+    def to_s
+        "#{username}"
+    end
 end

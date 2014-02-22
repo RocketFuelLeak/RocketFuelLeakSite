@@ -2,18 +2,30 @@
     = f.error_notification
 
     .form-inputs
-    
-        = f.input :title
-    
-        = f.input :content
-    
-        = f.input :published
-    
-        = f.input :published_at
-    
-        = f.association :user
-    
-    </div>
-
+        = f.input :title, label: false, placeholder: 'Title'
+        ul.nav.nav-tabs
+            li.active: a href="#post-tab-edit" data-toggle="tab" Write
+            li: a href="#post-tab-preview" data-toggle="tab" Preview
+        .tab-content
+            #post-tab-edit.tab-pane.active.fade.in
+                .markdown-box-actions
+                    .btn-group
+                        a.btn.btn-default.bold-btn: i.fa.fa-bold.fa-fw
+                        a.btn.btn-default.italic-btn: i.fa.fa-italic.fa-fw
+                        a.btn.btn-default.underline-btn: i.fa.fa-underline.fa-fw
+                        a.btn.btn-default.strike-btn: i.fa.fa-strikethrough.fa-fw
+                    .btn-group
+                        a.btn.btn-default.link-btn: i.fa.fa-link.fa-fw
+                        a.btn.btn-default.img-btn: i.fa.fa-picture-o.fa-fw
+                    .btn-group
+                        a.btn.btn-default.paragraph-btn P
+                        a.btn.btn-default.heading1-btn H1
+                        a.btn.btn-default.heading2-btn H2
+                        a.btn.btn-default.heading3-btn H3
+                = f.input :content, label: false, placeholder: 'Content', input_html: { rows: 10, class: 'markdown-box' }
+            #post-tab-preview.tab-pane.fade
+                p.text-center: strong Please note that the preview may not be 100% accurate.
+                #post-preview-target.markdown-preview.well.well-sm
+        = f.input :published, hint: 'Published posts will be visible to everyone'
     .form-actions
-        = f.button :submit
+        = f.button :submit, class: 'btn-primary btn-block'

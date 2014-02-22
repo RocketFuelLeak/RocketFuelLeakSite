@@ -1,26 +1,63 @@
 @import "cyborg/variables";
 
+$pagination-bg: transparent;
+$pagination-hover-bg: rgba(238, 238, 238, 0.1);
+$pagination-hover-border: $pagination-border;
+$pagination-disabled-bg: transparent;
+
 @import "bootstrap";
 
 @import "cyborg/bootswatch";
 
 $footer-height: 90px;
+$footer-narrow-height: 120px;
+
+@mixin box-shadow($values) {
+    -webkit-box-shadow: $values;
+    -moz-box-shadow: $values;
+    box-shadow: $values;
+}
 
 html, body {
     height: 100%;
 }
 
 body {
-    background: image-url('wow/background_5.4.jpg') no-repeat top center fixed #000;
+    background: image-url('wow/background_5.4_2560x1600.jpg') no-repeat top center fixed #000;
     background-size: cover;
 }
 
-#main-wrap {
-    background: rgba(0, 0, 0, 0.9);
+#site-header {
+    margin-bottom: 10px;
+}
+
+.header-horde-logo-container {
+    @extend .text-center;
+    max-height: 100px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+}
+
+.header-horde-logo {
+    max-height: 100px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#main-header-column {
+    background: image-url('wow/logo_horde_355.png') no-repeat, image-url('wow/logo_horde_355.png') no-repeat;
+    background-position: left center, right center;
+    background-size: contain;
+}
+
+#content-wrap {
     min-height: 100%;
     height: auto;
     margin-bottom: (-$footer-height);
     padding-bottom: $footer-height;
+    background: rgba(0, 0, 0, 0.9);
+    @include box-shadow(0 0 30px 0 black);
 }
 
 #footer-wrap {
@@ -29,6 +66,10 @@ body {
 
 .navbar {
     margin-bottom: 0;
+}
+
+.btn {
+    margin-top: 5px;
 }
 
 a.icon-link {
@@ -42,16 +83,12 @@ a.icon-link {
 }
 
 .thumbnail {
-    background: transparent;
+    background: rgba(0, 0, 0, 0.5);
     border-color: #444;
 }
 
 .form-control {
     color: black;
-}
-
-p a.btn {
-    margin-top: 5px;
 }
 
 .devise-link-list {
@@ -63,6 +100,10 @@ ol.terms-sublist {
 }
 
 img {
+    &.img-thumbnail {
+        border-color: $text-color;
+    }
+
     &.img-responsive-centered {
         max-width: 100%;
         height: auto;
@@ -81,3 +122,60 @@ img {
         margin-left: auto;
     }
 }
+
+textarea.markdown-box {
+    font-family: Consolas, 'Ubuntu Mono', 'Source Code Pro', 'Lucida Console', 'Courier New', monospace;
+    margin-top: 5px;
+}
+
+.tab-content > .tab-pane > p:first-child {
+    padding-top: 10px;
+}
+
+.markdown-preview {
+    img {
+        @extend .img-responsive-thumbnail-centered;
+    }
+}
+
+@media (min-width: 0) {
+    #footer-copy-text, #footer-social-text {
+        text-align: center;
+    }
+
+    #content-wrap {
+        margin-bottom: (-$footer-narrow-height);
+        padding-bottom: $footer-narrow-height;
+    }
+
+    #footer-wrap {
+        min-height: $footer-narrow-height;
+    }
+}
+
+@media (min-width: 600px) {
+    #footer-copy-text {
+        float: left;
+    }
+
+    #footer-social-text {
+        float: right;
+    }
+
+    #content-wrap {
+        margin-bottom: (-$footer-height);
+        padding-bottom: $footer-height;
+    }
+
+    #footer-wrap {
+        min-height: $footer-height;
+    }
+}
+
+@media (max-width: 400px) {
+    #main-header-column {
+        background: none;
+    }
+}
+
+@import "posts";

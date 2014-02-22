@@ -14,23 +14,33 @@
                 li class="#{current_page?(posts_path) && 'active'}"
                     = link_to 'News', posts_path
                 li.disabled: a.disabled Forums
-                li class="#{current_page?(addons_path) && 'active'}"
-                    = link_to 'AddOns', addons_path
-                li class="#{current_page?(mumble_path) && 'active'}"
-                    = link_to 'Mumble', mumble_path
-                li class="#{current_page?(epgp_path) && 'active'}"
-                    = link_to 'EPGP', epgp_path
                 li class="#{current_page?(about_path) && 'active'}"
                     = link_to 'About', about_path
+                li
+                    a.dropdown-toggle data-toggle="dropdown" href="#"
+                     | Help
+                     b.caret<
+                    ul.dropdown-menu
+                        li class="#{current_page?(addons_path) && 'active'}" = link_to 'AddOns', addons_path
+                        li class="#{current_page?(epgp_path) && 'active'}" = link_to 'EPGP', epgp_path
+                        - if can? :read, :mumble
+                            li class="#{current_page?(mumble_path) && 'active'}" = link_to 'Mumble', mumble_path
             ul.nav.navbar-nav.navbar-right
                 - if user_signed_in?
                     li
-                        a class="dropdown-toggle" data-toggle="dropdown" href="#"
-                         | #{current_user.username}
+                        a.dropdown-toggle data-toggle="dropdown" href="#"
+                         i.glyphicon.glyphicon-user>
+                         | #{current_user}
                          b.caret<
                         ul.dropdown-menu
-                            li = link_to 'Profile', current_user
-                            li = link_to 'Change password', edit_user_password_path
-                            li = link_to 'Sign out', destroy_user_session_path, method: :delete
+                            li = link_to current_user do
+                             i.fa.fa-user.fa-fw>
+                             | Profile
+                            li = link_to edit_user_registration_path do
+                             i.fa.fa-edit.fa-fw>
+                             | Change password
+                            li = link_to destroy_user_session_path, method: :delete do
+                             i.fa.fa-sign-out.fa-fw>
+                             | Sign out
                 - else
                     li: a href="#" data-toggle="modal" data-target="#sign-in-modal" Sign in

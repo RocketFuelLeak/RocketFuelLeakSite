@@ -41,4 +41,16 @@ module ApplicationHelper
     def devise_mapping
         @devise_mapping ||= Devise.mappings[:user]
     end
+
+    def title(title)
+        content_for :title, "RFL - #{title}"
+    end
+
+    def description(description)
+        content_for :description, description
+    end
+
+    def keywords(keywords)
+        content_for :keywords, keywords
+    end
 end

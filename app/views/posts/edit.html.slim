@@ -1,8 +1,7 @@
-h1 Editing post
+h1
+ | Editing news item
+ = link_to 'Show post', @post, class: 'btn btn-default pull-right', data: { confirm: 'All changes will be lost!' }
 
 == render 'form'
 
-= link_to 'Show', @post
-'|
-= link_to 'Back', posts_path
-
+p.text-center = link_to 'Back', posts_path, class: 'btn btn-link'
