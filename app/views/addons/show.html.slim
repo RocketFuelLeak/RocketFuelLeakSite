@@ -3,22 +3,23 @@
      | AddOn:
      =< @addon.name
     p = @addon.description
-    - if @addon.curse?
-        p: .btn-group
-            = link_to 'Curse', @addon.curse, class: 'btn btn-primary'
-            - if @addon.curse_download?
-                = link_to @addon.curse_download, class: 'btn btn-primary' do
-                    i.glyphicon.glyphicon-download-alt
-    - if @addon.wowinterface?
-        p: .btn-group
-            = link_to 'WoWInterface', @addon.wowinterface, class: 'btn btn-primary'
-            - if @addon.wowinterface_download?
-                = link_to @addon.wowinterface_download, class: 'btn btn-primary' do
-                    i.glyphicon.glyphicon-download-alt
-    - if can? :edit, @addon
-        p = link_to 'Edit', edit_addon_path(@addon), class: 'btn btn-default'
-    - if can? :destroy, @addon
-        P = link_to 'Delete', @addon, method: :delete, data: { confirm: 'Are you sure?' }
+    .text-center
+        - if @addon.curse?
+            .btn-group
+                = link_to 'Curse', @addon.curse, class: 'btn btn-primary'
+                - if @addon.curse_download?
+                    = link_to @addon.curse_download, class: 'btn btn-primary' do
+                        i.glyphicon.glyphicon-download-alt
+        - if @addon.wowinterface?
+            .btn-group
+                = link_to 'WoWInterface', @addon.wowinterface, class: 'btn btn-primary'
+                - if @addon.wowinterface_download?
+                    = link_to @addon.wowinterface_download, class: 'btn btn-primary' do
+                        i.glyphicon.glyphicon-download-alt
+    .text-center
+        - if can? :edit, @addon
+            => link_to 'Edit', edit_addon_path(@addon), class: 'btn btn-default'
+        - if can? :destroy, @addon
+            = link_to 'Delete', @addon, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 
-= link_to addons_path, class: 'btn btn-default' do
-    | &larr; Back
+.text-center = link_to 'Back to list', addons_path, class: 'btn btn-link'

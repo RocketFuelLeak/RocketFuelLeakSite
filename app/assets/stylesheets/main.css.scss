@@ -68,6 +68,12 @@ body {
     margin-bottom: 0;
 }
 
+table, .table {
+    > tbody > tr > td, > thead > tr > th {
+        vertical-align: middle;
+    }
+}
+
 .btn {
     margin-top: 5px;
 }

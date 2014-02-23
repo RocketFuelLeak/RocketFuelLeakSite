@@ -26,7 +26,7 @@ class AddonsController < ApplicationController
   def create
     respond_to do |format|
       if @addon.save
-        format.html { redirect_to @addon, notice: 'Addon was successfully created.' }
+        format.html { redirect_to addons_path, notice: 'Addon was successfully created.' }
         format.json { render action: 'show', status: :created, location: @addon }
       else
         format.html { render action: 'new' }
@@ -40,7 +40,7 @@ class AddonsController < ApplicationController
   def update
     respond_to do |format|
       if @addon.update(addon_params)
-        format.html { redirect_to @addon, notice: 'Addon was successfully updated.' }
+        format.html { redirect_to addons_path, notice: 'Addon was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

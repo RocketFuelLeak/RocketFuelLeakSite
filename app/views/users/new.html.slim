@@ -1,5 +1,7 @@
-h1 New user
+.row
+    .col-md-4.col-md-offset-4
+        h1 New user
 
-== render 'form'
+        == render 'form'
 
-= link_to 'Back', users_path
+        p.text-center = link_to 'Back', users_path, class: 'btn btn-link'

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     # GET /users
     # GET /users.json
     def index
+        authorize! :manage, User
     end
 
     # GET /users/1
@@ -61,8 +62,7 @@ class UsersController < ApplicationController
     private
         # Only allow a trusted parameter "white list" through.
         def user_params
-            #params.require(:post).permit(:title, :content, :published, :published_at, :user_id)
-            params.require(:user).permit(:username, :email, :password, )
+            params.require(:user).permit(:username, :email, :password)
         end
 
         def load_user

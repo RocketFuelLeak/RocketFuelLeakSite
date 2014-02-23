@@ -1,8 +1,17 @@
 = simple_form_for(@user) do |f|
     = f.error_notification
 
+    - unless f.object.new_record?
+        p Username: #{f.object.username}
+        - if f.object.provider.present?
+            p Auth provider: #{f.object.provider}
+        - if f.object.uid.present?
+            p Auth UID: #{f.object.uid}
+
     .form-inputs
-    
+        = f.input :username, label: false, placeholder: 'Username'
+        = f.input :email, label: false, placeholder: 'Email'
+        = f.input :password, label: false, placeholder: 'Password'
 
     .form-actions
-        = f.button :submit
+        = f.button :submit, class: 'btn-primary btn-block'

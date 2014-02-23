@@ -9,9 +9,11 @@ class Ability
                 can :manage, :all
             elsif user.is_officer?
                 can [:read, :create], Post
-                can :edit, Post, user: user
+                can [:update, :destroy], Post, user: user
+                can [:read, :update], Addon
+                can :read, [User, :mumble]
             else
-                can :read, :mumble
+                can :read, [Post, Addon, User, :mumble]
             end
         end
     end

@@ -1,8 +1,9 @@
-h1 Editing addon
+.row
+    .col-md-4.col-md-offset-4
+        h1 Editing addon
 
-== render 'form'
+        == render 'form'
 
-= link_to 'Show', @addon
-'|
-= link_to 'Back', addons_path
-
+        .text-center
+            /= link_to 'Show addon', @addon, class: 'btn btn-link'
+            =< link_to 'Back to list', addons_path, class: 'btn btn-link'
