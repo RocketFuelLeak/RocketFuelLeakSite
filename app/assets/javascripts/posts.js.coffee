@@ -11,6 +11,8 @@ class Editor
         @update()
     update: ->
         @preview.html(markdown.toHTML(@input.val()))
+        @preview.html(@preview.html().replace(/https?:\/\/[^y]*youtube\.[^\/]+\/watch\?[^v]*v=([A-Za-z0-9\-_]+)/,
+                      "<div class=\"flex-video widescreen\"><iframe src=\"https://www.youtube.com/embed/$1\" allowfullscreen=\"true\" frameborder=\"0\"></iframe></div>"))
     surround: (before, after = before, placeholder = "Type something...") ->
         caret = @input.caret()
         if caret.begin == caret.end
@@ -39,7 +41,9 @@ class Editor
             @input.caret(caret.begin + prefix.length + 1, caret.begin + before.length - 2)
             @input.focus()
     image: ->
-        link '!', "Alt text...", "http://www.example.com/example.png"
+        @link '!', "Alt text...", "http://www.example.com/example.png"
+    youtube: ->
+        alert('Simply paste a youtube video link on its own line in the post and it will be automatically converted when viewed.')
     paragraph: ->
         caret = @input.caret()
         val = @input.val()
@@ -71,8 +75,16 @@ $(document).on 'ready page:load', ->
     mdbox = $('#post_content')
     new Editor(mdbox, $("#post-preview-target"))
     mdboxele = mdbox.get(0)
-    mdbox.on 'input', (e) ->
-        this.editor.update()
+    #mdbox.on 'input', (e) ->
+    #    if this.refreshtimer
+    #        clearTimeout this.refreshtimer
+    #
+    #    this.refreshtimer = setTimeout (->
+    #        this.refreshtimer = null
+    #        this.editor.update()
+    #    ), 500
+    $('a[href="#post-tab-preview"]').on 'shown.bs.tab', (e) ->
+        mdboxele.editor.update()
     $('.markdown-box-actions a').each (index) ->
         $(this).on 'click', (e) ->
             e.preventDefault()
