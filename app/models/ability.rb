@@ -8,7 +8,7 @@ class Ability
             if user.is_admin?
                 can :manage, :all
             elsif user.is_officer?
-                can [:read, :create], Post
+                can [:read, :read_drafts, :create], Post
                 can [:update, :destroy], Post, user: user
                 can [:read, :update], Addon
                 can :read, [User, :mumble]
