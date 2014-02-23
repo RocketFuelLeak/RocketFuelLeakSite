@@ -22,6 +22,7 @@
                         li class="#{current_page?(epgp_path) && 'active'}" = link_to 'EPGP', epgp_path
                         - if can? :read, :mumble
                             li class="#{current_page?(mumble_path) && 'active'}" = link_to 'Mumble', mumble_path
+                        li = link_to 'Report an issue', 'https://github.com/RocketFuelLeak/RocketFuelLeakSite/issues/new'
                 li
                     a.dropdown-toggle data-toggle="dropdown" href="#"
                      | Links
@@ -32,7 +33,7 @@
                         li = link_to 'WoWProgress', 'http://www.wowprogress.com/guild/eu/stormreaver/Rocket+Fuel+Leak/rating.tier16_10'
                         li = link_to 'GuildOx', 'http://www.guildox.com/wow/guild/eu/Stormreaver/Rocket+Fuel+Leak'
                         li = link_to 'World of Logs', 'http://worldoflogs.com/guilds/191798/'
-                - if current_user.is_admin?
+                - if user_signed_in? and current_user.is_admin?
                     li
                         a.dropdown-toggle data-toggle="dropdown" href="#"
                          | Admin

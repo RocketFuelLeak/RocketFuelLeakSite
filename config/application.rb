@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 module RocketFuelLeakSite
   class Application < Rails::Application
+    config.time_zone = 'Stockholm'
     config.action_dispatch.default_headers = {
         'X-Frame-Options' => 'SAMEORIGIN',
         'X-XSS-Protection' => '1; mode=block',
