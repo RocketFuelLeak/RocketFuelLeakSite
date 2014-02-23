@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
     resourcify
 
     def check_published_state
-        if self.published == true
+        if self.published_changed? and self.published == true
             self.published_at = Time.now
         end
     end
