@@ -12,8 +12,10 @@ class Ability
                 can [:update, :destroy], Post, user: user
                 can [:read, :update], Addon
                 can :read, [User, :mumble]
-            else
+            elsif user.is_member?
                 can :read, [Post, Addon, User, :mumble]
+            else
+                can :read, [Post, Addon, User]
             end
         end
     end
