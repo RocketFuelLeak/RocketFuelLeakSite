@@ -1,1 +1,8 @@
-h3 Sidebar here
+h3.text-center Subscribe
+p Stay up to date with the latest guild news by subscribing to the atom feed, just click the button below!
+p.text-center
+    = link_to feed_posts_url(format: 'atom'), class: 'feed-link' do
+        span.fa-stack.fa-2x
+            i.fa.fa-square.fa-stack-2x
+            i.fa.fa-rss.fa-stack-1x.fa-inverse
+p The atom feed should also be compatible with traditional RSS readers.

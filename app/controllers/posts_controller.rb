@@ -69,6 +69,18 @@ class PostsController < ApplicationController
         end
     end
 
+    # GET /posts/feed.atom
+    def feed
+        @posts = Post.recently_published
+        @updated = @posts.first.updated_at unless @posts.empty?
+
+        respond_to do |format|
+            format.atom { render layout: false }
+            # RSS redirects to ATOM
+            format.rss { redirect_to feed_posts_path(format: :atom), status: :moved_permanently }
+        end
+    end
+
     private
         # Only allow a trusted parameter "white list" through.
         def post_params

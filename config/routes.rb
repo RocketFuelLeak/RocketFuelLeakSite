@@ -10,6 +10,10 @@ RocketFuelLeakSite::Application.routes.draw do
   get 'terms' => 'pages#terms'
 
   resources :users
-  resources :news, controller: 'posts', as: :posts
+  resources :news, controller: 'posts', as: :posts do
+    collection do
+      get 'feed' => 'posts#feed', defaults: { format: 'atom' }
+    end
+  end
   resources :addons
 end

@@ -25,6 +25,21 @@
     font-size: 18px;
 }
 
+$feed-color: #e06622;
+$feed-color-hover: darken($feed-color, 10%);
+
+a.feed-link i {
+    color: $feed-color;
+
+    &.fa-inverse { color: white; }
+}
+
+a.feed-link:hover i {
+    color: $feed-color-hover;
+
+    &.fa-inverse { color: darken(white, 10%); }
+}
+
 // Responsive videos
 // Credit: https://gist.github.com/jgarber/2302238
 .flex-video {
