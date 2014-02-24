@@ -29,7 +29,7 @@ module ApplicationHelper
         }
         html = Redcarpet::Markdown.new(renderer, options).render(text)
         html.gsub(/<a.+href="https?:\/\/[^y]*youtube\.[^\/]+\/watch\?[^v]*v=([A-Za-z0-9\-_]+).*<\/a>/,
-                  "<div class=\"flex-video widescreen\"><iframe src=\"https://www.youtube.com/embed/\\1\" allowfullscreen=\"true\" frameborder=\"0\"></iframe></div>").html_safe
+                  "<div class=\"flex-video widescreen\"><iframe src=\"https://www.youtube.com/embed/$1\" allowfullscreen=\"true\" frameborder=\"0\"></iframe></div>").html_safe
     end
 
     def resource_name
