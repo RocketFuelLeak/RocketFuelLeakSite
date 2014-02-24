@@ -5,7 +5,12 @@ class UsersController < ApplicationController
     # GET /users
     # GET /users.json
     def index
-        authorize! :manage, User
+        authorize! :manage, @users
+
+        respond_to do |format|
+            format.html { @users = @users.page(params[:page]).per(50) }
+            format.json { }
+        end
     end
 
     # GET /users/1
@@ -59,6 +64,30 @@ class UsersController < ApplicationController
         end
     end
 
+    # PATCH /users/1/toggle/member
+    # PATCH /users/1/toggle/member
+    def toggle_role
+        do_toggle_role params[:role]
+    end
+
+    # PATCH /users/1/toggle_member
+    # PATCH /users/1/toggle_member.json
+    def toggle_member
+        do_toggle_role :member
+    end
+
+    # PATCH /users/1/toggle_officer
+    # PATCH /users/1/toggle_officer.json
+    def toggle_officer
+        do_toggle_role :officer
+    end
+
+    # PATCH /users/1/toggle_admin
+    # PATCH /users/1/toggle_admin.json
+    def toggle_admin
+        do_toggle_role :admin
+    end
+
     private
         # Only allow a trusted parameter "white list" through.
         def user_params
@@ -67,5 +96,20 @@ class UsersController < ApplicationController
 
         def load_user
             @user = User.new(user_params)
+        end
+
+        def do_toggle_role(role)
+            @user = User.find(params[:id])
+            authorize! :manage, @user
+            if @user.has_role? role
+                @user.remove_role role
+            else
+                @user.add_role role
+            end
+            
+            respond_to do |format|
+                format.html { redirect_to :back, notice: 'User role successfully edited.' }
+                format.json { head :no_content }
+            end
         end
 end

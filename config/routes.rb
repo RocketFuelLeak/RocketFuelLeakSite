@@ -9,7 +9,15 @@ RocketFuelLeakSite::Application.routes.draw do
   get 'privacy' => 'pages#privacy'
   get 'terms' => 'pages#terms'
 
-  resources :users
+  resources :users do
+    member do
+      patch 'toggle_role/:role' => 'users#toggle_role', as: :toggle_role
+      patch 'toggle_member' => 'users#toggle_member'
+      patch 'toggle_officer' => 'users#toggle_officer'
+      patch 'toggle_admin' => 'users#toggle_admin'
+    end
+  end
+
   resources :news, controller: 'posts', as: :posts do
     collection do
       get 'feed' => 'posts#feed', defaults: { format: 'atom' }

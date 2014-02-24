@@ -1,43 +1,44 @@
 .row
-    .col-md-8.col-md-offset-2
+    .col-md-10.col-md-offset-1
         h1
          | Userlist
          = link_to 'New user', new_user_path, class: 'btn btn-success pull-right'
 
         table.table
-            tr
+            thead: tr
                 th.text-right #
                 th Username
+                th Email
                 th Actions
                 th Roles
-            - @users.each do |user|
-                tr
-                    td.text-right = user.id
-                    td
-                        = link_to user do
-                            = user
-                            - if user.is_admin?
-                                span.label.label-danger< Admin
-                            - if user.is_officer?
-                                span.label.label-success< Officer
-                    td
-                        - if can? :update, user
-                            => link_to 'Edit', edit_user_path(user)
-                        - if can? :destroy, user
-                            = link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }
-                    td
-                        - if can? :manage, user
-                            .btn-group
-                                button.btn.btn-default.dropdown-toggle type="button" data-toggle="dropdown"
-                                 | Manage Roles
-                                 span.caret<
-                                ul.dropdown-menu role="menu"
-                                    - [:admin, :officer, :member].each do |role|
-                                        - if user.has_role? role
-                                            li: a
-                                             i.fa.fa-check-square.fa-fw>
-                                             | #{role.to_s.titleize}
-                                        - else
-                                            li: a
-                                             i.fa.fa-square.fa-fw>
-                                             | #{role.to_s.titleize}
+            tbody
+                - @users.each do |user|
+                    tr
+                        td.text-right = user.id
+                        td
+                            = link_to user do
+                                = user
+                                - if user.is_admin?
+                                    span.label.label-danger< Admin
+                                - if user.is_officer?
+                                    span.label.label-success< Officer
+                                - if user.is_member?
+                                    span.label.label-default< Member
+                        td = user.email
+                        td
+                            - if can? :update, user
+                                => link_to 'Edit', edit_user_path(user), class: 'btn btn-default btn-sm'
+                            - if can? :destroy, user
+                                = link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+                        td
+                            - if can? :manage, user
+                                .btn-group
+                                    button.btn.btn-default.btn-sm.dropdown-toggle type="button" data-toggle="dropdown"
+                                     | Manage Roles
+                                     span.caret<
+                                    ul.dropdown-menu role="menu"
+                                        - [:admin, :officer, :member].each do |role|
+                                            li = link_to toggle_role_user_path(user, role), method: :patch do
+                                                i.fa.fa-fw class="#{user.has_role?(role) ? 'fa-check-square' : 'fa-square'}"
+                                                =< role.to_s.titleize
+        = paginate @users

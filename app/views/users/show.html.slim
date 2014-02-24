@@ -4,5 +4,15 @@
          =< @user
          - if can? :update, @user
             = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default pull-right'
-        
+        - if can? :manage, @user
+            p Email: #{@user.email}
+            - if @user.provider.present?
+                p Provider: #{@user.provider}
+            - if @user.uid.present?
+                p UID: #{@user.uid}
+            p.text-center
+                - [:admin, :officer, :member].each do |role|
+                    => link_to toggle_role_user_path(@user, role), method: :patch, class: "btn #{role_button_class(role)}" do
+                        i.fa.fa-fw class="#{@user.has_role?(role) ? 'fa-check-square' : 'fa-square'}"
+                        =< role.to_s.titleize
         p.text-center = link_to 'Back', :back, class: 'btn btn-link'
