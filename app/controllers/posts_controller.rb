@@ -5,6 +5,8 @@ class PostsController < ApplicationController
     # GET /posts
     # GET /posts.json
     def index
+        @truncate_posts = true
+
         if can? :read_drafts, Post
             @posts = @posts.recent
         else

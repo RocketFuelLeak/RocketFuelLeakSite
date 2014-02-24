@@ -16,6 +16,6 @@
        - if can? :destroy, post
             =< link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }
       - if @truncate_posts
-            = markdown(truncate(post.content, length: 500, separator: ' ', omission: "...\n\n[*Continue reading*](#{post_path(post)})", escape: false))
+            = markdown(truncate(post.content, length: 1000, separator: ' ', omission: "... [*Continue reading*](#{post_path(post)})", escape: false))
       - else
             = markdown(post.content)
