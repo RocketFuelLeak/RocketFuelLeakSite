@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+    before_action :load_shared
     before_action :load_post, only: :create
     load_and_authorize_resource
 
@@ -71,6 +72,27 @@ class PostsController < ApplicationController
         end
     end
 
+    # GET /posts/archive/2014/02
+    # GET /posts/archive/2014/02.json
+    def archive
+        @truncate_posts = true
+        year = params[:year]
+        month = params[:month]
+        @date = Date.parse("#{year}-#{month}-01").strftime('%B, %Y')
+        @posts = Post.from_archive(year, month)
+
+        if can? :read_drafts, Post
+            @posts = @posts.recent
+        else
+            @posts = @posts.recently_published
+        end
+
+        respond_to do |format|
+            format.html { @posts = @posts.page(params[:page]).per(10) }
+            format.json { }
+        end
+    end
+
     # GET /posts/feed.atom
     def feed
         @posts = Post.recently_published
@@ -87,6 +109,11 @@ class PostsController < ApplicationController
         # Only allow a trusted parameter "white list" through.
         def post_params
             params.require(:post).permit(:title, :content, :published)
+        end
+
+        def load_shared
+            @posts_by_year = Post.by_year
+            @posts_by_month = Post.by_month
         end
 
         def load_post

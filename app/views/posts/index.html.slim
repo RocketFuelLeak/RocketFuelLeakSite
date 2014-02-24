@@ -1,5 +1,5 @@
 - if @posts.empty?
     h3.text-muted.text-center There are no news posts :(
 - else
-    = render @posts, locals: { truncate_posts: true }
+    = render @posts
     = paginate @posts

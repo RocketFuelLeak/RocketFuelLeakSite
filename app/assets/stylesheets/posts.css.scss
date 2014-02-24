@@ -40,6 +40,26 @@ a.feed-link:hover i {
     &.fa-inverse { color: darken(white, 10%); }
 }
 
+ul#news-archive-list {
+    i { color: $text-color; }
+    span.badge { margin-left: 10px; }
+
+    > li > a {
+        > i.fa-folder { display: inline-block; }
+        > i.fa-folder-open { display: none; }
+
+        &.open {
+            > i.fa-folder {
+                display: none;
+            }
+
+            > i.fa-folder-open {
+                display: inline-block;
+            }
+        }
+    }
+}
+
 // Responsive videos
 // Credit: https://gist.github.com/jgarber/2302238
 .flex-video {

@@ -7,6 +7,8 @@ insertAt = (str, pos, val) ->
 
 class Editor
     constructor: (@input, @preview) ->
+        if @input == null or @input.length == 0
+            return
         @input.get(0).editor = this
         @update()
     update: ->
@@ -93,3 +95,10 @@ $(document).on 'ready page:load', ->
             param = a.data('action-param')
             if action
                 mdboxele.editor[action](param)
+    $('ul#news-archive-list > li > a').on 'click', (e) ->
+        e.preventDefault()
+        #$(this).toggleClass('open')
+    $('ul#news-archive-list > li > ul.collapse').on 'show.bs.collapse', (e) ->
+        $("ul#news-archive-list > li > a[href='##{$(this).attr('id')}']").addClass('open')
+    $('ul#news-archive-list > li > ul.collapse').on 'hide.bs.collapse', (e) ->
+        $("ul#news-archive-list > li > a[href='##{$(this).attr('id')}']").removeClass('open')

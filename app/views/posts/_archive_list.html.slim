@@ -1,0 +1,20 @@
+- if @posts_by_year and @posts_by_month
+    h3.text-center Archive
+    ul#news-archive-list.fa-ul
+        - @posts_by_year.each do |year, posts|
+            ruby:
+                year = year.year
+                curr_year = Date.current.year
+            li
+                a class="#{'open' if year == Date.current.year}" href="#months-#{year}" data-toggle="collapse" data-target="#months-#{year}"
+                 i.fa.fa-li.fa-folder
+                 i.fa.fa-li.fa-folder-open
+                 = year
+                 span.badge = posts.count
+                ul.collapse.fa-ul.archive-months id="months-#{year}" class="#{'in' if year == Date.current.year}"
+                    - posts.group_by { |p| p.created_at.beginning_of_month }.each do |month, posts|
+                        li.archive-month
+                            a href=archive_posts_path(year, month.strftime('%m'))
+                             i.fa.fa-li.fa-list
+                             = month.strftime('%B')
+                             span.badge = posts.count

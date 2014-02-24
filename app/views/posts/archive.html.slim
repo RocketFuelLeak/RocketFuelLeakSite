@@ -1,0 +1,6 @@
+- content_for :news_title, "News from #{@date}"
+- if @posts.empty?
+    h3.text-muted.text-center There are no posts :(
+- else
+    = render @posts
+    = paginate @posts

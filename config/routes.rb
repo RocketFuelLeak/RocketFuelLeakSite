@@ -20,6 +20,7 @@ RocketFuelLeakSite::Application.routes.draw do
 
   resources :news, controller: 'posts', as: :posts do
     collection do
+      get 'archive/:year/:month' => 'posts#archive', constraints: { year: /\d{4}/, month: /\d{2}/ }, as: :archive
       get 'feed' => 'posts#feed', defaults: { format: 'atom' }
     end
   end
