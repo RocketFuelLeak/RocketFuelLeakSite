@@ -91,6 +91,9 @@ GEM
     highline (1.6.20)
     hike (1.2.3)
     http_parser.rb (0.5.3)
+    httparty (0.13.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -276,6 +279,7 @@ DEPENDENCIES
   guard-bundler
   guard-livereload
   guard-rails
+  httparty
   jbuilder (~> 1.2)
   jquery-rails
   kaminari

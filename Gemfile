@@ -58,6 +58,8 @@ gem 'select2-rails'
 
 gem 'mail_form'
 
+gem 'httparty'
+
 group :development do
     # Use sqlite3 as the database for Active Record in development
     gem 'sqlite3'
