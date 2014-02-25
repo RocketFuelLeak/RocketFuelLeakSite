@@ -12,7 +12,6 @@ module WoW
 
         def self.get(resource, region = WoW.region)
             url = URL % { region: region, resource: resource }
-            puts "Making request to #{url}"
             HTTParty.get url
         end
     end
