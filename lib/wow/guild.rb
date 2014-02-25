@@ -25,7 +25,7 @@ module WoW
             if character.class == WoW::Character
                 @members.include? character.name
             else
-                @members.include? name
+                @members.include? character
             end
         end
     end
