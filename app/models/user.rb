@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
            :recoverable, :rememberable, :trackable, :validatable,
            :confirmable
 
+    has_one :character
+
     has_many :posts
 
     validates :username, presence: true, uniqueness: { case_sensitive: false },
@@ -46,7 +48,7 @@ class User < ActiveRecord::Base
     end
 
     def to_s
-        "#{username}"
+        username
     end
 
     def to_param

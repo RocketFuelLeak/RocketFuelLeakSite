@@ -8,7 +8,7 @@ module WoW
             @name = data['name']
             @realm = data['realm']
             @members = Array.new
-            if data.key? 'members' then
+            if data.key? 'members'
                 data['members'].each do |member|
                     @members.push member['character']['name']
                 end

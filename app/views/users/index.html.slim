@@ -8,6 +8,7 @@
             thead: tr
                 th.text-right #
                 th Username
+                th Character
                 th Email
                 th Actions
                 th Roles
@@ -24,6 +25,11 @@
                                     span.label.label-success< Officer
                                 - if user.is_member?
                                     span.label.label-default< Member
+                        td
+                            - if user.character.present?
+                                = link_to user.character.name, user.character
+                            - else
+                                | N/A
                         td = user.email
                         td
                             - if can? :update, user

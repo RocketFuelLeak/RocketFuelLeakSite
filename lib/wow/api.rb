@@ -5,6 +5,8 @@ require 'wow/guild'
 module WoW
     extend Configure
 
+    class APIError < StandardError; end
+
     class API
         ENDPOINT = "%{region}.battle.net".freeze
         PATH = "api/wow%{resource}".freeze
@@ -12,7 +14,13 @@ module WoW
 
         def self.get(resource, region = WoW.region)
             url = URL % { region: region, resource: resource }
-            HTTParty.get url
+            puts "Making request to #{url}"
+            data = HTTParty.get url
+            raise APIError.new('Parse error, server returned non-json') unless data.content_type == "application/json"
+            if data["status"] == "nok"
+                raise APIError.new(data["reason"])
+            end
+            data
         end
     end
 end

@@ -1,0 +1,6 @@
+= simple_form_for(@character, url: { action: 'connect' }) do |f|
+    = f.error_notification
+    .form-inputs
+        = f.input :name, label: false, placeholder: 'Character name'
+    .form-actions
+        = f.button :submit, 'Connect Character', class: 'btn-primary btn-block'

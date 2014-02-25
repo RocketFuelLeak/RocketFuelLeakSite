@@ -18,6 +18,18 @@ RocketFuelLeakSite::Application.routes.draw do
     end
   end
 
+  resources :characters do
+    collection do
+      get 'connection' => 'characters#connection'
+      post 'connect' => 'characters#connect'
+    end
+
+    member do
+      get 'confirmation' => 'characters#confirmation'
+      patch 'confirm' => 'characters#confirm'
+    end
+  end
+
   resources :news, controller: 'posts', as: :posts do
     collection do
       get 'archive/:year/:month' => 'posts#archive', constraints: { year: /\d{4}/, month: /\d{2}/ }, as: :archive

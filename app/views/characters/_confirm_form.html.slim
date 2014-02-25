@@ -1,0 +1,8 @@
+= simple_form_for(@character, url: { action: 'confirm' }) do |f|
+    = f.error_notification
+    p Please remove equipment from the following gear slots:
+    ul
+        - @character.confirmation_equipment.each do |slot|
+            li = t slot, scope: 'wow.slots'
+    .form-actions
+        = f.button :submit, 'Confirm Character', class: 'btn-primary btn-block'

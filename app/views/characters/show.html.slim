@@ -1,0 +1,13 @@
+.row
+    .col-md-4.col-md-offset-4
+        - unless @character.confirmed
+            .alert.alert-danger.notice-container
+             | This character has not been confirmed to belong to the specified user.
+        h3 WoW Character: #{@character.name}.
+        img.img-responsive src="#{@character.avatar}" alt="#{@character.name}'s avatar"
+        p Member of guild #{@character.guild}.
+        p Belongs to #{@character.user}.
+        - if can? :update, @character and not @character.confirmed
+            => link_to 'Confirm ownership', edit_character_path(@character), class: 'btn btn-primary btn-block'
+        p.text-center
+            = link_to 'Back', root_path, class: 'btn btn-link'

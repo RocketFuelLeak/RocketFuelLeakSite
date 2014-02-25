@@ -4,6 +4,16 @@
          =< @user
          - if can? :update, @user
             = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default pull-right'
+        - if @user.character.present?
+            - if @user.character.confirmed
+                h4 Connected WoW character
+                p = link_to @user.character.profile_url do
+                    img.img-responsive src="#{@user.character.avatar}" alt="#{@user.character.name}"
+            - elsif can? :confirm, @user.character
+                = link_to 'Confirm your WoW character', confirmation_character_path(@user.character),
+                          class: 'btn btn-success btn-block'
+        - elsif can? :connect, @user
+            = link_to 'Connect your WoW character', connection_characters_path, class: 'btn btn-primary btn-block'
         - if can? :manage, @user
             p Email: #{@user.email}
             - if @user.provider.present?
