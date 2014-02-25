@@ -25,8 +25,7 @@ module WoW
             new(data)
         end
 
-        def is_in_guild(guild)
-            guild ||= WoW.guild
+        def is_in_guild(guild = WoW.guild)
             if guild.class == WoW::Guild then
                 @guild == guild.name
             else
