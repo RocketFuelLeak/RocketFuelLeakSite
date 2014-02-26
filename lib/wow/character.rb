@@ -31,7 +31,7 @@ module WoW
         end
 
         def self.get_profile_url(name, realm = WoW.realm, region = WoW.region)
-            PROFILE_URL % { region: region, realm: realm, name: name }
+            PROFILE_URL % { region: region, realm: realm, name: URI.encode(name) }
         end
 
         def self.get_thumbnail_url(thumbnail, region = WoW.region)

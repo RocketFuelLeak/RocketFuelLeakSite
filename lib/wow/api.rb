@@ -16,7 +16,7 @@ module WoW
         URL = "http://%{region}.battle.net/api/wow%{resource}".freeze
 
         def self.get(resource, region = WoW.region)
-            url = URL % { region: region, resource: resource }
+            url = URL % { region: region, resource: URI.encode(resource) }
             data = HTTParty.get url
             raise APIError.new('Parse error, server returned non-json') unless data.content_type == "application/json"
             if data["status"] == "nok"

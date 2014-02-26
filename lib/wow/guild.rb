@@ -17,7 +17,7 @@ module WoW
         end
 
         def self.find(name = WoW.guild, fields = WoW.guild_fields, realm = WoW.realm, region = WoW.region)
-            resource = RESOURCE % { realm: realm, name: URI.encode(name), fields: fields }
+            resource = RESOURCE % { realm: realm, name: name, fields: fields }
             data = API.get(resource, region)
             new(data)
         end
