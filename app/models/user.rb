@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
 
     rolify
 
-    has_one :character
+    has_one :character, dependent: :destroy
 
-    has_many :posts
-    has_many :comments
+    has_many :posts, dependent: :destroy
+    has_many :comments, dependent: :destroy
 
     validates :username, presence: true, uniqueness: { case_sensitive: false },
               format: { with: /\A[A-Z][a-z]+\z/ }
