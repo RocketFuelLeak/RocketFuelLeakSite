@@ -1,0 +1,7 @@
+= simple_form_for(@character) do |f|
+    = f.error_notification
+    .form-inputs
+        = f.input :name, label: false, placeholder: 'Character name'
+        = f.input :confirmed
+    .form-actions
+        = f.button :submit, class: 'btn-primary btn-block'

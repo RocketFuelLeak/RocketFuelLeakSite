@@ -32,6 +32,24 @@ module ApplicationHelper
                   "<div class=\"flex-video widescreen\"><iframe src=\"https://www.youtube.com/embed/\\1\" allowfullscreen=\"true\" frameborder=\"0\"></iframe></div>").html_safe
     end
 
+    def class_text(class_id)
+        case class_id
+        when Symbol
+            class_id.to_s
+        when Integer
+            WoW::Constants::CLASS_IDS[class_id].to_s
+        end
+    end
+
+    def class_link_class(class_id)
+        "link-#{class_text(class_id)}"
+    end
+
+    def class_span(class_id, content)
+        css_class = "text-#{class_text(class_id)}"
+        content_tag :span, content, class: css_class
+    end
+
     def resource_name
         :user
     end

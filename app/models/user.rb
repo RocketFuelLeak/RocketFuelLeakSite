@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
-  rolify
     # Include default devise modules. Others available are:
     # :lockable and :timeoutable
     devise :database_authenticatable, :registerable, :omniauthable,
            :recoverable, :rememberable, :trackable, :validatable,
            :confirmable
+
+    rolify
 
     has_one :character
 
@@ -47,11 +48,28 @@ class User < ActiveRecord::Base
         end
     end
 
+    def gravatar_url(size = 48)
+        id = Digest::MD5.hexdigest(email.downcase)
+        "http://gravatar.com/avatar/#{id}?s=#{size}&d=mm"
+    end
+
+    def profile_image(size = 48)
+        if character and character.confirmed
+            character.avatar
+        else
+            gravatar_url(size)
+        end
+    end
+
+    def confirmed_character?
+        character.present? and character.confirmed
+    end
+
     def to_s
-        username
+        (character and character.confirmed) ? character.name : username
     end
 
     def to_param
-        "#{id}-#{username.parameterize}"
+        "#{id}-#{(character and character.confirmed) ? character.name.parameterize : username.parameterize}"
     end
 end

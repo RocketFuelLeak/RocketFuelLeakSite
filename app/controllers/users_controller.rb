@@ -99,7 +99,6 @@ class UsersController < ApplicationController
         end
 
         def do_toggle_role(role)
-            @user = User.find(params[:id])
             authorize! :manage, @user
             if @user.has_role? role
                 @user.remove_role role

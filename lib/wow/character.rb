@@ -3,14 +3,15 @@ module WoW
         RESOURCE = "/character/%{realm}/%{name}?fields=%{fields}".freeze
         SLOTS = [:head, :neck, :shoulder, :back, :chest, :shirt, :tabard, :wrist, :hands, :waist,
                  :legs, :feet, :finger1, :finger2, :trinket1, :trinket2, :mainHand, :offHand].freeze
-        PROFILE_URL = "http://%{region}.battle.net/wow/en/%{realm}/%{character}/advanced"
+        PROFILE_URL = "http://%{region}.battle.net/wow/en/character/%{realm}/%{name}/advanced"
         THUMBNAIL_URL = "http://%{region}.battle.net/static-render/%{region}/%{thumbnail}"
 
-        attr_accessor :name, :realm, :thumbnail, :thumbnail_url, :guild, :equipment
+        attr_accessor :name, :realm, :class_id, :thumbnail, :thumbnail_url, :guild, :equipment
 
         def initialize(data)
             @name = data['name']
             @realm = data['realm']
+            @class_id = data['class']
             @thumbnail = data['thumbnail']
             @thumbnail_url = self.class.get_thumbnail_url(@thumbnail)
             @guild = data['guild']['name'] if data.key? 'guild'

@@ -1,8 +1,9 @@
+- title 'Userlist'
 .row
     .col-md-10.col-md-offset-1
         h1
          | Userlist
-         = link_to 'New user', new_user_path, class: 'btn btn-success pull-right'
+         /= link_to 'New user', new_user_path, class: 'btn btn-success pull-right'
 
         table.table
             thead: tr
@@ -10,6 +11,8 @@
                 th Username
                 th Character
                 th Email
+                th Provider
+                th Confirmed?
                 th Actions
                 th Roles
             tbody
@@ -31,6 +34,8 @@
                             - else
                                 | N/A
                         td = user.email
+                        td = user.provider.present? ? user.provider.titleize : 'N/A'
+                        td = user.confirmed_at.present? ? 'Yes' : 'No'
                         td
                             - if can? :update, user
                                 => link_to 'Edit', edit_user_path(user), class: 'btn btn-default btn-sm'

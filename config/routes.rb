@@ -9,7 +9,7 @@ RocketFuelLeakSite::Application.routes.draw do
   get 'privacy' => 'pages#privacy'
   get 'terms' => 'pages#terms'
 
-  resources :users do
+  resources :users, except: [:new, :create] do
     member do
       patch 'toggle_role/:role' => 'users#toggle_role', as: :toggle_role
       patch 'toggle_member' => 'users#toggle_member'
@@ -18,7 +18,7 @@ RocketFuelLeakSite::Application.routes.draw do
     end
   end
 
-  resources :characters do
+  resources :characters, except: [:new, :create] do
     collection do
       get 'connection' => 'characters#connection'
       post 'connect' => 'characters#connect'
@@ -27,6 +27,7 @@ RocketFuelLeakSite::Application.routes.draw do
     member do
       get 'confirmation' => 'characters#confirmation'
       patch 'confirm' => 'characters#confirm'
+      patch 'toggle_confirmed' => 'characters#toggle_confirmed'
     end
   end
 

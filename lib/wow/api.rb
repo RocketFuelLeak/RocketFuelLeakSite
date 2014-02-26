@@ -1,3 +1,6 @@
+require 'httparty'
+
+require 'wow/constants'
 require 'wow/configure'
 require 'wow/character'
 require 'wow/guild'
@@ -14,7 +17,6 @@ module WoW
 
         def self.get(resource, region = WoW.region)
             url = URL % { region: region, resource: resource }
-            puts "Making request to #{url}"
             data = HTTParty.get url
             raise APIError.new('Parse error, server returned non-json') unless data.content_type == "application/json"
             if data["status"] == "nok"

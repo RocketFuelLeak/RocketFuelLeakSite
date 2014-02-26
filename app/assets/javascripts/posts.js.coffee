@@ -34,6 +34,8 @@ class Editor
         @surround "_"
     strikethrough: ->
         @surround "~~"
+    superscript: ->
+        @surround "^(", ")"
     link: (prefix = '', placeholder = "Link text...", url = "http://example.com/") ->
         before = prefix + "[" + placeholder + "]("
         after = ')'

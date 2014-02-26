@@ -1,6 +1,7 @@
 module WoW
     class Guild
         RESOURCE = "/guild/%{realm}/%{name}?fields=%{fields}".freeze
+        PROFILE_URL = "http://%{region}.battle.net/wow/en/guild/%{realm}/%{name}/"
 
         attr_accessor :name, :realm, :members
 
@@ -19,6 +20,10 @@ module WoW
             resource = RESOURCE % { realm: realm, name: URI.encode(name), fields: fields }
             data = API.get(resource, region)
             new(data)
+        end
+
+        def self.get_profile_url(name = WoW.guild, realm = WoW.realm, region = WoW.region)
+            PROFILE_URL % { region: region, realm: realm, name: URI.encode(name) }
         end
 
         def has_member(character)

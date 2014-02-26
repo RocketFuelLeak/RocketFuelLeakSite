@@ -1,15 +1,14 @@
+- title "User #{@user}"
 .row
     .col-md-4.col-md-offset-4
         h1
+         = link_to @user.confirmed_character? ? @user.character : @user do
+            = image_tag @user.profile_image, class: 'avatar-medium img-rounded'
          =< @user
          - if can? :update, @user
             = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default pull-right'
         - if @user.character.present?
-            - if @user.character.confirmed
-                h4 Connected WoW character
-                p = link_to @user.character.profile_url do
-                    img.img-responsive src="#{@user.character.avatar}" alt="#{@user.character.name}"
-            - elsif can? :confirm, @user.character
+            - if not @user.character.confirmed and can? :confirm, @user.character
                 = link_to 'Confirm your WoW character', confirmation_character_path(@user.character),
                           class: 'btn btn-success btn-block'
         - elsif can? :connect, @user
@@ -25,4 +24,4 @@
                     => link_to toggle_role_user_path(@user, role), method: :patch, class: "btn #{role_button_class(role)}" do
                         i.fa.fa-fw class="#{@user.has_role?(role) ? 'fa-check-square' : 'fa-square'}"
                         =< role.to_s.titleize
-        p.text-center = link_to 'Back', :back, class: 'btn btn-link'
+        p.text-center = link_to 'Back', root_path, class: 'btn btn-link'

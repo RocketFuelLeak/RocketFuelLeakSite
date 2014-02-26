@@ -5,6 +5,12 @@ class CharactersController < ApplicationController
     # GET /characters
     # GET /characters.json
     def index
+        authorize! :manage, @characters
+
+        respond_to do |format|
+            format.html { @characters = @characters.page(params[:page]).per(50) }
+            format.json { }
+        end
     end
 
     # GET /characters/1
@@ -35,13 +41,29 @@ class CharactersController < ApplicationController
     # POST /characters
     # POST /characters.json
     def create
-        
+        respond_to do |format|
+            if @character.save
+                format.html { redirect_to @character, notice: 'Character was successfully created.' }
+                format.json { render action: 'show', status: :created, location: @character }
+            else
+                format.html { render action: 'new' }
+                format.json { render json: @character.errors, status: :unprocessable_entity }
+            end
+        end
     end
 
     # PATCH/PUT /characters/1
     # PATCH/PUT /characters/1.json
     def update
-        
+        respond_to do |format|
+            if @character.update(character_params)
+                format.html { redirect_to @character, notice: 'Character was successfully updated.' }
+                format.json { head :no_content }
+            else
+                format.html { render action: 'edit' }
+                format.json { render json: @character.errors, status: :unprocessable_entity }
+            end
+        end
     end
 
     # DELETE /characters/1
@@ -86,10 +108,26 @@ class CharactersController < ApplicationController
         end
     end
 
+    # PATCH /characters/1/toggle_confirmed
+    # PATCH /characters/1/toggle_confirmed.json
+    def toggle_confirmed
+        authorize! :manage, @character
+        @character.confirmed = !@character.confirmed
+        respond_to do |format|
+            if @character.save
+                format.html { redirect_to @character, notice: 'Character was successfully updated.' }
+                format.json { head :no_content }
+            else
+                format.html { render action: 'edit' }
+                format.json { render json: @character.errors, status: :unprocessable_entity }
+            end
+        end
+    end
+
     private
         # Only allow a trusted parameter "white list" through.
         def character_params
-            params.require(:character).permit(:name, :realm, :avatar, :guild)
+            params.require(:character).permit(:name, :confirmed)
         end
 
         def character_connect_params

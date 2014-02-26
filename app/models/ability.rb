@@ -3,7 +3,7 @@ class Ability
 
     def initialize(user)
         unless user
-            can :read, [Post, Addon]
+            can :read, [Post, Addon, :mumble]
             can :archive, Post
         else
             if user.is_admin?
@@ -19,10 +19,16 @@ class Ability
                 can :archive, Post
                 can :read, Character
             else
-                can :read, [Post, Addon, User]
+                can :read, [Post, Addon, User, Character, :mumble]
                 can :archive, Post
-                can :read, Character, user: user
-                can :create, Character
+
+                unless user.character.present?
+                    can :connect, Character
+                    can [:connect, :connection], Character
+                    can :connect, User, id: user.id
+                end
+
+                can [:confirm, :confirmation], Character, user: user unless user.character.present? and user.character.confirmed
             end
         end
     end

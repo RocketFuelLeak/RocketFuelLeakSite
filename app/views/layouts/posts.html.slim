@@ -1,9 +1,9 @@
-- title content_for?(:news_title) ? yield(:news_title) : 'News'
+- send_title
 - content_for :content do
     .row
         .col-md-9
             h1
-             = content_for?(:news_title) ? yield(:news_title) : 'News'
+             = title_content
              - if can? :create, Post
                 = link_to 'New Post', new_post_path, class: 'btn btn-success pull-right'
             == yield

@@ -1,0 +1,78 @@
+$warrior-color:      rgb(199, 156, 110);
+$paladin-color:      rgb(245, 140, 186);
+$hunter-color:       rgb(171, 212, 115);
+$rogue-color:        rgb(255, 245, 105);
+$priest-color:       rgb(255, 255, 255);
+$death_knight-color: rgb(196,  31,  59);
+$shaman-color:       rgb(  0, 112, 222);
+$mage-color:         rgb(105, 204, 240);
+$warlock-color:      rgb(148, 130, 201);
+$monk-color:         rgb(  0, 255, 150);
+$druid-color:        rgb(255, 125,  10);
+
+.text-warrior      { color: $warrior-color !important; }
+.text-paladin      { color: $paladin-color !important; }
+.text-hunter       { color: $hunter-color !important; }
+.text-rogue        { color: $rogue-color !important; }
+.text-priest       { color: $priest-color !important; }
+.text-death_knight { color: $death_knight-color !important; }
+.text-shaman       { color: $shaman-color !important; }
+.text-mage         { color: $mage-color !important; }
+.text-warlock      { color: $warlock-color !important; }
+.text-monk         { color: $monk-color !important; }
+.text-druid        { color: $druid-color !important; }
+
+a.link-warrior {
+    color: darken($warrior-color, 10%) !important;
+    &:hover { @extend .text-warrior; }
+}
+
+a.link-paladin {
+    color: darken($paladin-color, 10%) !important;
+    &:hover { @extend .text-paladin; }
+}
+
+a.link-hunter {
+    color: darken($hunter-color, 10%) !important;
+    &:hover { @extend .text-hunter; }
+}
+
+a.link-rogue {
+    color: darken($rogue-color, 10%) !important;
+    &:hover { @extend .text-rogue; }
+}
+
+a.link-priest {
+    color: darken($priest-color, 10%) !important;
+    &:hover { @extend .text-priest; }
+}
+
+a.link-death_knight {
+    color: darken($death_knight-color, 10%) !important;
+    &:hover { @extend .text-death_knight; }
+}
+
+a.link-shaman {
+    color: darken($shaman-color, 10%) !important;
+    &:hover { @extend .text-shaman; }
+}
+
+a.link-mage {
+    color: darken($mage-color, 10%) !important;
+    &:hover { @extend .text-mage; }
+}
+
+a.link-warlock {
+    color: darken($warlock-color, 10%) !important;
+    &:hover { @extend .text-warlock; }
+}
+
+a.link-monk {
+    color: darken($monk-color, 10%) !important;
+    &:hover { @extend .monk-druid; }
+}
+
+a.link-druid {
+    color: darken($druid-color, 10%) !important;
+    &:hover { @extend .text-druid; }
+}

@@ -80,6 +80,10 @@ table, .table {
 
 a.icon-link {
     color: #bbb;
+
+    &:hover {
+        color: white;
+    }
 }
 
 .container {
@@ -126,6 +130,34 @@ img {
         display: block;
         margin-right: auto;
         margin-left: auto;
+    }
+
+    &.avatar-16, &.avatar-tiny {
+        height: 16px;
+
+        &.img-rounded {
+            border-radius: 4px;
+        }
+    }
+
+    &.avatar-18 {
+        height: 18px;
+    }
+
+    &.avatar-32, &.avatar-small {
+        height: 32px;
+    }
+
+    &.avatar-48, &.avatar-medium {
+        height: 48px;
+    }
+
+    &.avatar-64, &.avatar-large {
+        height: 64px;
+    }
+
+    &.avatar-128, &.avatar-huge {
+        height: 128px;
     }
 }
 
@@ -179,3 +211,5 @@ textarea.markdown-box {
 }
 
 @import "posts";
+
+@import "wow/classes";

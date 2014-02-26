@@ -1,5 +1,6 @@
+- title 'Editing Character'
 .row
     .col-md-4.col-md-offset-4
-        h2 Confirm your character
-        == render 'confirm_form'
-        p.text-center = link_to 'Back', @character, class: 'btn btn-link'
+        h2 Edit character
+        == render 'form'
+        p.text-center = link_to 'Back', characters_path, class: 'btn btn-link'

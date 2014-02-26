@@ -2,20 +2,21 @@
       h1.news-post-title = link_to post.title, post
       p.news-post-meta
        i.fa.fa-clock-o>
-       abbr title="#{post.published? ? post.published_at : post.created_at}"
+       abbr> title="#{post.published? ? post.published_at : post.created_at}"
         => time_ago_in_words post.published? ? post.published_at : post.created_at
         | ago
-       i.fa.fa-user<>
-       = post.user
-       /i.glyphicon.glyphicon-tag<>
-       /| Test
+       | by
+       = link_to post.user, class: "news-post-author-link #{post.user.confirmed_character? && class_link_class(post.user.character.class_id)}" do
+            = image_tag post.user.profile_image, class: 'avatar-tiny img-rounded'
+            = post.user
        - unless post.published
             span.label.label-danger< This post has not been published
        - if can? :update, post
             =< link_to 'Edit', edit_post_path(post)
        - if can? :destroy, post
             =< link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }
-      - if @truncate_posts
-            = markdown(truncate(post.content, length: 1000, separator: ' ', omission: "... [*Continue reading*](#{post_path(post)})", escape: false))
-      - else
-            = markdown(post.content)
+      .news-post-content
+          - if @truncate_posts
+                = markdown(truncate(post.content, length: 1000, separator: ' ', omission: "... [*Continue reading*](#{post_path(post)})", escape: false))
+          - else
+                = markdown(post.content)

@@ -1,8 +1,15 @@
 = simple_form_for(@character, url: { action: 'confirm' }) do |f|
     = f.error_notification
-    p Please remove equipment from the following gear slots:
+    p
+     | Please go on
+     =<> link_to f.object.name, f.object.profile_url
+     | and remove equipment from the following gear slots.
+    p: strong You need to log out after the gear has been removed in order for the armory to update your character profile.
     ul
         - @character.confirmation_equipment.each do |slot|
-            li = t slot, scope: 'wow.slots'
+            li
+             = t slot, scope: 'wow.slots'
+             - if f.object.errors[slot].present?
+                 span.text-danger< = f.object.errors[slot].first
     .form-actions
         = f.button :submit, 'Confirm Character', class: 'btn-primary btn-block'

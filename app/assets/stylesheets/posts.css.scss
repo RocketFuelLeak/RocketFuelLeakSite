@@ -5,8 +5,13 @@
 .news-post {
     margin-bottom: 60px;
 
-    img {
+    .news-post-content img {
         @extend .img-responsive-thumbnail-centered;
+    }
+
+    a.news-post-author-link img {
+        margin-left: 5px;
+        margin-right: 3px;
     }
 }
 
@@ -19,10 +24,6 @@
     margin-bottom: 20px;
     //color: #999;
     @extend .text-muted;
-}
-
-.news-post-body {
-    font-size: 18px;
 }
 
 $feed-color: #e06622;
