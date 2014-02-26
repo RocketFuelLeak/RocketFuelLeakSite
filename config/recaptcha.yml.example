@@ -1,0 +1,9 @@
+development:
+    public_key: "xxxxx"
+    private_key: "xxxxx"
+test:
+    public_key: "xxxxx"
+    private_key: "xxxxx"
+production:
+    public_key: "xxxxx"
+    private_key: "xxxxx"

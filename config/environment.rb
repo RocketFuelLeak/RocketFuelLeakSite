@@ -8,6 +8,7 @@ FACEBOOK_CONFIG = YAML.load_file("#{::Rails.root}/config/facebook.yml")[::Rails.
 TWITTER_CONFIG = YAML.load_file("#{::Rails.root}/config/twitter.yml")[::Rails.env]
 GOOGLE_CONFIG = YAML.load_file("#{::Rails.root}/config/google.yml")[::Rails.env]
 SMTP_CONFIG = YAML.load_file("#{::Rails.root}/config/smtp.yml")[::Rails.env]
+RECAPTCHA_CONFIG = YAML.load_file("#{::Rails.root}/config/recaptcha.yml")[::Rails.env]
 
 # Initialize the Rails application.
 RocketFuelLeakSite::Application.initialize!

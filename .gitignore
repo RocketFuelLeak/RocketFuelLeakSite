@@ -55,3 +55,6 @@ public/sitemap*.xml*
 
 # SMTP config
 config/smtp.yml
+
+# reCAPTCHA config
+config/recaptcha.yml
