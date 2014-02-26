@@ -198,6 +198,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    recaptcha (0.3.6)
     redcarpet (3.0.0)
     ref (1.0.5)
     rolify (3.4.0)
@@ -294,6 +295,7 @@ DEPENDENCIES
   placeholder-gem
   pygments.rb
   rails (= 4.0.2)
+  recaptcha
   redcarpet
   rolify
   rvm-capistrano

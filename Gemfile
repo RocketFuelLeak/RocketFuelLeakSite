@@ -41,6 +41,7 @@ gem 'kaminari'
 
 # Authentication gems
 gem 'devise'
+gem 'recaptcha', :require => 'recaptcha/rails'
 #gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-facebook'
