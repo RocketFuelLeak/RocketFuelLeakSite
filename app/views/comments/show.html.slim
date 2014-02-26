@@ -1,0 +1,8 @@
+.row
+    .col-md-6.col-md-offset-3
+        h4.text-center
+         = @comment.user
+         | 's comment on
+         =< link_to @commentable, @commentable
+        = render @comment
+        .text-center = link_to 'Back', @commentable, class: 'btn btn-link'

@@ -1,0 +1,22 @@
+.comment {
+    @extend .media;
+    
+    .comment-body {
+        @extend .media-body;
+
+        .comment-author {
+            @extend .media-heading;
+        }
+        
+        p.comment-content {
+            margin-bottom: 0;
+        }
+
+        .comment-footer {
+            @extend .text-muted;
+            @extend .small;
+
+            margin-top: 5px;
+        }
+    }
+}

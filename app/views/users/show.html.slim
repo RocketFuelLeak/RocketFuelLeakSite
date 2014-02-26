@@ -5,21 +5,25 @@
          = link_to @user.confirmed_character? ? @user.character : @user do
             = image_tag @user.profile_image, class: 'avatar-medium img-rounded'
          =< @user
-         - if can? :update, @user
-            = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default pull-right'
+         .pull-right
+             - if can? :update, @user
+                = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default'
+             - if can? :destroy, @user
+                =< link_to 'Delete', @user, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
         - if @user.character.present?
             - if not @user.character.confirmed and can? :confirm, @user.character
                 = link_to 'Confirm your WoW character', confirmation_character_path(@user.character),
                           class: 'btn btn-success btn-block'
         - elsif can? :connect, @user
             = link_to 'Connect your WoW character', connection_characters_path, class: 'btn btn-primary btn-block'
+        p #{@user} has made #{@user.posts.size} posts and #{@user.comments.size} comments.
         - if can? :manage, @user
             p Email: #{@user.email}
             - if @user.provider.present?
                 p Provider: #{@user.provider}
             - if @user.uid.present?
                 p UID: #{@user.uid}
-            p.text-center
+            .text-center
                 - [:admin, :officer, :member].each do |role|
                     => link_to toggle_role_user_path(@user, role), method: :patch, class: "btn #{role_button_class(role)}" do
                         i.fa.fa-fw class="#{@user.has_role?(role) ? 'fa-check-square' : 'fa-square'}"

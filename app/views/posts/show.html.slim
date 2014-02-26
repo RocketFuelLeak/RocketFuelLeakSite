@@ -1,3 +1,11 @@
 - title @post.title
 = render @post
+- if @comments.present?
+    #comments.col-md-12
+        .col-md-8.col-md-offset-2
+            h3.text-center = zero_pluralize(@comments.size, 'Comment', 'No')
+            = render @comments
+            = paginate @comments
+            - if can? :create, Comment, @post
+                = render 'comments/form'
 p.text-center = link_to 'Back', posts_path, class: 'btn btn-link'

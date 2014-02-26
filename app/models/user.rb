@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
     has_one :character
 
     has_many :posts
+    has_many :comments
 
     validates :username, presence: true, uniqueness: { case_sensitive: false },
               format: { with: /\A[A-Z][a-z]+\z/ }

@@ -9,11 +9,17 @@
        = link_to post.user, class: "news-post-author-link #{post.user.confirmed_character? && class_link_class(post.user.character.class_id)}" do
             = image_tag post.user.profile_image, class: 'avatar-tiny img-rounded'
             = post.user
+       - if can? :read, Comment, post
+           = link_to "#{post_path(post)}#comments", class: 'news-post-comments-link' do
+                i.fa class="#{post.comments.size > 0 ? 'fa-comments' : 'fa-comment'}"
+                = zero_pluralize(post.comments.size, 'comment', 'No')
        - unless post.published
             span.label.label-danger< This post has not been published
        - if can? :update, post
+            |  &middot;
             =< link_to 'Edit', edit_post_path(post)
        - if can? :destroy, post
+            |  &middot;
             =< link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }
       .news-post-content
           - if @truncate_posts

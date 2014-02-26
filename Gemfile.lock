@@ -31,7 +31,7 @@ GEM
     bootstrap-sass (3.1.0.1)
       sass (~> 3.2)
     builder (3.1.4)
-    cancan (1.6.10)
+    cancancan (1.7.0)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -271,7 +271,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 3.1.0.1)
-  cancan
+  cancancan (~> 1.7)
   capistrano
   coffee-rails (~> 4.0.0)
   country_select

@@ -9,6 +9,8 @@ RocketFuelLeakSite::Application.routes.draw do
   get 'privacy' => 'pages#privacy'
   get 'terms' => 'pages#terms'
 
+  resources :addons
+
   resources :users, except: [:new, :create] do
     member do
       patch 'toggle_role/:role' => 'users#toggle_role', as: :toggle_role
@@ -36,6 +38,7 @@ RocketFuelLeakSite::Application.routes.draw do
       get 'archive/:year/:month' => 'posts#archive', constraints: { year: /\d{4}/, month: /\d{2}/ }, as: :archive
       get 'feed' => 'posts#feed', defaults: { format: 'atom' }
     end
+
+    resources :comments
   end
-  resources :addons
 end

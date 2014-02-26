@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
 
     belongs_to :user
 
+    has_many :comments, as: :commentable
+
     validates :title, presence: true, uniqueness: { case_sensitive: false }
     validates :content, presence: true
 
@@ -33,6 +35,10 @@ class Post < ActiveRecord::Base
         if self.published_changed? and self.published == true
             self.published_at = Time.now
         end
+    end
+
+    def to_s
+        title
     end
 
     def to_param

@@ -1,0 +1,20 @@
+.comment
+    = image_tag comment.user.profile_image(64), class: 'pull-left avatar-64 img-rounded'
+    .comment-body
+        h4.comment-author = link_to comment.user do
+            - if comment.user.confirmed_character?
+                = class_link comment.user, comment.user, comment.user.character.class_id
+            - else
+                = link_to comment.user, comment.user
+        p.comment-content = comment.content
+        p.comment-footer
+         | Posted #{time_ago_in_words comment.created_at} ago &middot;
+         - if comment.edited?
+            |  Edited &middot;
+         =<> link_to 'Permalink', [@commentable, comment]
+         - if can? :update, comment
+            | &middot;
+            =<> link_to 'Edit', [:edit, @commentable, comment]
+         - if can? :destroy, comment
+            | &middot;
+            =< link_to 'Delete', [@commentable, comment], method: :delete, data: { confirm: 'Are you sure?' }

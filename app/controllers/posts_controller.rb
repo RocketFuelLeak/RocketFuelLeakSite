@@ -24,6 +24,11 @@ class PostsController < ApplicationController
     # GET /posts/1.json
     def show
         authorize! :read_drafts, @post unless @post.published
+        if can? :read, Comment, @post
+            @commentable = @post
+            @comments = @commentable.comments.recent.page(params[:page]).per(15)
+            @comment = Comment.new
+        end
     end
 
     # GET /posts/new

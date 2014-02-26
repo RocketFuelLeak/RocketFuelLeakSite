@@ -32,6 +32,14 @@ module ApplicationHelper
                   "<div class=\"flex-video widescreen\"><iframe src=\"https://www.youtube.com/embed/\\1\" allowfullscreen=\"true\" frameborder=\"0\"></iframe></div>").html_safe
     end
 
+    def zero_pluralize(n, noun, empty, empty_pluralize = true)
+        if n == 0
+            "#{empty} #{empty_pluralize ? noun.pluralize : noun}"
+        else
+            pluralize(n, noun)
+        end
+    end
+
     def class_text(class_id)
         case class_id
         when Symbol
@@ -43,6 +51,10 @@ module ApplicationHelper
 
     def class_link_class(class_id)
         "link-#{class_text(class_id)}"
+    end
+
+    def class_link(text, target, class_id)
+        link_to text, target, class: class_link_class(class_id)
     end
 
     def class_span(class_id, content)
