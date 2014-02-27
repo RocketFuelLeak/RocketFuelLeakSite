@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
     rolify
 
     has_one :character, dependent: :destroy
+    has_one :application, dependent: :destroy
 
     has_many :posts, dependent: :destroy
     has_many :comments, dependent: :destroy

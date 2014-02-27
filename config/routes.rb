@@ -1,4 +1,6 @@
 RocketFuelLeakSite::Application.routes.draw do
+  resources :applications
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
 
   root 'pages#index'

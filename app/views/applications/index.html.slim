@@ -1,0 +1,29 @@
+h1 Listing applications
+
+table
+  tr
+    th Content
+    th Character name
+    th Character realm
+    th Character guild
+    th Status
+    th User
+    th
+    th
+    th
+
+  - @applications.each do |application|
+    tr
+      td = application.content
+      td = application.character_name
+      td = application.character_realm
+      td = application.character_guild
+      td = application.status
+      td = application.user
+      td = link_to 'Show', application
+      td = link_to 'Edit', edit_application_path(application)
+      td = link_to 'Destroy', application, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Application', new_application_path

@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Content:
+  = @application.content
+p
+  strong Character name:
+  = @application.character_name
+p
+  strong Character realm:
+  = @application.character_realm
+p
+  strong Character guild:
+  = @application.character_guild
+p
+  strong Status:
+  = @application.status
+p
+  strong User:
+  = @application.user
+
+= link_to 'Edit', edit_application_path(@application)
+'|
+= link_to 'Back', applications_path

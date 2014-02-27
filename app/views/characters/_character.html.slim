@@ -1,0 +1,8 @@
+.media
+    = link_to character.profile_url, class: 'pull-left' do
+        = image_tag character.avatar, alt: "#{character}'s avatar", class: 'media-object avatar-64 img-rounded'
+    .media-body
+        h4.media-heading = class_link character, character, character.class_id
+        | Member of guild
+        =<> link_to character.guild, WoW::Guild.get_profile_url(character.guild)
+        | on Stormreaver-EU.

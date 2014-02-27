@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  character_name: MyString
+  character_realm: MyString
+  character_guild: MyString
+  status: 1
+  user_id: 
+
+two:
+  content: MyText
+  character_name: MyString
+  character_realm: MyString
+  character_guild: MyString
+  status: 1
+  user_id: 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226135159) do
+ActiveRecord::Schema.define(version: 20140227193947) do
 
   create_table "addons", force: true do |t|
     t.string   "name"
@@ -25,6 +25,21 @@ ActiveRecord::Schema.define(version: 20140226135159) do
     t.string   "curse_download"
     t.string   "wowinterface_download"
   end
+
+  create_table "applications", force: true do |t|
+    t.text     "content"
+    t.string   "character_name"
+    t.string   "character_realm"
+    t.string   "character_guild"
+    t.integer  "status"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "verified_character"
+  end
+
+  add_index "applications", ["status"], name: "index_applications_on_status"
+  add_index "applications", ["user_id"], name: "index_applications_on_user_id"
 
   create_table "characters", force: true do |t|
     t.string   "name"
