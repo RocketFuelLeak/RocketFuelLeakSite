@@ -16,24 +16,28 @@
                 p You will be able to add a World of Warcraft character after your account has been created.
                 = f.input :terms_read,
                     label: ("I have read and agree to the #{link_to 'Terms and Conditions', terms_path}").html_safe
-                #recaptcha_widget.form-group
-                    /p Complete the reCAPTCHA to sign up.
-                    #recaptcha_image
-                    - if flash[:recaptcha_error]
-                        p.recaptcha_only_if_incorrect_sol.text-danger = flash[:recaptcha_error]
-                    .input-group
-                        input#recaptcha_response_field.form-control[type="text" name="recaptcha_response_field"
-                                                                    placeholder="Enter the words above"]
-                        .input-group-btn
-                            button#recaptcha_new.btn.btn-default type="button" title="Get another CAPTCHA" data-toggle="tooltip"
-                                i.glyphicon.glyphicon-refresh
-                            button#recaptcha_switch_audio.btn.btn-default type="button" title="Get an audio CAPTCHA" data-toggle="tooltip"
-                                i.glyphicon.glyphicon-volume-up
-                            button#recaptcha_switch_image.btn.btn-default type="button" title="Get an image CAPTCHA" data-toggle="tooltip"
-                                i.glyphicon.glyphicon-picture
-                            button#recaptcha_help.btn.btn-default type="button" title="Help" data-toggle="tooltip"
-                                i.glyphicon.glyphicon-question-sign
-                = recaptcha_tags ajax: true, noscript: true, display: { theme: 'custom', custom_theme_widget: 'recaptcha_widget' }
+                - if f.object.recaptcha_required?
+                    #recaptcha_widget.form-group
+                        /p Complete the reCAPTCHA to sign up.
+                        #recaptcha_image
+                        - if flash[:recaptcha_error]
+                            p.recaptcha_only_if_incorrect_sol.text-danger = flash[:recaptcha_error]
+                        .input-group
+                            input#recaptcha_response_field.form-control[type="text" name="recaptcha_response_field"
+                                                                        placeholder="Enter the words above"]
+                            .input-group-btn
+                                button#recaptcha_new.btn.btn-default[type="button" title="Get another CAPTCHA"
+                                                                     data-toggle="tooltip"]
+                                    i.glyphicon.glyphicon-refresh
+                                button#recaptcha_switch_audio.btn.btn-default[type="button" title="Get an audio CAPTCHA"
+                                                                              data-toggle="tooltip"]
+                                    i.glyphicon.glyphicon-volume-up
+                                button#recaptcha_switch_image.btn.btn-default[type="button" title="Get an image CAPTCHA"
+                                                                              data-toggle="tooltip"]
+                                    i.glyphicon.glyphicon-picture
+                                button#recaptcha_help.btn.btn-default type="button" title="Help" data-toggle="tooltip"
+                                    i.glyphicon.glyphicon-question-sign
+                    = recaptcha_tags ajax: true, noscript: true, display: { theme: 'custom', custom_theme_widget: 'recaptcha_widget' }
             .form-actions
                 = f.button :submit, "Sign up", class: 'btn-primary btn-block'
         = render "devise/shared/links"

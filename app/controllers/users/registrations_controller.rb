@@ -4,13 +4,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
             super
             session[:omniauth] = nil unless @user.new_record?
         else
-            if verify_recaptcha
+            build_resource(sign_up_params)
+            if not resource.recaptcha_required? or verify_recaptcha
                 flash.delete :recaptcha_error
                 super
                 session[:omniauth] = nil unless @user.new_record?
             else
                 flash.delete :recaptcha_error
-                build_resource(sign_up_params)
                 resource.valid?
                 flash.now[:alert] = 'There was an error with the reCAPTCHA code below. Please re-enter the code.'
                 resource.errors.add(:base, 'There was an error with the reCAPTCHA code below. Please re-enter the code.')
