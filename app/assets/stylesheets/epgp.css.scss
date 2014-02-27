@@ -1,0 +1,11 @@
+$mainspec-color:      rgb( 85, 240,  15);
+$minor-upgrade-color: rgb( 19, 129,   0);
+$offspec-color:       rgb(255, 210,   0);
+$transmog-color:      rgb(121,   0, 255);
+$greed-color:         rgb(255,  99,   0);
+
+.text-mainspec      { color: $mainspec-color      !important; }
+.text-minor-upgrade { color: $minor-upgrade-color !important; }
+.text-offspec       { color: $offspec-color       !important; }
+.text-transmog      { color: $transmog-color      !important; }
+.text-greed         { color: $greed-color         !important; }

@@ -1,0 +1,17 @@
+$poor-color:      rgb(157, 157, 157);
+$common-color:    rgb(255, 255, 255);
+$uncommon-color:  rgb( 30, 255,   0);
+$rare-color:      rgb(  0, 112, 221);
+$epic-color:      rgb(163,  53, 238);
+$legendary-color: rgb(255, 128,   0);
+$artifact-color:  rgb(230, 204, 128);
+$heirloom-color:  rgb(230, 204, 128);
+
+.text-poor      { color: $poor-color      !important; }
+.text-common    { color: $common-color    !important; }
+.text-uncommon  { color: $uncommon-color  !important; }
+.text-rare      { color: $rare-color      !important; }
+.text-epic      { color: $epic-color      !important; }
+.text-legendary { color: $legendary-color !important; }
+.text-artifact  { color: $artifact-color  !important; }
+.text-heirloom  { color: $heirloom-color  !important; }

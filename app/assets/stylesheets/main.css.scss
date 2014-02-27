@@ -5,6 +5,9 @@ $pagination-hover-bg: rgba(238, 238, 238, 0.1);
 $pagination-hover-border: $pagination-border;
 $pagination-disabled-bg: transparent;
 
+$code-color: #0c0;
+$code-bg: $kbd-bg;
+
 @import "bootstrap";
 
 @import "cyborg/bootswatch";
@@ -215,9 +218,7 @@ textarea.markdown-box {
 }
 
 @import "posts";
-
 @import "comments";
-
 @import "users";
-
-@import "wow/classes";
+@import "epgp";
+@import "wow/base";

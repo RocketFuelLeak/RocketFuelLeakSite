@@ -6,6 +6,88 @@
         p
          | EPGP stands for Effort Points/Gear Points. It's a system designed to handle loot distribution in a way
            that is more fair than standard DKP distribution.
+        p
+         | The way this works is that EP (Effort Points) is representative of the effort you have put in during raids.
+           Your GP (Gear Points) increase when you win loot, the higher quality loot, the more your GP increases.
+        p When loot drops, you select whether you need it or not. There are several options for you to choose.
+        dl.dl-horizontal
+            dt.text-mainspec Mainspec
+            dd You need this piece of loot for your Main Spec, it's a major upgrade.
+            dt.text-minor-upgrade Minor Upgrade
+            dd
+             | Getting this piece would improve your game, but it's either an upgrade with the same item level as your
+               current gear or you'd like to only receive it if nobody else needs it.
+            dt.text-offspec Offspec
+            dd You need this item for your offspec.
+            dt.text-transmog Transmog
+            dd You'd like to use this piece for transmog purposes.
+            dt.text-greed Greed
+            dd You want this piece to sell it to a vendor.
+            dt Pass
+            dd You don't want this item at all.
+        p It's important to note that the amount of GP you will be credited depends on the option you select.
+        p
+         | For Main Spec and Minor Upgrade, you will be credited 100% of the item's worth. For any other option, it is
+           given to you for free. Abuse of this fact (rolling Offspec on gear you need for Main Spec) is not taken
+           lightly and may grant you a loot ban or exclusion from the raid team.
+        p
+         | In addition to that, the GP values also depend on the quality of the loot, item level, slot, and stats budget.
+           A ring, for example, is worth less GP than a chestpiece with the same quality and item level,
+           because it has less stats on it.
+        p
+         | Also, <strong>EPGP is personal and not character-specific</strong>. This means that you share EPGP values
+           between all the characters you have in the guild. Earning EP or winning an item on character X will also
+           increase your EP and/or GP on character Y.
+        h3 What happens in a typical raid
+        p
+         | Before the first raid in a week, everyone's EP and GP are reduced by 10%. This is to make sure that recent
+           changes to EPGP carry more weight than older ones. So if Joe's EP and GP are 1000 and 500 (respectively)
+           before the first raid, they will be reduced to 900 and 450.
+        p
+         | When the group wipes on a boss, they are awarded a small amount of EP in recognition of the effort required.
+           You are awarded 2 points of EP for a wipe on a normal difficulty boss, and 5 EP for every progression wipe
+           on a heroic difficulty boss. This means that once a heroic boss has been killed and is on farm, you will
+           only be granted 2 EP (same as for a normal boss) when wiping on it.
+        p
+         | Once a boss has been defeated, every member in the group is awarded 1000 EP. If it's a progression kill
+           on heroic, the amount awarded is instead 1500 EP, which is reduced to 1000 EP once that boss is on farm.
+        p Then, it's on to <strong class="text-epic">the loot</strong>!
+        p
+         | When a boss dies and time comes to distribute its loot, the loot master will distribute each item separately
+           via the addon
+         =< link_to 'EPGPLootMaster', 'http://www.curse.com/addons/wow/epgp_lootmaster'
+         | . Every member in the raid will then get a popup with different buttons to select their loot preference,
+           as shown below.
+        = image_tag 'epgp/loot_popup.png', alt: 'EPGPLootMaster loot popup', class: 'img-responsive-centered'
+        p
+         | This window provides you with all the info you need to make your selection. What the different buttons
+           mean was explained above, some other info this popup provides is:
+        dl.dl-horizontal
+            dt Item Level
+            dd The raw item level of the item. (Top right)
+            dt GP Value
+            dd The GP value for that item, this is the value that you will be credited if you win. (Top right)
+            dt Time until pass
+            dd Once this bar expires, you will auto-pass the item.
+            dt Note button
+            dd
+             | You can use the right-most button to set a custom note on the item that will be displayed to
+               the master looter.
+        p
+         | After you have made your selection, you will be competing against other members who chose the
+           same option as you. Most of the time it will be between players who chose
+         strong.text-mainspec< Mainspec
+         | .
+        p As mentioned before, whoever has the highest PR value is going to win the item. Take this example:
+        .well
+         | Seylaina picks <span class="text-mainspec">Mainspec</span>, Shottyy picks the same option and they
+           are the only two who have selected <span class="text-mainspec">Mainspec</span>. Seylaina's EP and GP
+           values are 5000 and 600. Shottyy's EP and GP values are 4000 and 450.
+        p
+         | In this case, Seylaina's PR value is roughly (5000 / (600 + 100)) = 7.14, while Shottyy's PR is about
+           (4000 / (450 + 100)) = 7.27. This means that Shottyy wins the loot (higher PR).
+           Even though Seylaina had a higher EP value, Shottyy still won due to having lower GP,
+           which significantly raises the PR in situations like these.
     .col-md-4
         h3.text-center EPGP F.A.Q
         h4 PR Calculator
@@ -48,9 +130,11 @@
          | Whenever you win a piece of loot, you get credited with GP.
            As your GP increases, your PR will decrease. Lower PR means you get less priority at loot.
            How much GP you are credited depends on the quality and stat values of the item.
+        h4 Who manages the EPGP values?
+        p Currently, only members with the "EPGP Officer" rank and the Guild Leader are able to manage the EPGP values.
         h4 Where can I read more?
         p
-            => link_to 'The EPGP help pages', 'http://www.epgpweb.com/help/system'
-            | is a good place to read up if you want more info on how EPGP works.
-              If you feel this page is lacking in info, feel free to notify an officer in-game
-              and this page will be updated.
+         => link_to 'The EPGP wiki', 'http://www.epgpweb.com/help/system'
+         | is a good place to read up if you want more info on how EPGP works.
+           If you feel this page is lacking in info, feel free to notify an officer in-game
+           and this page will be updated.
