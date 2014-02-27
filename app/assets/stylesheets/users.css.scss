@@ -1,0 +1,26 @@
+#recaptcha_widget {
+    display: none;
+}
+
+#recaptcha_image {
+    max-width: 100%;
+    height: auto !important;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+
+    img {
+        max-width: 100%;
+        height: auto !important;
+        border-radius: 4px;
+    }
+}
+
+#recaptcha_response_field {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+#recaptcha_switch_image {
+    display: none;
+}

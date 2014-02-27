@@ -78,10 +78,14 @@ table, .table {
     margin-top: 5px;
 }
 
+.input-group-btn > .btn {
+    margin-top: 0;
+}
+
 a.icon-link {
     color: #bbb;
 
-    &:hover {
+    &:hover, &:focus {
         color: white;
     }
 }
@@ -213,5 +217,7 @@ textarea.markdown-box {
 @import "posts";
 
 @import "comments";
+
+@import "users";
 
 @import "wow/classes";
