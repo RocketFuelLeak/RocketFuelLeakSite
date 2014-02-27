@@ -1,4 +1,4 @@
-.comment
+.comment id="comment-#{@commentable.id}-#{comment.id}"
     = image_tag comment.user.profile_image(64), class: 'pull-left avatar-64 img-rounded'
     .comment-body
         h4.comment-author = link_to comment.user do
