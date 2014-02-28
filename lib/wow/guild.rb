@@ -8,11 +8,10 @@ module WoW
         def initialize(data)
             @name = data['name']
             @realm = data['realm']
-            @members = Array.new
+            @members = Hash.new
             if data.key? 'members'
-                data['members'].each do |member|
-                    @members.push member['character']['name']
-                end
+                #@members = data['members'].map { |member| { name: member['character']['name'], rank: member['rank'] } }
+                data['members'].map { |member| @members[member['character']['name']] = { rank: member['rank'] } }
             end
         end
 

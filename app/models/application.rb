@@ -70,4 +70,8 @@ class Application < ActiveRecord::Base
     def email
         user.email
     end
+
+    def to_param
+        "#{id}-#{character_name.parameterize}"
+    end
 end

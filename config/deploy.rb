@@ -38,8 +38,11 @@ namespace :deploy do
         put File.read("config/secrets.yml.example"), "#{shared_path}/config/secrets.yml"
         put File.read("config/github.yml.example"), "#{shared_path}/config/github.yml"
         put File.read("config/facebook.yml.example"), "#{shared_path}/config/facebook.yml"
+        put File.read("config/twitter.yml.example"), "#{shared_path}/config/twitter.yml"
+        put File.read("config/google.yml.example"), "#{shared_path}/config/google.yml"
         put File.read("config/devise.yml.example"), "#{shared_path}/config/devise.yml"
         put File.read("config/smtp.yml.example"), "#{shared_path}/config/smtp.yml"
+        put File.read("config/recaptcha.yml.example"), "#{shared_path}/config/recaptcha.yml"
         puts "Now edit the config files in #{shared_path}."
     end
 
@@ -50,8 +53,11 @@ namespace :deploy do
         run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
         run "ln -nfs #{shared_path}/config/github.yml #{release_path}/config/github.yml"
         run "ln -nfs #{shared_path}/config/facebook.yml #{release_path}/config/facebook.yml"
+        run "ln -nfs #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
+        run "ln -nfs #{shared_path}/config/google.yml #{release_path}/config/google.yml"
         run "ln -nfs #{shared_path}/config/devise.yml #{release_path}/config/devise.yml"
         run "ln -nfs #{shared_path}/config/smtp.yml #{release_path}/config/smtp.yml"
+        run "ln -nfs #{shared_path}/config/recaptcha.yml #{release_path}/config/recaptcha.yml"
     end
 
     after "deploy:finalize_update", "deploy:symlink_configs"
@@ -74,6 +80,12 @@ namespace :deploy do
     end
 
     after "deploy", "deploy:refresh_sitemaps"
+
+    task :update_members, roles: :app do
+        run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake wow:update_members"
+    end
+
+    after "deploy", "deploy:update_members"
 end
 
 namespace :rails do

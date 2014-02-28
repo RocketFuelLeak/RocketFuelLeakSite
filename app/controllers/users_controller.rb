@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     def index
         authorize! :manage, @users
 
+        @users = @users.includes(:character)
+
         respond_to do |format|
             format.html { @users = @users.page(params[:page]).per(50) }
             format.json { }
