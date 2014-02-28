@@ -4,6 +4,9 @@ p#footer-copy-text
  =<> link_to 'Privacy', privacy_path
  | &middot;
  =< link_to 'Terms', terms_path
+ - if can_apply?
+    |  &middot;
+    =< link_to 'Apply now!', new_application_path
 p#footer-social-text
     / TODO: Find a reddit icon
     /a.icon-link href="http://reddit.com/r/RocketFuelLeak" title="subreddit"

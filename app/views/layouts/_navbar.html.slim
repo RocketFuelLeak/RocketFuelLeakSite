@@ -11,8 +11,6 @@
             ul.nav.navbar-nav
                 li class="#{current_page?(root_path) && 'active'}" = link_to 'Home', root_path
                 li class="#{current_page?(posts_path) && 'active'}" = link_to 'News', posts_path
-                - if can_apply?
-                    li class="#{current_page?(new_application_path) && 'active'}" = link_to 'Apply', new_application_path
                 - if can? :read, Application
                     li class="#{current_page?(applications_path) && 'active'}" = link_to 'Applications', applications_path
                 li.disabled: a.disabled Forums
@@ -21,11 +19,11 @@
                      | Help
                      b.caret<
                     ul.dropdown-menu
+                        li class="#{current_page?(rules_path) && 'active'}" = link_to 'Rules', rules_path
                         li class="#{current_page?(about_path) && 'active'}" = link_to 'About', about_path
                         li class="#{current_page?(addons_path) && 'active'}" = link_to 'AddOns', addons_path
                         li class="#{current_page?(epgp_path) && 'active'}" = link_to 'EPGP', epgp_path
-                        - if can? :read, :mumble
-                            li class="#{current_page?(mumble_path) && 'active'}" = link_to 'Mumble', mumble_path
+                        li class="#{current_page?(mumble_path) && 'active'}" = link_to 'Mumble', mumble_path
                         li = link_to 'Report an issue', 'https://github.com/RocketFuelLeak/RocketFuelLeakSite/issues/new'
                 li
                     a.dropdown-toggle data-toggle="dropdown" href="#"

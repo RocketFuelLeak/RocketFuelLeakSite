@@ -2,105 +2,139 @@
 
 .row
     .col-md-9
-        h1 Our Mumble server
-        p
-         | Communicating with the in-game chat isn't very efficient when raiding, anybody knows that.
-           That's why we, as most other raiding guilds, use voice communication during raids.
-        p
-         | We have chosen Mumble as our <abbr title="Voice over IP">VoIP</abbr> solution because of the low latency
-           and the fact that it's completely free and open-source.
-        p
-         | The only problem with Mumble, compared to other solutions, is that many users find it difficult to set up
-           when they first install and open it. This page aims to help new members
-           (or <abbr title="Pick Up Group">PUGs</abbr>) get their Mumble client up and running with our server.
-        h2 Downloading Mumble
-        p
-         | Before doing anything, you will need to download the installer for Mumble. You can do so from
-         =< link_to 'their page on sourceforge.net', 'http://mumble.sourceforge.net/'
-         | . Just select the version appropriate for your system. This is the recommended way, as it is guaranteed
-           that you get the latest client version. If you'd rather have a direct download link, you can find them
-           in the sidebar for Windows and OS X. Save the installer somewhere accessibly, like your desktop.
-        h2 Installing Mumble
-        p
-         | Just run the installer that you downloaded and
-         strong< follow the on-screen instructions
-         | . If you'd rather want a complete guide to installing it, we've compiled an installation guide just for you
-           below.
-        .panel.panel-default
-            .panel-heading
-                h3.panel-title
-                    a href="#mumble-install-guide" data-toggle="collapse" Guide to installing mumble (click to expand)
-            #mumble-install-guide.panel-collapse.collapse
-                .panel-body
-                    .alert.alert-info.alert-lg Please note that this installation guide assumes you are using the Windows operating system.
-                    p
-                     | Once the installer has finished downloading, it's time to run it. Double-click on the installer file and
-                       choose "Yes" on any UAC prompts. You should be greeted with the following window.
-                    = image_tag 'mumble/install_1.png', alt: 'Mumble installer greeting', class: 'img-responsive-centered'
-                    p Simply choose "Next" as the image marks with the red rectangle and continue to the next screen.
-                    = image_tag 'mumble/install_2.png', alt: 'Mumble installer license agreement', class: 'img-responsive-centered'
-                    p Read through the agreement <sup>hah</sup> and accept them before pressing "Next" and continuing.
-                    = image_tag 'mumble/install_3.png', alt: 'Mumble installer location', class: 'img-responsive-centered'
-                    p Change the installation location if you wish, and then continue with "Next".
-                    = image_tag 'mumble/install_4.png', alt: 'Mumble installer read', class: 'img-responsive-centered'
-                    p
-                     | Easy, just press "Install" to begin installation.
-                     strong< Press "Yes" on any UAC prompts that appear during installation.
-                    = image_tag 'mumble/install_5.png', alt: 'Mumble installer finished', class: 'img-responsive-centered'
-                    p
-                     | Once installation has finished, make sure you check the "Start Mumble" checkbox before pressing "Finish".
-                       When Mumble starts up, an audio wizard will launch to guide you through setting up and configuring your
-                       microphone and speakers or headphones.
-                    = image_tag 'mumble/wizard_1.png', alt: 'Mumble audio wizard welcome', class: 'img-responsive-centered'
-                    .alert.alert-danger.text-uppercase
-                     strong> WARNING:
-                     | Do not cancel the audio wizard prematurely as it is imperative that you follow it from start to finish
-                       to ensure an optimal experience with the Mumble client. Closing out of the audio wizard early is the most
-                       frequent source of problems.
-                    = image_tag 'mumble/wizard_2.png', alt: 'Mumble audio wizard device config', class: 'img-responsive-centered'
-                    p Turn on echo cancellation if your microphone doesn't support it on its own, and continue with "Next".
-                    = image_tag 'mumble/wizard_3.png', alt: 'Mumble audio wizard device tuning', class: 'img-responsive-centered'
-                    p Follow the instructions and continue with "Next".
-                    = image_tag 'mumble/wizard_4.png', alt: 'Mumble audio wizard volume tuning', class: 'img-responsive-centered'
-                    p
-                     strong> Follow the instructions
-                     | and continue with "Next".
-                    = image_tag 'mumble/wizard_5.png', alt: 'Mumble audio wizard transmit settings', class: 'img-responsive-centered'
-                    p
-                     | Choose whether you want to use PTT (Push To Talk) or voice activation. If you're unsure, go with Push To Talk.
-                       Once you have made your choice, continue to the next screen with "Next".
-                    = image_tag 'mumble/wizard_6.png', alt: 'Mumble audio wizard quality and notifications', class: 'img-responsive-centered'
-                    p Modify the settings here if you wish, you may want to turn off Text-To-Speech to avoid annoying spam.
-                    = image_tag 'mumble/wizard_7.png', alt: 'Mumble audio wizard positional audio', class: 'img-responsive-centered'
-                    p If you use headphones, check the "Use headphones" checkbox, then continue with "Next".
-                    = image_tag 'mumble/wizard_8.png', alt: 'Mumble audio wizard finished', class: 'img-responsive-centered'
-                    p
-                     strong> Congratulations!
-                     | You made it through the audio wizard, the hard part is now over! The only thing left is to add a
-                       certificate and server. After pressing "Finish", you will see the following window.
-                    = image_tag 'mumble/cert_1.png', alt: 'Mumble certificate wizard', class: 'img-responsive-centered'
-                    p Choosing automatic certificate creation is recommended for least amount of hassle.
-                    = image_tag 'mumble/cert_2.png', alt: 'Mumble certificate finish', class: 'img-responsive-centered'
-                    p
-                     | Now that we've created a certificate for ourselves, it's time to add a server to connect to.
-                       Mumble will conveniently display the server list when you are done adding a certificate.
-                    = image_tag 'mumble/connect_1.png', alt: 'Mumble connection window', class: 'img-responsive-centered'
-                    p Press the "Add New..." button to add a new server to your favourites list.
-                    = image_tag 'mumble/connect_2.png', alt: 'Mumble server window', class: 'img-responsive-centered'
-                    p
-                     | Fill out the details as they are shown in the above image, replacing the text in the Username field with the
-                       name of your WoW character.
-                    = image_tag 'mumble/connect_3.png', alt: 'Mumble server selection', class: 'img-responsive-centered'
-                    p
-                     | Now select our server in the list and press "Connect".
-                       You may see the below popup when you connect for the first time.
-                    = image_tag 'mumble/connect_4.png', alt: 'Mumble certificate warning', class: 'img-responsive-centered'
-                    p If this appears, you can safely choose "Yes" to accept and store the certificate. After that, you are finally...
-                    = image_tag 'mumble/client.png', alt: 'Mumble client connected to server', class: 'img-responsive-centered'
-                    h4 Connected!
-                    p
-                     | Now that you are connected, you can begin talking to other people on the server. If you are here for a raid,
-                       an officer will move you into the appropriate channel.
+        .row
+            .col-md-12
+                h1 Our Mumble server
+                p
+                 | Communicating with the in-game chat isn't very efficient when raiding, anybody knows that.
+                   That's why we, as most other raiding guilds, use voice communication during raids.
+                p
+                 | We have chosen Mumble as our <abbr title="Voice over IP">VoIP</abbr> solution because of the low latency
+                   and the fact that it's completely free and open-source.
+                p
+                 | The only problem with Mumble, compared to other solutions, is that many users find it difficult to set up
+                   when they first install and open it. This page aims to help new members
+                   (or <abbr title="Pick Up Group">PUGs</abbr>) get their Mumble client up and running with our server.
+                h2 Downloading Mumble
+                p
+                 | Before doing anything, you will need to download the installer for Mumble. You can do so from
+                 =< link_to 'their page on sourceforge.net', 'http://mumble.sourceforge.net/'
+                 | . Just select the version appropriate for your system. This is the recommended way, as it is guaranteed
+                   that you get the latest client version. If you'd rather have a direct download link, you can find them
+                   in the sidebar for Windows and OS X. Save the installer somewhere accessibly, like your desktop.
+                h2 Installing Mumble
+                p
+                 | Just run the installer that you downloaded and
+                 strong< follow the on-screen instructions
+                 | . If you'd rather want a complete guide to installing it, we've compiled an installation guide just for you
+                   below.
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title
+                            a href="#mumble-install-guide" data-toggle="collapse" Guide to installing mumble (click to expand)
+                    #mumble-install-guide.panel-collapse.collapse
+                        .panel-body
+                            .alert.alert-info.alert-lg Please note that this installation guide assumes you are using the Windows operating system.
+                            p
+                             | Once the installer has finished downloading, it's time to run it. Double-click on the installer file and
+                               choose "Yes" on any UAC prompts. You should be greeted with the following window.
+                            = image_tag 'mumble/install_1.png', alt: 'Mumble installer greeting', class: 'img-responsive-centered'
+                            p Simply choose "Next" as the image marks with the red rectangle and continue to the next screen.
+                            = image_tag 'mumble/install_2.png', alt: 'Mumble installer license agreement', class: 'img-responsive-centered'
+                            p Read through the agreement <sup>hah</sup> and accept them before pressing "Next" and continuing.
+                            = image_tag 'mumble/install_3.png', alt: 'Mumble installer location', class: 'img-responsive-centered'
+                            p Change the installation location if you wish, and then continue with "Next".
+                            = image_tag 'mumble/install_4.png', alt: 'Mumble installer read', class: 'img-responsive-centered'
+                            p
+                             | Easy, just press "Install" to begin installation.
+                             strong< Press "Yes" on any UAC prompts that appear during installation.
+                            = image_tag 'mumble/install_5.png', alt: 'Mumble installer finished', class: 'img-responsive-centered'
+                            p
+                             | Once installation has finished, make sure you check the "Start Mumble" checkbox before pressing "Finish".
+                               When Mumble starts up, an audio wizard will launch to guide you through setting up and configuring your
+                               microphone and speakers or headphones.
+                            = image_tag 'mumble/wizard_1.png', alt: 'Mumble audio wizard welcome', class: 'img-responsive-centered'
+                            .alert.alert-danger.text-uppercase
+                             strong> WARNING:
+                             | Do not cancel the audio wizard prematurely as it is imperative that you follow it from start to finish
+                               to ensure an optimal experience with the Mumble client. Closing out of the audio wizard early is the most
+                               frequent source of problems.
+                            = image_tag 'mumble/wizard_2.png', alt: 'Mumble audio wizard device config', class: 'img-responsive-centered'
+                            p Turn on echo cancellation if your microphone doesn't support it on its own, and continue with "Next".
+                            = image_tag 'mumble/wizard_3.png', alt: 'Mumble audio wizard device tuning', class: 'img-responsive-centered'
+                            p Follow the instructions and continue with "Next".
+                            = image_tag 'mumble/wizard_4.png', alt: 'Mumble audio wizard volume tuning', class: 'img-responsive-centered'
+                            p
+                             strong> Follow the instructions
+                             | and continue with "Next".
+                            = image_tag 'mumble/wizard_5.png', alt: 'Mumble audio wizard transmit settings', class: 'img-responsive-centered'
+                            p
+                             | Choose whether you want to use PTT (Push To Talk) or voice activation. If you're unsure, go with Push To Talk.
+                               Once you have made your choice, continue to the next screen with "Next".
+                            = image_tag 'mumble/wizard_6.png', alt: 'Mumble audio wizard quality and notifications', class: 'img-responsive-centered'
+                            p Modify the settings here if you wish, you may want to turn off Text-To-Speech to avoid annoying spam.
+                            = image_tag 'mumble/wizard_7.png', alt: 'Mumble audio wizard positional audio', class: 'img-responsive-centered'
+                            p If you use headphones, check the "Use headphones" checkbox, then continue with "Next".
+                            = image_tag 'mumble/wizard_8.png', alt: 'Mumble audio wizard finished', class: 'img-responsive-centered'
+                            p
+                             strong> Congratulations!
+                             | You made it through the audio wizard, the hard part is now over! The only thing left is to add a
+                               certificate and server. After pressing "Finish", you will see the following window.
+                            = image_tag 'mumble/cert_1.png', alt: 'Mumble certificate wizard', class: 'img-responsive-centered'
+                            p Choosing automatic certificate creation is recommended for least amount of hassle.
+                            = image_tag 'mumble/cert_2.png', alt: 'Mumble certificate finish', class: 'img-responsive-centered'
+                            p
+                             | Now that we've created a certificate for ourselves, it's time to add a server to connect to.
+                               Mumble will conveniently display the server list when you are done adding a certificate.
+                            = image_tag 'mumble/connect_1.png', alt: 'Mumble connection window', class: 'img-responsive-centered'
+                            p Press the "Add New..." button to add a new server to your favourites list.
+                            = image_tag 'mumble/connect_2.png', alt: 'Mumble server window', class: 'img-responsive-centered'
+                            p
+                             | Fill out the details as they are shown in the above image, replacing the text in the Username field with the
+                               name of your WoW character.
+                            = image_tag 'mumble/connect_3.png', alt: 'Mumble server selection', class: 'img-responsive-centered'
+                            p
+                             | Now select our server in the list and press "Connect".
+                               You may see the below popup when you connect for the first time.
+                            = image_tag 'mumble/connect_4.png', alt: 'Mumble certificate warning', class: 'img-responsive-centered'
+                            p If this appears, you can safely choose "Yes" to accept and store the certificate. After that, you are finally...
+                            = image_tag 'mumble/client.png', alt: 'Mumble client connected to server', class: 'img-responsive-centered'
+                            h4 Connected!
+                            p
+                             | Now that you are connected, you can begin talking to other people on the server. If you are here for a raid,
+                               an officer will move you into the appropriate channel.
+        .row
+            .col-md-12
+                h2 Server rules
+                p
+                 | In addition to the regular
+                 =< link_to 'guild rules', rules_path
+                 | , there are some additional rules to observe when using our Mumble server.
+        .row
+            .col-md-6
+                h3 No harassment
+                p
+                 | Harassment is not tolerated, if you are found to be harassing other people on the Mumble server,
+                   you will be kicked and/or banned.
+            .col-md-6
+                h3 Use <abbr title="Push To Talk">PTT</abbr> or Voice Activation
+                p
+                 | Do not use the "Continous transmission" mode on Mumble, it will transmit <strong>everything</strong>
+                   that your microphone picks up and is very annoying to listen to.
+        .row
+            .col-md-6
+                h3 Use headphones
+                p
+                 | If you have headphones, then please do use them. Using speakers with a VoIP service will often lead
+                   to your microphone picking up the sounds coming from the speakers, and everyone will hear themselves
+                   talking thanks to you. This can also make it difficult to hear what people are saying, due to the echo.
+            .col-md-6
+                h3 Speak English
+                p
+                 | Our guild is international, we have members from many different countries speaking many different
+                   languages. Please be aware that not everyone can speak your mother tongue. Use English when
+                   communicating with others on the Mumble server.
+
     .col-md-3
         h3.text-center Quick info
         dl

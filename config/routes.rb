@@ -3,6 +3,7 @@ RocketFuelLeakSite::Application.routes.draw do
 
   root 'pages#index'
 
+  get 'rules' => 'pages#rules'
   get 'epgp' => 'pages#epgp'
   get 'mumble' => 'pages#mumble'
   get 'about' => 'pages#about'

@@ -3,8 +3,10 @@ class PagesController < ApplicationController
         @posts = Post.recently_published.limit(5)
     end
 
+    def rules
+    end
+
     def mumble
-        authorize! :read, :mumble
     end
 
     def epgp

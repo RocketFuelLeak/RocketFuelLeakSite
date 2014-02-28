@@ -7,7 +7,7 @@ class Ability
 
         # Note: 'archive' is to READ archives
         if not user
-            can :read, [Post, Addon, :mumble]
+            can :read, [Post, Addon]
             can :archive, Post
             can :read, Comment, commentable_type: 'Post'
         else
@@ -16,7 +16,7 @@ class Ability
                 return # No need to continue, or?
             end
 
-            can :read, [Post, Addon, User, Character, :mumble]
+            can :read, [Post, Addon, User, Character]
             can :archive, Post
             can [:update, :destroy], Comment, user_id: user.id
 

@@ -6,11 +6,32 @@
         p
          | We're a fun social guild who have an amazing core heroic raiding team,
            and we are also recruiting for a second team for much fun!
-           If you need any help in game always contact Tasee our amazing leader,
-           or any of the officers Seylaina, Vintra, Shottyy or Woop!
+           If you need any help in game always contact Tasee, our amazing leader,
+           or any of the officers Seylaina, Vintra, Shottyy, or Wóóp!
         p
          | Always Remember, we might be named after an annoying debuff, but this guild is anything but annoying.
            In fact, we are the opposite of our namesake, we are super speedy awesome fun!
+        h2 Who do we accept?
+        p Anyone! No, really. We are both a social and raiding guild, so there's no reason anyone should be excluded.
+        p
+         | Although you should be aware that our guild chat can be quite colourful at times. If you are afraid of
+           curse words and some really dark jokes, you probably should go look for some other guild
+         sup< or My Little Pony fanclub
+         | .
+        p
+         | So how does one go about to join this <span class="text-pink">fabulous</span> guild?
+           Simple! All you have to do is whisper one of our members in-game and they should be able to invite you
+           or find someone who can.
+        p: strong But wait! Do you seek to join our raiding team?
+        p
+         | If you want to raid with us, you will have to apply to join on this site, and wait for someone to accept
+           your application before you are able to raid with us. You can still join us as a social member in the meantime,
+           though.
+        - if can_apply?
+            p
+             | To apply for our raiding team now, just use the button below! And again, if you just want to be social,
+               there's no need to create an application.
+            .text-center = link_to 'Apply now!', new_application_path, class: 'btn btn-success btn-lg'
     .col-md-3.col-md-offset-1
         .col-md-12
             h3.text-center News
