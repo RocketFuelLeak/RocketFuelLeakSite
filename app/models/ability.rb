@@ -27,10 +27,9 @@ class Ability
 
                 can :read, Application
             else
-                can [:read, :create], Comment, commentable_type: 'Post'
-
                 can [:read, :create], Comment do |comment|
-                    comment.commentable_type == 'Application' and comment.commentable.user_id == user.id
+                    comment.commentable_type == 'Post' or
+                    (comment.commentable_type == 'Application' and comment.commentable.user_id == user.id)
                 end
 
                 can :connect, Character

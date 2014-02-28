@@ -43,6 +43,11 @@ class ApplicationsController < ApplicationController
 
     # GET /applications/new
     def new
+        if not view_context.can_apply?
+            flash[:error] = 'You are not allowed to create new applications. If you have already applied to the guild, you can find a link to your application on your profile page.'
+            redirect_to root_path
+        end
+
         @character = current_user.character if current_user.confirmed_character?
     end
 
@@ -54,6 +59,11 @@ class ApplicationsController < ApplicationController
     # POST /applications
     # POST /applications.json
     def create
+        if not view_context.can_apply?
+            flash[:error] = 'You are not allowed to create new applications. If you have already applied to the guild, you can find a link to your application on your profile page.'
+            redirect_to root_path
+        end
+
         respond_to do |format|
             if @application.save
                 format.html { redirect_to @application, notice: 'Application was successfully created.' }
