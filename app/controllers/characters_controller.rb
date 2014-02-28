@@ -5,7 +5,7 @@ class CharactersController < ApplicationController
     # GET /characters
     # GET /characters.json
     def index
-        authorize! :manage, @characters
+        authorize! :manage, Character
 
         respond_to do |format|
             format.html { @characters = @characters.page(params[:page]).per(50) }
@@ -28,14 +28,23 @@ class CharactersController < ApplicationController
 
     # GET /characters/connection
     def connection
-        redirect_to current_user.character if current_user.character
+        if current_user.character
+            flash[:error] = 'You have already connected a character, please go to your profile page to confirm it.'
+            redirect_to root_path
+        end
         @character = Character.new
     end
 
     # GET /characters/confirmation
     def confirmation
-        redirect_to connection_character_path unless current_user.character
-        redirect_to current_user.character if current_user.character and current_user.character.confirmed
+        if current_user.character
+            if current_user.confirmed_character?
+                flash[:error] = 'You have already confirmed your character.'
+            else
+                flash[:error] = 'You need to connect a character to your account before you can confirm it.'
+            end
+            redirect_to root_path
+        end
     end
 
     # POST /characters
@@ -79,6 +88,10 @@ class CharactersController < ApplicationController
     # POST /characters/connect
     # POST /characters/connect.json
     def connect
+        if current_user.character
+            flash[:error] = 'You have already connected a character, please go to your profile page to confirm it.'
+            redirect_to root_path
+        end
         respond_to do |format|
             if @character.save
                 flash[:success] = 'Character was successfully connected.'
@@ -94,6 +107,15 @@ class CharactersController < ApplicationController
     # PATCH /characters/1/confirm
     # PATCH /characters/1/confirm.json
     def confirm
+        if current_user.character
+            if current_user.confirmed_character?
+                flash[:error] = 'You have already confirmed your character.'
+            else
+                flash[:error] = 'You need to connect a character to your account before you can confirm it.'
+            end
+            redirect_to root_path
+        end
+
         @character.confirm_character
 
         respond_to do |format|

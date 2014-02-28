@@ -1,8 +1,10 @@
-h1 Editing application
-
-== render 'form'
-
-= link_to 'Show', @application
-'|
-= link_to 'Back', applications_path
-
+.row
+    .col-md-6.col-md-offset-3
+        h1 Editing application
+        == render 'form'
+        .text-center
+            - if can? :read, Application
+                = link_to 'Show', @application, class: 'btn btn-link'
+                = link_to 'Back', applications_path, class: 'btn btn-link'
+            - else
+                = link_to 'Back', @application, class: 'btn btn-link'

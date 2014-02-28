@@ -1,29 +1,35 @@
-h1 Listing applications
+.row
+    .col-md-8.col-md-offset-2
+        h1
+         | Listing #{@status.to_s.downcase} applications
+         - if can_apply?
+            = link_to 'Apply', new_application_path, class: 'btn btn-success pull-right'
+        - if @applications.empty?
+            h3.text-center.text-muted There are no #{@status.to_s.downcase} applications :(
+        - else
+            table.table
+                thead
+                    tr
+                        th Character
+                        th Realm
+                        th Guild
+                        th Status
+                        th User
+                        th Actions
 
-table
-  tr
-    th Content
-    th Character name
-    th Character realm
-    th Character guild
-    th Status
-    th User
-    th
-    th
-    th
-
-  - @applications.each do |application|
-    tr
-      td = application.content
-      td = application.character_name
-      td = application.character_realm
-      td = application.character_guild
-      td = application.status
-      td = application.user
-      td = link_to 'Show', application
-      td = link_to 'Edit', edit_application_path(application)
-      td = link_to 'Destroy', application, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Application', new_application_path
+                tbody
+                    - @applications.each do |application|
+                        tr
+                            td = link_to application.character_name, WoW::Character.get_profile_url(application.character_name, application.character_realm)
+                            td = application.character_realm
+                            td = link_to application.character_guild, WoW::Guild.get_profile_url(application.character_guild, application.character_realm)
+                            td: span.label class="#{status_label_class(application.status)}" = status_text(application.status)
+                            td = link_to application.user, application.user
+                            td = link_to 'Read application', application
+            = paginate @applications
+        .text-center
+            = link_to 'All', '?status=all', class: 'btn btn-link'
+            = link_to 'Open', '?status=open', class: 'btn btn-link'
+            = link_to 'Closed', '?status=closed', class: 'btn btn-link'
+            = link_to 'Accepted', '?status=accepted', class: 'btn btn-link'
+            = link_to 'Declined', '?status=declined', class: 'btn btn-link'

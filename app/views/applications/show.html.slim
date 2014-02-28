@@ -1,24 +1,47 @@
-p#notice = notice
-
-p
-  strong Content:
-  = @application.content
-p
-  strong Character name:
-  = @application.character_name
-p
-  strong Character realm:
-  = @application.character_realm
-p
-  strong Character guild:
-  = @application.character_guild
-p
-  strong Status:
-  = @application.status
-p
-  strong User:
-  = @application.user
-
-= link_to 'Edit', edit_application_path(@application)
-'|
-= link_to 'Back', applications_path
+.row
+    .col-md-8.col-md-offset-2
+        h1
+         span.label class="#{status_label_class(@application.status)}" = status_text(@application.status)
+         =< @application.character_name
+         | 's application
+        p
+         | This application was created by
+         =< link_to @application.user, @application.user
+         | .
+        p = formatted_application(@application.content)
+        h2 About the player
+        - if @character
+            = render @character
+        - else
+            p
+                strong> Character name:
+                = @application.character_name
+            p
+                strong> Character realm:
+                = @application.character_realm
+            p
+                strong> Character guild:
+                = @application.character_guild
+            p
+                = link_to 'Armory link', WoW::Character.get_profile_url(@application.character_name, @application.character_realm)
+        .text-center
+            - if not @application.open? and can? :open, @application
+                => link_to 'Open', open_application_path(@application), method: :patch, class: 'btn btn-default'
+            - if not @application.accepted? and can? :accept, @application
+                => link_to 'Accept', accept_application_path(@application), method: :patch, class: 'btn btn-success'
+            - if not @application.declined? and can? :decline, @application
+                => link_to 'Decline', decline_application_path(@application), method: :patch, class: 'btn btn-danger'
+            - if can? :update, @application
+                => link_to 'Edit', edit_application_path(@application), class: 'btn btn-default'
+            - if can? :destroy, @application
+                = link_to 'Delete', @application, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+        - if @comments
+            #comments.col-md-12
+                .col-md-8.col-md-offset-2
+                    h3.text-center = zero_pluralize(@comments.size, 'Comment', 'No')
+                    = render @comments
+                    = paginate @comments
+                    - if can? :create, Comment, @application
+                        = render 'comments/form'
+        .text-center
+            = link_to 'Back', can?(:read, Application) ? applications_path : root_path, class: 'btn btn-link'

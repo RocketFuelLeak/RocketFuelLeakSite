@@ -1,6 +1,6 @@
 - title @post.title
 = render @post
-- if @comments.present?
+- if @comments
     #comments.col-md-12
         .col-md-8.col-md-offset-2
             h3.text-center = zero_pluralize(@comments.size, 'Comment', 'No')

@@ -33,10 +33,8 @@ class Ability
                     comment.commentable_type == 'Application' and comment.commentable.user_id == user.id
                 end
 
-                unless user.character.present?
-                    can :connect, Character
-                    can :connect, User, id: user.id
-                end
+                can :connect, Character
+                can :connect, User, id: user.id
 
                 can :confirm, Character, user_id: user.id unless user.character.present? and user.character.confirmed
 

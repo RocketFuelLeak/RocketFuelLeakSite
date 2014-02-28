@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
     load_resource :post, instance_name: :commentable, class: 'Post'
+    load_resource :application, instance_name: :commentable, class: 'Application'
     before_filter :auth_commentable
     before_action :create_comment, only: :create
     load_and_authorize_resource :comment, through: :commentable

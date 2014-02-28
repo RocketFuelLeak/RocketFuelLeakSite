@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227193947) do
+ActiveRecord::Schema.define(version: 20140228015302) do
 
   create_table "addons", force: true do |t|
     t.string   "name"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140227193947) do
     t.integer  "class_id"
   end
 
+  add_index "characters", ["name"], name: "index_characters_on_name"
   add_index "characters", ["user_id"], name: "index_characters_on_user_id"
 
   create_table "comments", force: true do |t|

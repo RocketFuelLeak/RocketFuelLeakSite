@@ -3,13 +3,12 @@
 
     .form-inputs
         = f.input :content, label: false, placeholder: 'Describe why you want to join us', input_html: { rows: 20 }
-        - if @show_character_fields
+        - if @character.present?
+            p This application is connected the following character:
+            = render @character
+        - else
             = f.input :character_name, label: false, placeholder: 'Character name'
             = f.input :character_realm, label: false, placeholder: 'Character realm'
             = f.input :character_guild, label: false, placeholder: 'Character guild'
-        - elsif current_user.confirmed_character?
-            p You are creating this application on your connected character:
-            = render current_user.character
-
     .form-actions
         = f.button :submit, class: 'btn btn-primary btn-block'

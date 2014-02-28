@@ -6,7 +6,7 @@
                 = class_link comment.user, comment.user, comment.user.character.class_id
             - else
                 = link_to comment.user, comment.user
-        p.comment-content = comment.content
+        p.comment-content = formatted_comment(comment.content)
         p.comment-footer
          | Posted #{time_ago_in_words comment.created_at} ago &middot;
          - if comment.edited?

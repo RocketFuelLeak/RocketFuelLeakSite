@@ -16,6 +16,9 @@ class UsersController < ApplicationController
     # GET /users/1
     # GET /users/1.json
     def show
+        if @user.application.present?
+            @application = @user.application
+        end
     end
 
     # GET /users/new

@@ -12,11 +12,17 @@
                 =< link_to 'Delete', @user, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
         - if @user.character.present?
             - if not @user.character.confirmed and can? :confirm, @user.character
-                = link_to 'Confirm your WoW character', confirmation_character_path(@user.character),
-                          class: 'btn btn-success btn-block'
+                p = link_to 'Confirm your WoW character', confirmation_character_path(@user.character),
+                            class: 'btn btn-success btn-block'
         - elsif can? :connect, @user
-            = link_to 'Connect your WoW character', connection_characters_path, class: 'btn btn-primary btn-block'
+            p = link_to 'Connect your WoW character', connection_characters_path, class: 'btn btn-primary btn-block'
         p #{@user} has made #{@user.posts.size} posts and #{@user.comments.size} comments.
+        - if @application and can? :read, @application
+            p
+             => @user
+             | has
+             =< link_to 'applied to this guild', @application
+             | .
         - if can? :manage, @user
             p Email: #{@user.email}
             - if @user.provider.present?

@@ -1,6 +1,4 @@
 RocketFuelLeakSite::Application.routes.draw do
-  resources :applications
-
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
 
   root 'pages#index'
@@ -39,6 +37,16 @@ RocketFuelLeakSite::Application.routes.draw do
     collection do
       get 'archive/:year/:month' => 'posts#archive', constraints: { year: /\d{4}/, month: /\d{2}/ }, as: :archive
       get 'feed' => 'posts#feed', defaults: { format: 'atom' }
+    end
+
+    resources :comments
+  end
+
+  resources :applications do
+    member do
+      patch 'open' => 'applications#open'
+      patch 'accept' => 'applications#accept'
+      patch 'decline' => 'applications#decline'
     end
 
     resources :comments
