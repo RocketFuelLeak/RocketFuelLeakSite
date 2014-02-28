@@ -6,10 +6,10 @@
              | This character has not been confirmed to belong to the specified user.
         h1 = image_tag @character.avatar, class: 'img-responsive-centered img-rounded'
         h3 WoW Character: #{@character.name}.
-        - if @character.guild.present?
+        - if @character.guild_name.present?
             p
              | Member of guild
-             =< link_to @character.guild, WoW::Guild.get_profile_url(@character.guild)
+             =< link_to @character.guild_name, @character.guild_url
              | .
         p
          | Belongs to

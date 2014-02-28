@@ -27,7 +27,8 @@ class Application < ActiveRecord::Base
     validates :content, presence: true
     validates :character_name, presence: true
     validates :character_realm, presence: true
-    validates :character_guild, presence: true
+    validates :character_guild_name, presence: true
+    validates :character_guild_realm, presence: true
 
     attributes :character_name, :character_realm, :character_guild, :created_at
 
@@ -57,6 +58,10 @@ class Application < ActiveRecord::Base
 
     def decline
         self.status = STATUS_IDS[:declined]
+    end
+
+    def edited?
+        updated_at > created_at
     end
 
     def headers

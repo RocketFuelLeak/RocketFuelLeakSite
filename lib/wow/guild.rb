@@ -8,14 +8,22 @@ module WoW
         def initialize(data)
             @name = data['name']
             @realm = data['realm']
-            @members = Hash.new
             if data.key? 'members'
-                #@members = data['members'].map { |member| { name: member['character']['name'], rank: member['rank'] } }
-                data['members'].map { |member| @members[member['character']['name']] = { rank: member['rank'] } }
+                @members = Hash.new
+                data['members'].map do |member|
+                    name = member['character']['name']
+                    realm = member['character']['realm']
+                    id = "#{name}-#{realm}"
+                    @members[id] = {
+                        name: name,
+                        realm: realm,
+                        rank: member['rank']
+                    }
+                end
             end
         end
 
-        def self.find(name = WoW.guild, fields = WoW.guild_fields, realm = WoW.realm, region = WoW.region)
+        def self.find(name = WoW.guild, realm = WoW.realm, region = WoW.region, fields = WoW.guild_fields)
             resource = RESOURCE % { realm: realm, name: name, fields: fields }
             data = API.get(resource, region)
             new(data)
@@ -25,11 +33,13 @@ module WoW
             PROFILE_URL % { region: region, realm: realm, name: URI.encode(name) }
         end
 
-        def has_member(character)
-            if character.class == WoW::Character
-                @members.include? character.name
+        def has_member?(character, realm = @realm)
+            return false unless @members
+            case character
+            when WoW::Character
+                @members.key? character.id
             else
-                @members.include? character
+                @members.key? WoW::Character.get_id(character, realm)
             end
         end
     end

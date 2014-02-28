@@ -9,6 +9,8 @@
         - else
             = f.input :character_name, label: false, placeholder: 'Character name'
             = f.input :character_realm, label: false, placeholder: 'Character realm'
-            = f.input :character_guild, label: false, placeholder: 'Character guild'
+            = f.input :character_guild_name, label: false, placeholder: 'Character guild name'
+            = f.input :character_guild_realm, label: false, placeholder: 'Character guild realm',
+                      hint: 'This is probably the same as your character realm'
     .form-actions
         = f.button :submit, class: 'btn btn-primary btn-block'

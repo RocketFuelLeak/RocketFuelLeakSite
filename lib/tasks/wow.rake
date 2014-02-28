@@ -6,8 +6,7 @@ namespace :wow do
         User.includes(:character).find_each do |user|
             next if user.is_admin?
             character = user.character
-            member = members[character.name] if character and character.confirmed
-            if member
+            if (character and character.confirmed) and guild.has_member?(character.name, character.realm)
                 user.grant :member
                 user.grant :officer if member[:rank] <= 3
             else

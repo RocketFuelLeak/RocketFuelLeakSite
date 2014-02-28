@@ -7,8 +7,13 @@
         p
          | This application was created by
          =< link_to @application.user, @application.user
+         =< time_ago_abbr(@application.created_at)
+         - if @application.edited?
+            |, it was last updated
+            =< time_ago_abbr(@application.updated_at)
          | .
-        p = formatted_application(@application.content)
+        .well.well-sm
+            p = formatted_application(@application.content)
         h2 About the player
         - if @character
             = render @character
@@ -20,10 +25,13 @@
                 strong> Character realm:
                 = @application.character_realm
             p
-                strong> Character guild:
-                = @application.character_guild
+                strong> Character guild name:
+                = @application.character_guild_name
             p
-                = link_to 'Armory link', WoW::Character.get_profile_url(@application.character_name, @application.character_realm)
+                strong> Character guild realm:
+                = @application.character_guild_realm
+            p = link_to 'Armory link (player)', WoW::Character.get_profile_url(@application.character_name, @application.character_realm)
+            p = link_to 'Armory link (guild)', WoW::Guild.get_profile_url(@application.character_guild_name, @application.character_guild_realm)
         .text-center
             - if not @application.open? and can? :open, @application
                 => link_to 'Open', open_application_path(@application), method: :patch, class: 'btn btn-default'

@@ -39,6 +39,10 @@ module ApplicationHelper
         end
     end
 
+    def time_ago_abbr(date)
+        content_tag :abbr, "#{time_ago_in_words(date)} ago", title: date, data: { toggle: 'tooltip' }
+    end
+
     def zero_pluralize(n, noun, empty, empty_pluralize = true)
         if n == 0
             "#{empty} #{empty_pluralize ? noun.pluralize : noun}"

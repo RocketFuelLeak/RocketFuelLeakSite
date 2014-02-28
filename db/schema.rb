@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228015302) do
+ActiveRecord::Schema.define(version: 20140228190024) do
 
   create_table "addons", force: true do |t|
     t.string   "name"
@@ -30,12 +30,13 @@ ActiveRecord::Schema.define(version: 20140228015302) do
     t.text     "content"
     t.string   "character_name"
     t.string   "character_realm"
-    t.string   "character_guild"
+    t.string   "character_guild_name"
     t.integer  "status"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "verified_character"
+    t.string   "character_guild_realm"
   end
 
   add_index "applications", ["status"], name: "index_applications_on_status"
@@ -43,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140228015302) do
 
   create_table "characters", force: true do |t|
     t.string   "name"
-    t.string   "guild"
+    t.string   "guild_name"
     t.boolean  "confirmed"
     t.string   "confirmation_equipment"
     t.integer  "user_id"
@@ -51,6 +52,8 @@ ActiveRecord::Schema.define(version: 20140228015302) do
     t.datetime "updated_at"
     t.string   "avatar"
     t.integer  "class_id"
+    t.string   "realm"
+    t.string   "guild_realm"
   end
 
   add_index "characters", ["name"], name: "index_characters_on_name"

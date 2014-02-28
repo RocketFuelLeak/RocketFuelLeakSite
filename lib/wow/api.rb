@@ -11,9 +11,9 @@ module WoW
     class APIError < StandardError; end
 
     class API
-        ENDPOINT = "%{region}.battle.net".freeze
-        PATH = "api/wow%{resource}".freeze
-        URL = "http://%{region}.battle.net/api/wow%{resource}".freeze
+        ENDPOINT = "%{region}.battle.net"
+        PATH = "api/wow%{resource}"
+        URL = "http://%{region}.battle.net/api/wow%{resource}"
 
         def self.get(resource, region = WoW.region)
             url = URL % { region: region, resource: URI.encode(resource) }

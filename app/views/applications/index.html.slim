@@ -22,7 +22,8 @@
                         tr
                             td = link_to application.character_name, WoW::Character.get_profile_url(application.character_name, application.character_realm)
                             td = application.character_realm
-                            td = link_to application.character_guild, WoW::Guild.get_profile_url(application.character_guild, application.character_realm)
+                            td = link_to application.character_guild_name,
+                                 WoW::Guild.get_profile_url(application.character_guild_name, application.character_guild_realm)
                             td: span.label class="#{status_label_class(application.status)}" = status_text(application.status)
                             td = link_to application.user, application.user
                             td = link_to 'Read application', application

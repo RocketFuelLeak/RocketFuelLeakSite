@@ -72,10 +72,14 @@ class User < ActiveRecord::Base
     end
 
     def to_s
-        (character and character.confirmed) ? character.name : username
+        confirmed_character? ? character.name : username
     end
 
     def to_param
-        "#{id}-#{(character and character.confirmed) ? character.name.parameterize : username.parameterize}"
+        if confirmed_character?
+            "#{id}-#{character.name.parameterize}#{'-' + character.realm.parameterize unless character.realm == WoW.realm}"
+        else
+            "#{id}-#{username.parameterize}"
+        end
     end
 end

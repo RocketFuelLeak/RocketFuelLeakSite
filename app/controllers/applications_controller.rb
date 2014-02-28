@@ -62,6 +62,7 @@ class ApplicationsController < ApplicationController
         if not view_context.can_apply?
             flash[:error] = 'You are not allowed to create new applications. If you have already applied to the guild, you can find a link to your application on your profile page.'
             redirect_to root_path
+            return
         end
 
         respond_to do |format|
@@ -82,7 +83,8 @@ class ApplicationsController < ApplicationController
             c = @application.user.character
             @application.character_name = c.name
             @application.character_realm = c.realm
-            @application.character_guild = c.guild
+            @application.character_guild_name = c.guild_name
+            @application.character_guild_realm = c.guild_realm
             @application.verified_character = true
         end
         respond_to do |format|
@@ -157,7 +159,7 @@ class ApplicationsController < ApplicationController
     private
         # Only allow a trusted parameter "white list" through.
         def application_params
-            params.require(:application).permit(:content, :character_name, :character_realm, :character_guild)
+            params.require(:application).permit(:content, :character_name, :character_realm, :character_guild_name, :character_guild_realm)
         end
 
         def load_application
@@ -166,7 +168,8 @@ class ApplicationsController < ApplicationController
             if current_user.confirmed_character?
                 @application.character_name = current_user.character.name
                 @application.character_realm = WoW.realm
-                @application.character_guild = WoW.guild
+                @application.character_guild_name = WoW.guild
+                @application.character_guild_realm = WoW.realm
                 @application.verified_character = true
             else
                 @application.verified_character = false

@@ -40,9 +40,10 @@ class CharactersController < ApplicationController
         if current_user.character
             if current_user.confirmed_character?
                 flash[:error] = 'You have already confirmed your character.'
-            else
-                flash[:error] = 'You need to connect a character to your account before you can confirm it.'
+                redirect_to root_path
             end
+        else
+            flash[:error] = 'You need to connect a character to your account before you can confirm it.'
             redirect_to root_path
         end
     end
@@ -149,15 +150,15 @@ class CharactersController < ApplicationController
     private
         # Only allow a trusted parameter "white list" through.
         def character_params
-            params.require(:character).permit(:name, :confirmed)
+            params.require(:character).permit(:name, :realm, :confirmed)
         end
 
         def character_connect_params
-            params.require(:character).permit(:name)
+            params.require(:character).permit(:name, :realm)
         end
 
         def load_from_armory
-            @character = Character.from_armory(character_connect_params[:name])
+            @character = Character.from_armory(character_connect_params[:name], character_connect_params[:realm])
             @character.user = current_user
         end
 end

@@ -20,7 +20,7 @@
                             = image_tag character.avatar, class: 'avatar-small img-rounded'
                         td = link_to character, character
                         td = link_to character.user.username, character.user
-                        td = link_to character.guild, WoW::Guild.get_profile_url(character.guild)
+                        td = link_to character.guild_name, character.guild_url
                         td
                             = link_to toggle_confirmed_character_path(character), class: 'btn btn-default btn-sm', method: :patch do
                                 i.fa.fa-1x.fa-fw class="#{character.confirmed ? 'fa-check-square' : 'fa-square'}"

@@ -3,7 +3,10 @@ class Character < ActiveRecord::Base
 
     belongs_to :user
 
-    validates :name, presence: true, uniqueness: { case_sensitive: false }
+    validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :realm }
+    validates :realm, presence: true
+    validates :guild_name, presence: true
+    validates :guild_realm, presence: true
 
     validate :character_valid
     validate :confirmation_valid
@@ -12,14 +15,16 @@ class Character < ActiveRecord::Base
 
     after_save :update_user_role
 
-    def self.from_armory(name)
+    def self.from_armory(name, realm = WoW.realm)
         character = Character.new
         begin
-            wow_char = WoW::Character.find(name)
+            wow_char = WoW::Character.find(name, realm)
             character.name = wow_char.name
+            character.realm = wow_char.realm
             character.class_id = wow_char.class_id
             character.avatar = wow_char.thumbnail_url
-            character.guild = wow_char.guild
+            character.guild_name = wow_char.guild[:name]
+            character.guild_realm = wow_char.guild[:realm]
             character.confirmed = false
             character.confirmation_equipment = wow_char.equipment.keys.sample(4)
             character.api_error = nil
@@ -55,7 +60,10 @@ class Character < ActiveRecord::Base
     end
 
     def character_valid
-        errors.add(:name, "API error: #{api_error}") if api_error
+        if api_error
+            errors.add(:name, "API error: #{api_error}")
+            errors.add(:realm, "API error: #{api_error}")
+        end
     end
 
     def confirmation_valid
@@ -66,19 +74,25 @@ class Character < ActiveRecord::Base
     end
 
     def update_from_armory
-        api_character = WoW::Character.find(name) unless api_character.present?
-        self.class_id = api_character.class_id
-        self.avatar = api_character.thumbnail_url
-        self.guild = api_character.guild
+        begin
+            api_character = WoW::Character.find(name, realm) unless api_character.present?
+            self.class_id = api_character.class_id
+            self.avatar = api_character.thumbnail_url
+            self.guild_name = api_character.guild[:name]
+            self.guild_realm = api_character.guild[:realm]
+        rescue WoW::ApiError
+            self.confirmed = false
+        end
     end
 
     def confirm_character
         begin
-            api_character = WoW::Character.find(name)
+            api_character = WoW::Character.find(name, realm)
             present = confirmation_equipment & api_character.equipment.keys
             self.confirmed = present.empty?
             self.confirmation_errors = present
         rescue WoW::APIError => e
+            self.confirmed = false
             self.api_error = e
         end
     end
@@ -86,7 +100,7 @@ class Character < ActiveRecord::Base
     def update_user_role
         return if self.user.is_admin? or not self.confirmed
 
-        if self.guild == WoW.guild
+        if guild_name == WoW.guild and guild_realm == WoW.realm
             self.user.add_role :member
         else
             self.user.remove_role :officer
@@ -95,7 +109,11 @@ class Character < ActiveRecord::Base
     end
 
     def profile_url
-        WoW::Character.get_profile_url(name)
+        WoW::Character.get_profile_url(name, realm)
+    end
+
+    def guild_url
+        WoW::Guild.get_profile_url(guild_name, guild_realm)
     end
 
     def to_s
@@ -103,6 +121,6 @@ class Character < ActiveRecord::Base
     end
 
     def to_param
-        "#{id}-#{name.parameterize}"
+        "#{id}-#{name.parameterize}-#{realm.parameterize}"
     end
 end

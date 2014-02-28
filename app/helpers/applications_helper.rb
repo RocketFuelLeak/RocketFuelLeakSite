@@ -33,7 +33,7 @@ module ApplicationsHelper
 
     def can_apply?
         return false unless user_signed_in?
-        return false if current_user.character.present? and current_user.character.guild == WoW.guild
+        return false if current_user.character.present? and current_user.character.guild_name == WoW.guild and current_user.character.guild_realm == WoW.realm
         return false if current_user.application.present?
         true
     end

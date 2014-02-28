@@ -2,9 +2,7 @@
       h1.news-post-title = link_to post.title, post
       p.news-post-meta
        i.fa.fa-clock-o>
-       abbr> title="#{post.published? ? post.published_at : post.created_at}"
-        => time_ago_in_words post.published? ? post.published_at : post.created_at
-        | ago
+       => time_ago_abbr(post.published? ? post.published_at : post.created_at)
        | by
        = link_to post.user, class: "news-post-author-link #{post.user.confirmed_character? && class_link_class(post.user.character.class_id)}" do
             = image_tag post.user.profile_image, class: 'avatar-tiny img-rounded'
