@@ -1,0 +1,119 @@
+html, body {
+  height: 100%; }
+
+body {
+  background: url('http://i.imgur.com/6QQ7ecB.jpg') no-repeat top center fixed black;
+  background-size: cover; }
+
+#site-header {
+  margin-bottom: 10px; }
+
+#content-wrap {
+  min-height: 100%;
+  height: auto;
+  margin-bottom: -90px;
+  padding-bottom: 90px;
+  background: rgba(0, 0, 0, 0.9);
+  -webkit-box-shadow: 0 0 30px 0 black;
+  -moz-box-shadow: 0 0 30px 0 black;
+  box-shadow: 0 0 30px 0 black; }
+
+#footer-wrap {
+  min-height: 90px; }
+
+.navbar {
+  margin-bottom: 0; }
+
+table > tbody > tr > td, table > thead > tr > th, .table > tbody > tr > td, .table > thead > tr > th {
+  vertical-align: middle; }
+
+.btn {
+  margin-top: 5px; }
+
+.input-group-btn > .btn {
+  margin-top: 0; }
+
+a.icon-link {
+  color: #bbb; }
+  a.icon-link:hover, a.icon-link:focus {
+    color: white; }
+
+.container .notice-container {
+  margin-top: 10px; }
+
+.thumbnail {
+  background: rgba(0, 0, 0, 0.5);
+  border-color: #444; }
+
+.form-control {
+  color: black; }
+
+.devise-link-list {
+  margin-top: 5px; }
+
+ol.terms-sublist {
+  list-style-type: lower-alpha; }
+
+.text-pink {
+  color: #ff69b4; }
+
+img.img-thumbnail, img.img-responsive-thumbnail-centered, .news-post .news-post-content img {
+  border-color: #888888; }
+img.img-responsive-centered {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px; }
+img.img-responsive-thumbnail-centered, .news-post .news-post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-right: auto;
+  margin-left: auto; }
+img.avatar-16, img.avatar-tiny {
+  height: 16px; }
+  img.avatar-16.img-rounded, img.avatar-tiny.img-rounded {
+    border-radius: 4px; }
+img.avatar-18 {
+  height: 18px; }
+img.avatar-32, img.avatar-small {
+  height: 32px; }
+img.avatar-48, img.avatar-medium {
+  height: 48px; }
+img.avatar-64, img.avatar-large {
+  height: 64px; }
+img.avatar-128, img.avatar-huge {
+  height: 128px; }
+
+textarea.markdown-box {
+  font-family: Consolas, 'Ubuntu Mono', 'Source Code Pro', 'Lucida Console', 'Courier New', monospace;
+  margin-top: 5px; }
+
+.tab-content > .tab-pane > p:first-child {
+  padding-top: 10px; }
+
+@media (min-width: 0) {
+  #footer-copy-text, #footer-social-text {
+    text-align: center; }
+
+  #content-wrap {
+    margin-bottom: -120px;
+    padding-bottom: 120px; }
+
+  #footer-wrap {
+    min-height: 120px; } }
+@media (min-width: 600px) {
+  #footer-copy-text {
+    float: left; }
+
+  #footer-social-text {
+    float: right; }
+
+  #content-wrap {
+    margin-bottom: -90px;
+    padding-bottom: 90px; }
+
+  #footer-wrap {
+    min-height: 90px; } }
