@@ -42,5 +42,15 @@ module WoW
                 @members.key? WoW::Character.get_id(character, realm)
             end
         end
+
+        def get_member(character, realm = @realm)
+            return nil unless @members and has_member?(character, realm)
+            case character
+            when WoW::Character
+                @members[character.id]
+            else
+                @members[WoW::Character.get_id(character, realm)]
+            end
+        end
     end
 end
