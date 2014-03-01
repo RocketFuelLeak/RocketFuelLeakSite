@@ -16,6 +16,6 @@
          =< link_to @character.user, @character.user
          | .
         - if can? :confirm, @character and not @character.confirmed
-            => link_to 'Confirm ownership', confirmation_character_path(@character), class: 'btn btn-primary btn-block'
+            => link_to 'Confirm ownership', confirm_character_path(@character), class: 'btn btn-primary btn-block'
         p.text-center
             = link_to 'Back', root_path, class: 'btn btn-link'

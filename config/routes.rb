@@ -23,13 +23,13 @@ RocketFuelLeakSite::Application.routes.draw do
 
   resources :characters, except: [:new, :create] do
     collection do
-      get 'connection' => 'characters#connection'
-      post 'connect' => 'characters#connect'
+      get 'connect' => 'characters#connect'
+      post 'connect' => 'characters#post_connect'
     end
 
     member do
-      get 'confirmation' => 'characters#confirmation'
-      patch 'confirm' => 'characters#confirm'
+      get 'confirm' => 'characters#confirm'
+      patch 'confirm' => 'characters#patch_confirm'
       patch 'toggle_confirmed' => 'characters#toggle_confirmed'
     end
   end

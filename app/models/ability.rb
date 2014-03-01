@@ -2,8 +2,8 @@ class Ability
     include CanCan::Ability
 
     def initialize(user)
-        alias_action :connection, to: :connect
-        alias_action :confirmation, to: :confirm
+        alias_action :post_connect, to: :connect
+        alias_action :post_confirm, to: :confirm
 
         # Note: 'archive' is to READ archives
         if not user

@@ -1,5 +1,5 @@
 class CharactersController < ApplicationController
-    before_action :load_from_armory, only: :connect
+    before_action :load_from_armory, only: :post_connect
     load_and_authorize_resource
 
     # GET /characters
@@ -26,8 +26,8 @@ class CharactersController < ApplicationController
     def edit
     end
 
-    # GET /characters/connection
-    def connection
+    # GET /characters/connect
+    def connect
         if current_user.character
             flash[:error] = 'You have already connected a character, please go to your profile page to confirm it.'
             redirect_to root_path
@@ -35,8 +35,8 @@ class CharactersController < ApplicationController
         @character = Character.new
     end
 
-    # GET /characters/confirmation
-    def confirmation
+    # GET /characters/1/confirm
+    def confirm
         if current_user.character
             if current_user.confirmed_character?
                 flash[:error] = 'You have already confirmed your character.'
@@ -88,7 +88,7 @@ class CharactersController < ApplicationController
 
     # POST /characters/connect
     # POST /characters/connect.json
-    def connect
+    def post_connect
         if current_user.character
             flash[:error] = 'You have already connected a character, please go to your profile page to confirm it.'
             redirect_to root_path
@@ -96,10 +96,10 @@ class CharactersController < ApplicationController
         respond_to do |format|
             if @character.save
                 flash[:success] = 'Character was successfully connected.'
-                format.html { redirect_to confirmation_character_path(@character) }
+                format.html { redirect_to confirm_character_path(@character) }
                 format.json { render action: 'show', status: :connected, location: @character }
             else
-                format.html { render action: 'connection' }
+                format.html { render action: 'connect' }
                 format.json { render json: @character.errors, status: :unprocessable_entity }
             end
         end
@@ -107,7 +107,7 @@ class CharactersController < ApplicationController
 
     # PATCH /characters/1/confirm
     # PATCH /characters/1/confirm.json
-    def confirm
+    def patch_confirm
         if current_user.character
             if current_user.confirmed_character?
                 flash[:error] = 'You have already confirmed your character.'
@@ -125,7 +125,7 @@ class CharactersController < ApplicationController
                 format.html { redirect_to @character.user }
                 format.json { head :no_content }
             else
-                format.html { render action: 'confirmation' }
+                format.html { render action: 'confirm' }
                 format.json { render json: @character.errors, status: :unprocessable_entity }
             end
         end

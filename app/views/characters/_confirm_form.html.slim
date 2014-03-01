@@ -1,4 +1,4 @@
-= simple_form_for(@character, url: { action: 'confirm' }) do |f|
+= simple_form_for(@character, url: { action: 'confirm' }, method: :patch) do |f|
     = f.error_notification
     p
      | Please go on
