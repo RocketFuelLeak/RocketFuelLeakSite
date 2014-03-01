@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
     has_many :posts, dependent: :destroy
     has_many :comments, dependent: :destroy
 
-    validates :username, presence: true, uniqueness: { case_sensitive: false },
-              format: { with: /\A[A-Z][a-z]+\z/ }
+    validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[A-Za-z0-9]{3,16}\z/ } #,format: { with: /\A[A-Z][a-z]+\z/ }
 
     validates_acceptance_of :terms_read, accept: true
 

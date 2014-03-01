@@ -6,12 +6,12 @@
             .form-inputs
                 = f.input :username, label: false, placeholder: 'Username', required: true, autofocus: true,
                     input_html: { data: { toggle: 'tooltip', trigger: 'focus', placement: 'bottom', container: 'body',
-                            title: 'Minimum 3 characters, letters only, must start with capital letter and contain only lowercase letters' } }
+                            title: '3-16 characters, alphanumeric characters only.' }, minlength: 3, maxlength: 16 }
                 = f.input :email, label: false, placeholder: 'Email', required: true
                 - if f.object.password_required?
                     = f.input :password, label: false, placeholder: 'Password', required: true,
                         input_html: { data: { toggle: 'tooltip', trigger: 'focus', placement: 'bottom', container: 'body',
-                            title: 'Must be between 8 and 128 characters long (inclusive)' } }
+                            title: 'Must be between 8 and 128 characters long (inclusive)' }, minlength: 8, maxlength: 128 }
                     = f.input :password_confirmation, label: false, placeholder: 'Confirm password', required: true
                 p You will be able to add a World of Warcraft character after your account has been created.
                 = f.input :terms_read,
