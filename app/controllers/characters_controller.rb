@@ -38,7 +38,7 @@ class CharactersController < ApplicationController
     # GET /characters/1/confirm
     def confirm
         if current_user.character
-            if current_user.confirmed_character?
+            if current_user.confirmed
                 flash[:error] = 'You have already confirmed your character.'
                 redirect_to root_path
             end
@@ -109,12 +109,15 @@ class CharactersController < ApplicationController
     # PATCH /characters/1/confirm.json
     def patch_confirm
         if current_user.character
-            if current_user.confirmed_character?
+            if current_user.character.confirmed
                 flash[:error] = 'You have already confirmed your character.'
-            else
-                flash[:error] = 'You need to connect a character to your account before you can confirm it.'
+                redirect_to root_path
+                return
             end
+        else
+            flash[:error] = 'You need to connect a character to your account before you can confirm it.'
             redirect_to root_path
+            return
         end
 
         @character.confirm_character

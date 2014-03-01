@@ -3,7 +3,7 @@ class Ability
 
     def initialize(user)
         alias_action :post_connect, to: :connect
-        alias_action :post_confirm, to: :confirm
+        alias_action :patch_confirm, to: :confirm
 
         # Note: 'archive' is to READ archives
         if not user
@@ -35,7 +35,7 @@ class Ability
                 can :connect, Character
                 can :connect, User, id: user.id
 
-                can :confirm, Character, user_id: user.id unless user.character.present? and user.character.confirmed
+                can :confirm, Character, user_id: user.id unless user.confirmed_character?
 
                 can [:read, :destroy], Application, user_id: user.id
                 can :create, Application
