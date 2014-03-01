@@ -96,4 +96,8 @@ module ApplicationHelper
     def keywords(keywords)
         content_for :keywords, keywords
     end
+
+    def head(head)
+        content_for :head, head
+    end
 end

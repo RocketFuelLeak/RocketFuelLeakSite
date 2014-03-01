@@ -1,4 +1,6 @@
 - send_title
+- head auto_discovery_link_tag(:atom, feed_posts_url(format: 'atom'))
+- head auto_discovery_link_tag(:rss, feed_posts_url(format: 'rss'))
 - content_for :content do
     .row
         .col-md-9
