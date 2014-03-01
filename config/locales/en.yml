@@ -20,8 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-    description: "Rocket Fuel Leak is a horde-side guild on the european realm Stormreaver."
-    keywords: "rocket, fuel, leak, rocket fuel leak, wow, world of warcraft, warcraft, stormreaver, eu, europe, mists of pandaria, pandaria, raiding, raid, raiding guild"
+    description: "Rocket Fuel Leak is a horde-side World of Warcraft guild on the european realm Stormreaver."
+    keywords: >
+        rocket, fuel, leak, rocket fuel leak, rfl, wow, world of warcraft, warcraft, stormreaver, eu, europe,
+        mists of pandaria, mop, pandaria, raiding, raid, raiding guild
     views:
         pagination:
             first: "&laquo;"
