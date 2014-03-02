@@ -79,8 +79,8 @@ group :development do
     gem 'rvm-capistrano', group: :development
 end
 
-group :production do
-    # Use PostgreSQL in production
+group :staging, :production do
+    # Use PostgreSQL in staging and production
     gem 'pg'
     gem 'unicorn'
 end
