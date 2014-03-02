@@ -118,6 +118,18 @@ namespace :nginx do
     end
 end
 
+namespace :maintenance do
+    desc "Start maintenance"
+    task :start do
+        run_rake "maintenance:start"
+    end
+
+    desc "Stop maintenance"
+    task :end do
+        run_rake "maintenance:stop"
+    end
+end
+
 def run_interactively(command)
     server ||= find_servers_for_task(current_task).first
     #app_env = fetch("default environment", {}).map{|k,v| "#{k}=\"#{v}\""}.join(' ')
