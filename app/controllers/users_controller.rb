@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     def index
         authorize! :manage, @users
 
-        @users = @users.includes(:character)
+        @users = @users.includes(:character).ordered
 
         respond_to do |format|
             format.html { @users = @users.page(params[:page]).per(50) }

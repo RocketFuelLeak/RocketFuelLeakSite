@@ -7,6 +7,8 @@ class CharactersController < ApplicationController
     def index
         authorize! :manage, Character
 
+        @characters = @characters.includes(:user).ordered
+
         respond_to do |format|
             format.html { @characters = @characters.page(params[:page]).per(50) }
             format.json { }

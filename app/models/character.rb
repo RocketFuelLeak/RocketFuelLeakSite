@@ -1,6 +1,8 @@
 class Character < ActiveRecord::Base
     serialize :confirmation_equipment
 
+    scope :ordered, -> { order(id: :asc) }
+
     belongs_to :user
 
     validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :realm }

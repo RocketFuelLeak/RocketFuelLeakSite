@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
            :recoverable, :rememberable, :trackable, :validatable,
            :confirmable
 
+    scope :ordered, -> { order(id: :asc) }
+
     rolify
 
     has_one :character, dependent: :destroy
