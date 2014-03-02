@@ -139,5 +139,5 @@ def run_interactively(command)
 end
 
 def run_rake(task)
-    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake #{task}"
+    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake #{task}"
 end
