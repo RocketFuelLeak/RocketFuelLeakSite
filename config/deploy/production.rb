@@ -8,13 +8,15 @@ set :rails_env, 'production'
 
 namespace :deploy do
     task :refresh_sitemaps, roles: :app do
-        run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sitemap:refresh"
+        #run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake sitemap:refresh"
+        run_rake "sitemap:refresh"
     end
 
     after "deploy", "deploy:refresh_sitemaps"
 
     task :update_members, roles: :app do
-        run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake wow:update_members"
+        #run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake wow:update_members"
+        run_rake "wow:update_members"
     end
 
     after "deploy", "deploy:update_members"

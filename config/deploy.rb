@@ -74,6 +74,12 @@ namespace :deploy do
 
     before "deploy", "deploy:check_revision"
 
+    task :update_rankings do
+        run_rake "wowprogress:update_rankings"
+    end
+
+    after "deploy", "deploy:update_rankings"
+
     after "deploy", "deploy:migrate"
 end
 
@@ -107,4 +113,8 @@ def run_interactively(command)
     command = %Q(ssh #{user}@#{server} -p #{port} -t 'source ~/.profile && cd #{deploy_to}/current && #{command}')
     puts command
     exec command
+end
+
+def run_rake(task)
+    run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake #{task}"
 end
