@@ -5,7 +5,11 @@
          - if can_apply?
             = link_to 'Apply', new_application_path, class: 'btn btn-success pull-right'
         - if @applications.empty?
-            h3.text-center.text-muted There are no #{@status.to_s.downcase} applications :(
+            h3.text-center.text-muted
+             ' There are no
+             - unless @status == :all
+                => @status.to_s.downcase
+             | applications :(
         - else
             table.table
                 thead
