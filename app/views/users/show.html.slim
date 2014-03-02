@@ -5,11 +5,6 @@
          = link_to @user.confirmed_character? ? @user.character : @user do
             = image_tag @user.profile_image, class: 'avatar-medium img-rounded'
          =< @user
-         .pull-right
-             - if can? :update, @user
-                = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default'
-             - if can? :destroy, @user
-                =< link_to 'Delete', @user, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
         - if @user.character.present?
             - if not @user.character.confirmed and can? :confirm, @user.character
                 p = link_to 'Confirm your WoW character', confirm_character_path(@user.character),
@@ -34,4 +29,9 @@
                     => link_to toggle_role_user_path(@user, role), method: :patch, class: "btn #{role_button_class(role)}" do
                         i.fa.fa-fw class="#{@user.has_role?(role) ? 'fa-check-square' : 'fa-square'}"
                         =< role.to_s.titleize
+        .text-center
+            - if can? :update, @user
+                = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default'
+            - if can? :destroy, @user
+                =< link_to 'Delete', @user, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
         p.text-center = link_to 'Back', root_path, class: 'btn btn-link'
