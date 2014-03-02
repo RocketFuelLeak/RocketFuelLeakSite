@@ -12,7 +12,6 @@ module WoWProgress
 
         def self.get(region = WoWProgress.region, realm = WoWProgress.realm, guild = WoWProgress.guild)
             url = URL % { region: region, realm: URI.encode(realm), guild: URI.encode(guild) }
-            puts "Making request to #{url}"
             data = HTTParty.get url
             raise APIError.new('Parse error, server returned invalid json') if data.parsed_response == nil
             JSON.parse(data)
