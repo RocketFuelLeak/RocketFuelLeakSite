@@ -11,7 +11,6 @@ require 'capistrano/ext/multistage'
 
 set :application, "RocketFuelLeakSite"
 set :user, "rails"
-set :port, 2553
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
@@ -32,13 +31,13 @@ namespace :deploy do
     %w[start stop restart].each do |command|
         desc "#{command} unicorn server"
         task command, roles: :app, except: {no_release: true} do
-            run "/etc/init.d/unicorn_#{application} #{command}"
+            run "/etc/init.d/unicorn_#{application}_#{rails_env} #{command}"
         end
     end
 
     task :setup_config, roles: :app do
-        sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-        sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+        sudo "ln -nfs #{current_path}/config/nginx_#{rails_env}.conf /etc/nginx/sites-enabled/#{application}_#{rails_env}"
+        sudo "ln -nfs #{current_path}/config/unicorn_init_#{rails_env}.sh /etc/init.d/unicorn_#{application}_#{rails_env}"
         run "mkdir -p #{shared_path}/config"
         put File.read("config/database.yml.example"), "#{shared_path}/config/database.yml"
         put File.read("config/secrets.yml.example"), "#{shared_path}/config/secrets.yml"
