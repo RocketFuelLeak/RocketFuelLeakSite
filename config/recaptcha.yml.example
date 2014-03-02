@@ -4,6 +4,9 @@ development:
 test:
     public_key: "xxxxx"
     private_key: "xxxxx"
+staging:
+    public_key: "xxxxx"
+    private_key: "xxxxx"
 production:
     public_key: "xxxxx"
     private_key: "xxxxx"

@@ -4,6 +4,9 @@ development:
 test:
     client_id: "xxxxx"
     client_secret: "xxxxx"
+staging:
+    client_id: "xxxxx"
+    client_secret: "xxxxx"
 production:
     client_id: "xxxxx"
     client_secret: "xxxxx"

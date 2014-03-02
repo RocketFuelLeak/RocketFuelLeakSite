@@ -4,5 +4,8 @@ development:
 test:
     secret_key: "xxxxx"
 
+staging:
+    secret_key: "xxxxx"
+
 production:
     secret_key: "xxxxx"

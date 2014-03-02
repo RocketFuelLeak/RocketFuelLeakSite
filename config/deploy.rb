@@ -5,7 +5,9 @@ set :whenever_command, "bundle exec whenever"
 set :whenever_roles, [:app]
 require "whenever/capistrano"
 
-server "rocketfuelleak.com", :web, :app, :db, primary: true
+set :stages, %w(production staging)
+set :default_stage, "staging"
+require 'capistrano/ext/multistage'
 
 set :application, "RocketFuelLeakSite"
 set :user, "rails"
@@ -19,6 +21,10 @@ set :branch, "master"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
+
+task :uname do
+    run "uname -a"
+end
 
 after "deploy", "deploy:cleanup"
 

@@ -4,6 +4,9 @@ development:
 test:
     api_key: "xxxxx"
     api_secret: "xxxxx"
+staging:
+    api_key: "xxxxx"
+    api_secret: "xxxxx"
 production:
     api_key: "xxxxx"
     api_secret: "xxxxx"

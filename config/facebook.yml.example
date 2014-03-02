@@ -4,6 +4,9 @@ development:
 test:
     app_id: "xxxxx"
     app_secret: "xxxxx"
+staging:
+    app_id: "xxxxx"
+    app_secret: "xxxxx"
 production:
     app_id: "xxxxx"
     app_secret: "xxxxx"
