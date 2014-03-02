@@ -1,10 +1,6 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 
-set :whenever_command, "bundle exec whenever"
-set :whenever_roles, [:app]
-require "whenever/capistrano"
-
 set :stages, %w(production staging)
 set :default_stage, "staging"
 require 'capistrano/ext/multistage'
