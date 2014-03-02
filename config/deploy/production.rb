@@ -3,7 +3,7 @@ set :whenever_roles, [:app]
 require "whenever/capistrano"
 
 server "rocketfuelleak.com", :web, :app, :db, primary: true
-set :port, 2554
+set :port, 2553
 set :rails_env, 'production'
 
 namespace :deploy do
