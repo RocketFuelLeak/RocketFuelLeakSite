@@ -12,12 +12,5 @@ namespace :deploy do
         run_rake "sitemap:refresh"
     end
 
-    after "deploy", "deploy:refresh_sitemaps"
-
-    task :update_members, roles: :app do
-        #run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake wow:update_members"
-        run_rake "wow:update_members"
-    end
-
     after "deploy", "deploy:update_members"
 end

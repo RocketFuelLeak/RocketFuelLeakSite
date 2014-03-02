@@ -74,6 +74,17 @@ namespace :deploy do
 
     before "deploy", "deploy:check_revision"
 
+    task :refresh_sitemaps, roles: :app do
+        run_rake "sitemap:refresh:no_ping"
+    end
+
+    after "deploy", "deploy:refresh_sitemaps"
+
+    task :update_members, roles: :app do
+        #run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake wow:update_members"
+        run_rake "wow:update_members"
+    end
+
     task :update_rankings do
         run_rake "wowprogress:update_rankings"
     end
