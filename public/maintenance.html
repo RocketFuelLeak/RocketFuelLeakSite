@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Rocket Fuel Leak</title>
+    <style type="text/css">
+    body {
+        font-family: Consolas, 'Source Code Pro', 'Courier New', monospace;
+        font-size: 100px;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        color: #DDD;
+        background: black;
+    }
+
+    #youtube {
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+    </style>
+</head>
+<body>
+    <div id="text"></div>
+    <script type="text/javascript">
+        'use strict';
+
+        var song = new Audio('/countdown.mp3');
+        var voice = {
+             1: new Audio('/1.ogg'),
+             2: new Audio('/2.ogg'),
+             3: new Audio('/3.ogg'),
+             4: new Audio('/4.ogg'),
+             5: new Audio('/5.ogg'),
+             6: new Audio('/6.ogg'),
+             7: new Audio('/7.ogg'),
+             8: new Audio('/8.ogg'),
+             9: new Audio('/9.ogg'),
+            10: new Audio('/10.ogg')
+        }
+
+        function activateSong(time) {
+            if (!song.paused)
+                return;
+            song.volume = 0.0;
+            song.play();
+            var setTo = 295 - time;
+            if (setTo > 294) setTo = 294;
+            else if (setTo < 0) setTo = 0;
+            setTimeout(function() {
+                song.volume = 0.0;
+                song.currentTime = setTo;
+                increaseVolume();
+            }, 100);
+        }
+
+        var songFading = false;
+
+        function increaseVolume() {
+            if (song.volume < 1.0) {
+                song.volume += 0.01;
+                setTimeout(increaseVolume, 25);
+            }
+        }
+
+        function decreaseVolume() {
+            if (song.volume > 0.0) {
+                song.volume -= 0.01;
+                setTimeout(decreaseVolume, 50);
+            }
+        }
+
+        function fadeSong() {
+            if (songFading || song.volume <= 0.0)
+                return;
+            decreaseVolume();
+            songFading = true;
+        }
+
+        function playNumber(num) {
+            if (num < 1 || num > 10) return;
+            var volume = 0.1 * (10 - num - 1);
+            if (volume < 0.3) volume = 0.3;
+            if (voice[num]) {
+                voice[num].volume = volume;
+                voice[num].play();
+            }
+        }
+
+        var dueDate = new Date(Date.UTC(2014, 2, 2, 18, 0, 0, 0));
+        var lastDiff = -1;
+
+        function setText(e, t) {
+            if (e.innerText)
+                e.innerText = t;
+            else
+                e.textContent = t;
+        };
+
+        function pad(str, padStr) {
+            str = str.toString(); // Logic!
+            return padStr.substring(0, padStr.length - str.length) + str;
+        }
+
+        function updateStyle() {
+            document.querySelector('#text').style.lineHeight = window.innerHeight + 'px';
+        }
+        
+        function updateTime() {
+            updateStyle();
+            var diff = dueDate - Date.now();
+            var diffTotalSeconds = Math.floor(diff / 1000);
+            if (diff <= 0) {
+                diff = 0;
+                if (lastDiff > 0)
+                    window.location.reload(true);
+            }
+            var diffDays = Math.floor(diff / 1000 / 60 / 60 / 24);
+            diff -= diffDays * 24 * 60 * 60 * 1000;
+            var diffHours = Math.floor(diff / 1000 / 60 / 60);
+            diff -= diffHours * 60 * 60 * 1000;
+            var diffMinutes = Math.floor(diff / 1000 / 60);
+            diff -= diffMinutes * 60 * 1000;
+            var diffSeconds = Math.floor(diff / 1000);
+            var days = pad(diffDays, "00");
+            var hours = pad(diffHours, "00");
+            var minutes = pad(diffMinutes, "00");
+            var seconds = pad(diffSeconds, "00");
+            var text = days + ':' + hours + ':' + minutes + ':' + seconds;
+            if (diffTotalSeconds > 0)
+                setText(document.querySelector('#text'), text);
+            else
+                setText(document.querySelector('#text'), '00:00:00:00');
+            lastDiff = diff;
+            if (diffTotalSeconds <= 310 && diffTotalSeconds > 15) // 10 minutes
+                activateSong(diffTotalSeconds - 15);
+            if (diffTotalSeconds <= 15)
+                fadeSong();
+            if (diffTotalSeconds <= 10)
+                playNumber(diffTotalSeconds);
+        };
+        
+        window.onresize = updateStyle;
+        window.onload = updateStyle;
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-46500503-1', 'rocketfuelleak.com');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
