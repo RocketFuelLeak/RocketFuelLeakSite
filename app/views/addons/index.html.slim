@@ -53,8 +53,8 @@
                                         = link_to addon.curse_download, class: 'btn btn-primary' do
                                             i.glyphicon.glyphicon-download-alt
                             - if addon.wowinterface.present?
-                                .btn-group
-                                    =< link_to 'WoWInterface', addon.wowinterface, class: 'btn btn-primary'
+                                .btn-group<
+                                    = link_to 'WoWInterface', addon.wowinterface, class: 'btn btn-primary'
                                     - if addon.wowinterface_download?
                                         = link_to addon.wowinterface_download, class: 'btn btn-primary' do
                                             i.glyphicon.glyphicon-download-alt
