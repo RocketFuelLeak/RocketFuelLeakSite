@@ -38,7 +38,7 @@ class CharactersController < ApplicationController
     # GET /characters/1/confirm
     def confirm
         if current_user.character
-            if current_user.confirmed
+            if current_user.character.confirmed
                 flash[:error] = 'You have already confirmed your character.'
                 redirect_to root_path
             end
