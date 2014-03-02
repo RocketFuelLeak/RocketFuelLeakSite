@@ -126,7 +126,7 @@ namespace :maintenance do
 
     desc "Stop maintenance"
     task :end do
-        run_rake "maintenance:stop"
+        run_rake "maintenance:end"
     end
 end
 
