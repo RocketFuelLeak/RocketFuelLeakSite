@@ -66,6 +66,7 @@ class Application < ActiveRecord::Base
 
     def headers
         {
+            from: 'support@rocketfuelleak.com',
             to: 'adam.hellberg95+rflapplication@gmail.com',
             subject: '[RFL] New application'
         }
