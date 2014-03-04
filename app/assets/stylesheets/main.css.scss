@@ -72,7 +72,13 @@ body {
 }
 
 table, .table {
-    > tbody > tr > td, > thead > tr > th {
+    background: none;
+
+    > thead > tr > th {
+        vertical-align: bottom;
+    }
+
+    > tbody > tr > td {
         vertical-align: middle;
     }
 }
