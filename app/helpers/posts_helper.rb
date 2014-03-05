@@ -1,6 +1,6 @@
 module PostsHelper
     def title_content
-        content_for?(:news_title) ? yield(:news_title) : 'News'
+        content_for?(:news_title) ? content_for(:news_title) : 'News'
     end
 
     def send_title
