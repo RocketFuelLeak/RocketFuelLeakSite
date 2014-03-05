@@ -67,6 +67,10 @@ ul#news-archive-list {
     }
 }
 
+.markdown-box-actions > .btn-group:not(:first-child) {
+    margin-left: 5px;
+}
+
 // Responsive videos
 // Credit: https://gist.github.com/jgarber/2302238
 .flex-video {
