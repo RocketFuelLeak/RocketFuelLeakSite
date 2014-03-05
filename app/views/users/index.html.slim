@@ -22,12 +22,12 @@
                         td
                             = link_to user do
                                 = user
-                                - if user.is_admin?
-                                    span.label.label-danger< Admin
-                                - if user.is_officer?
-                                    span.label.label-success< Officer
-                                - if user.is_member?
-                                    span.label.label-default< Member
+                            - if user.is_admin?
+                                span.label.label-danger< Admin
+                            - if user.is_officer?
+                                span.label.label-success< Officer
+                            - if user.is_member?
+                                span.label.label-default< Member
                         td
                             - if user.character.present?
                                 = link_to user.character.name, user.character
