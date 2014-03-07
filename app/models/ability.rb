@@ -8,7 +8,7 @@ class Ability
         # Note: 'archive' is to READ archives
         if not user
             can :read, [Post, Addon]
-            can :archive, Post
+            can [:feed, :archive], Post
             can :read, Comment, commentable_type: 'Post'
         else
             if user.is_admin?
@@ -17,7 +17,7 @@ class Ability
             end
 
             can :read, [Post, Addon, User, Character]
-            can :archive, Post
+            can [:feed, :archive], Post
             can [:update, :destroy], Comment, user_id: user.id
 
             if user.is_member?
