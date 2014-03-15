@@ -16,7 +16,7 @@ APP_NAME=RocketFuelLeakSite
 APP_ROOT=/home/rails/apps/$APP_NAME
 APP_CURRENT=$APP_ROOT/current
 PID=$APP_CURRENT/tmp/pids/unicorn.pid
-CMD="cd $APP_CURRENT; bundle exec unicorn -D -c $APP_CURRENT/config/unicorn.rb -E staging"
+CMD="cd $APP_CURRENT; RAILS_ENV=staging && ~/.rvm/bin/rvm default do bundle exec unicorn -D -c $APP_CURRENT/config/unicorn.rb -E staging"
 AS_USER=rails
 set -u
 

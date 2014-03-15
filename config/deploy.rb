@@ -1,143 +1,98 @@
-require "bundler/capistrano"
-require "rvm/capistrano"
+# config valid only for Capistrano 3.1
+lock '3.1.0'
 
-set :stages, %w(production staging)
-set :default_stage, "staging"
-require 'capistrano/ext/multistage'
+set :application, 'RocketFuelLeakSite'
+set :repo_url, 'git@github.com:RocketFuelLeak/RocketFuelLeakSite.git'
 
-set :application, "RocketFuelLeakSite"
-set :user, "rails"
-set :deploy_to, "/home/#{user}/apps/#{application}"
-set :deploy_via, :remote_cache
-set :use_sudo, false
-set :scm, :git
-set :repository,  "git@github.com:RocketFuelLeak/#{application}.git"
-set :branch, "master"
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, "/home/#{fetch(:user, 'rails')}/apps/#{fetch(:application)}"
 
-task :uname do
-    run "uname -a"
-end
+# Default value for :scm is :git
+# set :scm, :git
 
-after "deploy", "deploy:cleanup"
+# Default value for :format is :pretty
+# set :format, :pretty
+
+# Default value for :log_level is :debug
+# set :log_level, :debug
+
+# Default value for :pty is false
+set :pty, true
+
+# Default value for :linked_files is []
+set :linked_files, %w{config/database.yml config/secrets.yml config/github.yml config/facebook.yml config/twitter.yml config/google.yml config/devise.yml config/smtp.yml config/recaptcha.yml}
+
+# Default value for linked_dirs is []
+# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+set :ssh_options, { forward_agent: true }
 
 namespace :deploy do
-    %w[start stop restart].each do |command|
-        desc "#{command} unicorn server"
-        task command, roles: :app, except: {no_release: true} do
-            run "/etc/init.d/unicorn_#{application}_#{rails_env} #{command}"
+  desc "Make sure local git is in sync with remote."
+  before :deploy, :check_revision do
+    on roles(:web) do
+      unless `git rev-parse HEAD` == `git rev-parse origin/master`
+        puts "WARNING: HEAD is not the same as origin/master"
+        puts "Run `git push` to sync changes."
+        exit
+      end
+    end
+  end
+
+  %w{start stop restart}.each do |command|
+    desc "#{command} application"
+    task command do
+      on roles(:app), in: :sequence, wait: 5 do
+        execute "/etc/init.d/unicorn_#{fetch(:application)}_#{fetch(:stage)}", command
+      end
+    end
+  end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
+  task :refresh_sitemaps do
+    on roles(:app) do
+      within release_path do
+        execute :rake, 'sitemap:refresh:no_ping'
+      end
+    end
+  end
+
+  after :deploy, :refresh_sitemaps
+
+  task :update_members do
+    on roles(:app) do
+      within release_path do
+        execute :rake, 'wow:update_members'
+      end
+    end
+  end
+
+  task :update_rankings do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'wowprogress:update_rankings'
         end
+      end
     end
-
-    task :setup_config, roles: :app do
-        sudo "ln -nfs #{current_path}/config/nginx_#{rails_env}.conf /etc/nginx/sites-enabled/#{application}_#{rails_env}"
-        sudo "ln -nfs #{current_path}/config/unicorn_init_#{rails_env}.sh /etc/init.d/unicorn_#{application}_#{rails_env}"
-        run "mkdir -p #{shared_path}/config"
-        put File.read("config/database.yml.example"), "#{shared_path}/config/database.yml"
-        put File.read("config/secrets.yml.example"), "#{shared_path}/config/secrets.yml"
-        put File.read("config/github.yml.example"), "#{shared_path}/config/github.yml"
-        put File.read("config/facebook.yml.example"), "#{shared_path}/config/facebook.yml"
-        put File.read("config/twitter.yml.example"), "#{shared_path}/config/twitter.yml"
-        put File.read("config/google.yml.example"), "#{shared_path}/config/google.yml"
-        put File.read("config/devise.yml.example"), "#{shared_path}/config/devise.yml"
-        put File.read("config/smtp.yml.example"), "#{shared_path}/config/smtp.yml"
-        put File.read("config/recaptcha.yml.example"), "#{shared_path}/config/recaptcha.yml"
-        puts "Now edit the config files in #{shared_path}."
-    end
-
-    after "deploy:setup", "deploy:setup_config"
-
-    task :symlink_configs, roles: :app do
-        run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-        run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
-        run "ln -nfs #{shared_path}/config/github.yml #{release_path}/config/github.yml"
-        run "ln -nfs #{shared_path}/config/facebook.yml #{release_path}/config/facebook.yml"
-        run "ln -nfs #{shared_path}/config/twitter.yml #{release_path}/config/twitter.yml"
-        run "ln -nfs #{shared_path}/config/google.yml #{release_path}/config/google.yml"
-        run "ln -nfs #{shared_path}/config/devise.yml #{release_path}/config/devise.yml"
-        run "ln -nfs #{shared_path}/config/smtp.yml #{release_path}/config/smtp.yml"
-        run "ln -nfs #{shared_path}/config/recaptcha.yml #{release_path}/config/recaptcha.yml"
-    end
-
-    after "deploy:finalize_update", "deploy:symlink_configs"
-
-    desc "Make sure local git is in sync with remote."
-    task :check_revision, roles: :web do
-        unless `git rev-parse HEAD` == `git rev-parse origin/master`
-            puts "WARNING: HEAD is not the same as origin/master"
-            puts "Run `git push` to sync changes."
-            exit
-        end
-    end
-
-    before "deploy", "deploy:check_revision"
-
-    task :refresh_sitemaps, roles: :app do
-        run_rake "sitemap:refresh:no_ping"
-    end
-
-    after "deploy", "deploy:refresh_sitemaps"
-
-    task :update_members, roles: :app do
-        #run "cd #{release_path} && RAILS_ENV=#{rails_env} bundle exec rake wow:update_members"
-        run_rake "wow:update_members"
-    end
-
-    task :update_rankings do
-        run_rake "wowprogress:update_rankings"
-    end
-
-    after "deploy", "deploy:update_rankings"
-
-    after "deploy", "deploy:migrate"
-end
-
-namespace :rails do
-    desc "Remote console"
-    task :console, roles: :app do
-        run_interactively "bundle exec rails console #{rails_env}"
-    end
-
-    desc "Remote dbconsole"
-    task :dbconsole, roles: :app do
-        run_interactively "bundle exec rails dbconsole #{rails_env}"
-    end
-end
-
-namespace :nginx do
-    desc "Reload nginx configs"
-    task :reload do
-        sudo "service nginx reload"
-    end
-
-    desc "Restart nginx server"
-    task :restart do
-        sudo "service nginx restart"
-    end
-end
-
-namespace :maintenance do
-    desc "Start maintenance"
-    task :start do
-        run_rake "maintenance:start"
-    end
-
-    desc "Stop maintenance"
-    task :end do
-        run_rake "maintenance:end"
-    end
-end
-
-def run_interactively(command)
-    server ||= find_servers_for_task(current_task).first
-    #app_env = fetch("default environment", {}).map{|k,v| "#{k}=\"#{v}\""}.join(' ')
-    command = %Q(ssh #{user}@#{server} -p #{port} -t 'source ~/.profile && cd #{deploy_to}/current && #{command}')
-    puts command
-    exec command
-end
-
-def run_rake(task)
-    run "cd #{latest_release} && RAILS_ENV=#{rails_env} bundle exec rake #{task}"
+  end
 end

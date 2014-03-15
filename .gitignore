@@ -58,3 +58,7 @@ config/smtp.yml
 
 # reCAPTCHA config
 config/recaptcha.yml
+
+# Ignore old capistrano config backup
+/old_cap
+
