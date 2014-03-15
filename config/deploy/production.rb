@@ -1,6 +1,6 @@
-set :whenever_command, "bundle exec whenever"
-set :whenever_roles, [:app]
 require "whenever/capistrano"
+
+set :whenever_roles, ->{ :app }
 
 set :stage, :production
 set :rails_env, 'production'
