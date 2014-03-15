@@ -2,7 +2,7 @@ APP_NAME = "RocketFuelLeakSite"
 APP_PATH = "/home/rails/apps/#{APP_NAME}"
 APP_CURRENT = "#{APP_PATH}/current"
 working_directory APP_CURRENT
-pid "#{APP_CURRENT}/tmp/pids/unicorn.pid"
+pid "#{APP_PATH}/shared/pids/unicorn.pid"
 stdout_path "#{APP_PATH}/shared/log/unicorn.log"
 stderr_path "#{APP_PATH}/shared/log/unicorn.err.log"
 

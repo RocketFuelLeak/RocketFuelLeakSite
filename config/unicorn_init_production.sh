@@ -15,7 +15,7 @@ TIMEOUT=${TIMEOUT-60}
 APP_NAME=RocketFuelLeakSite
 APP_ROOT=/home/rails/apps/$APP_NAME
 APP_CURRENT=$APP_ROOT/current
-PID=$APP_CURRENT/tmp/pids/unicorn.pid
+PID=$APP_ROOT/shared/pids/unicorn.pid
 CMD="cd $APP_CURRENT; RAILS_ENV=production && ~/.rvm/bin/rvm default do bundle exec unicorn -D -c $APP_CURRENT/config/unicorn.rb -E production"
 AS_USER=rails
 set -u
