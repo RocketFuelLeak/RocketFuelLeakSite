@@ -62,9 +62,10 @@ namespace :deploy do
       upload! "config/smtp.yml.example", "#{shared_path}/config/smtp.yml"
       upload! "config/recaptcha.yml.example"), "#{shared_path}/config/recaptcha.yml"
       puts "Now edit the config files in #{shared_path}."
-      puts "Execute the following symlink commands:"
+      puts "Execute the following commands:"
       puts "sudo ln -nfs #{current_path}/config/nginx_#{rails_env}.conf /etc/nginx/sites-enabled/#{application}_#{rails_env}"
       puts "sudo ln -nfs #{current_path}/config/unicorn_init_#{rails_env}.sh /etc/init.d/unicorn_#{application}_#{rails_env}"
+      puts "sudo update-rc.d -f unicorn_#{application}_#{rails_env} defaults"
     end
   end
 
