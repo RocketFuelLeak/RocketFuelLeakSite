@@ -1,6 +1,5 @@
-require "whenever/capistrano"
-
 set :whenever_roles, ->{ :app }
+require "whenever/capistrano"
 
 set :stage, :production
 set :rails_env, 'production'
