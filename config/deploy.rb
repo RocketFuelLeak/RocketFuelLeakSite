@@ -49,7 +49,7 @@ namespace :deploy do
   end
 
   desc "Setup the base config files"
-  after :setup, :setup_configs do
+  task :setup_configs do
     on roles(:app) do
       execute "mkdir -p #{shared_path}/config"
       upload! "config/database.yml.example", "#{shared_path}/config/database.yml"
