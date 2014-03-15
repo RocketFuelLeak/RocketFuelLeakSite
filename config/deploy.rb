@@ -60,7 +60,7 @@ namespace :deploy do
       upload! "config/google.yml.example", "#{shared_path}/config/google.yml"
       upload! "config/devise.yml.example", "#{shared_path}/config/devise.yml"
       upload! "config/smtp.yml.example", "#{shared_path}/config/smtp.yml"
-      upload! "config/recaptcha.yml.example"), "#{shared_path}/config/recaptcha.yml"
+      upload! "config/recaptcha.yml.example", "#{shared_path}/config/recaptcha.yml"
       puts "Now edit the config files in #{shared_path}."
       puts "Execute the following commands:"
       puts "sudo ln -nfs #{current_path}/config/nginx_#{rails_env}.conf /etc/nginx/sites-enabled/#{application}_#{rails_env}"
