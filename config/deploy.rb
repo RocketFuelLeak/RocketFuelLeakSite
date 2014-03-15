@@ -48,6 +48,26 @@ namespace :deploy do
     end
   end
 
+  desc "Setup the base config files"
+  after :setup, :setup_configs do
+    on roles(:app) do
+      execute "mkdir -p #{shared_path}/config"
+      upload! "config/database.yml.example", "#{shared_path}/config/database.yml"
+      upload! "config/secrets.yml.example", "#{shared_path}/config/secrets.yml"
+      upload! "config/github.yml.example", "#{shared_path}/config/github.yml"
+      upload! "config/facebook.yml.example", "#{shared_path}/config/facebook.yml"
+      upload! "config/twitter.yml.example", "#{shared_path}/config/twitter.yml"
+      upload! "config/google.yml.example", "#{shared_path}/config/google.yml"
+      upload! "config/devise.yml.example", "#{shared_path}/config/devise.yml"
+      upload! "config/smtp.yml.example", "#{shared_path}/config/smtp.yml"
+      upload! "config/recaptcha.yml.example"), "#{shared_path}/config/recaptcha.yml"
+      puts "Now edit the config files in #{shared_path}."
+      puts "Execute the following symlink commands:"
+      puts "sudo ln -nfs #{current_path}/config/nginx_#{rails_env}.conf /etc/nginx/sites-enabled/#{application}_#{rails_env}"
+      puts "sudo ln -nfs #{current_path}/config/unicorn_init_#{rails_env}.sh /etc/init.d/unicorn_#{application}_#{rails_env}"
+    end
+  end
+
   %w{start stop restart}.each do |command|
     desc "#{command} application"
     task command do
@@ -70,9 +90,7 @@ namespace :deploy do
 
   task :refresh_sitemaps do
     on roles(:app) do
-      within release_path do
-        execute :rake, 'sitemap:refresh:no_ping'
-      end
+      env_rake 'sitemap:refresh:no_ping'
     end
   end
 
@@ -80,19 +98,53 @@ namespace :deploy do
 
   task :update_members do
     on roles(:app) do
-      within release_path do
-        execute :rake, 'wow:update_members'
-      end
+      env_rake 'wow:update_members'
     end
   end
 
   task :update_rankings do
     on roles(:app) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'wowprogress:update_rankings'
-        end
-      end
+      env_rake 'wowprogress:update_rankings'
+    end
+  end
+end
+
+namespace :nginx do
+  desc "Reload nginx configs"
+  task :reload do
+    on roles(:web) do
+      sudo 'service nginx reload'
+    end
+  end
+
+  desc "Restart nginx server"
+  task :restart do
+    on roles(:web) do
+      execute :sudo, :service, :nginx, :restart
+    end
+  end
+end
+
+namespace :maintenance do
+  desc "Start maintenance"
+  task :start do
+    on roles(:app) do
+      env_rake 'maintenance:start'
+    end
+  end
+
+  desc "End maintenance"
+  task :end do
+    on roles(:app) do
+      env_rake 'maintenance:end'
+    end
+  end
+end
+
+def env_rake(*args)
+  within release_path do
+    with rails_env: fetch(:rails_env) do
+      execute :rake, *args
     end
   end
 end

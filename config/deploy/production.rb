@@ -13,7 +13,7 @@ server 'rocketfuelleak.com', user: 'rails', roles: %w{web app db},
 namespace :deploy do
     task :refresh_sitemaps do
         on roles(:app) do
-            execute :rake, 'sitemap:refresh'
+            rake 'sitemap:refresh'
         end
     end
 
