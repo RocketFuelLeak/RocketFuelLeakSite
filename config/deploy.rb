@@ -20,7 +20,7 @@ set :deploy_to, "/home/#{fetch(:user, 'rails')}/apps/#{fetch(:application)}"
 # set :log_level, :debug
 
 # Default value for :pty is false
-set :pty, true
+#set :pty, true
 
 # Default value for :linked_files is []
 set :linked_files, %w{config/database.yml config/secrets.yml config/github.yml config/facebook.yml config/twitter.yml config/google.yml config/devise.yml config/smtp.yml config/recaptcha.yml}
