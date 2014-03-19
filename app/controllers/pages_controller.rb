@@ -12,6 +12,7 @@ class PagesController < ApplicationController
             @world_rank = @wowprogress["world_rank"]
             @region_rank = @wowprogress["area_rank"]
             @realm_rank = @wowprogress["realm_rank"]
+            @ranks_fetched_at = @wowprogress["fetched_at"]
         end
     end
 

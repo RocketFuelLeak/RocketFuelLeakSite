@@ -50,4 +50,6 @@
                 p.rank-domain Europe
                 h2.rank-number ##{@world_rank}
                 p.rank-domain World
+                - if @ranks_fetched_at
+                    p.small Updated #{time_ago_abbr(@ranks_fetched_at)}
                 p.small = link_to 'WoWProgress.com', 'http://www.wowprogress.com/guild/eu/stormreaver/Rocket+Fuel+Leak/'
