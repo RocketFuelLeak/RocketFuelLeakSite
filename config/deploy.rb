@@ -89,13 +89,11 @@ namespace :deploy do
     end
   end
 
-  task :refresh_sitemaps do
+  after :deploy, :refresh_sitemaps do
     on roles(:app) do
       env_rake 'sitemap:refresh:no_ping'
     end
   end
-
-  after :deploy, :refresh_sitemaps
 
   task :update_members do
     on roles(:app) do
