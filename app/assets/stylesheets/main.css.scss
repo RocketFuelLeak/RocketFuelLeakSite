@@ -176,6 +176,12 @@ img {
     &.avatar-128, &.avatar-huge {
         height: 128px;
     }
+
+    &.logo-image {
+        width: 400px;
+        //margin-right: 5px;
+        border-radius: 10px;
+    }
 }
 
 textarea.markdown-box {
@@ -224,6 +230,31 @@ textarea.markdown-box {
 @media (max-width: 400px) {
     #main-header-column {
         background: none;
+    }
+}
+
+@media (max-width: 500px) {
+    img.logo-image {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 500px) and (max-width: $screen-xs-max) {
+    img.logo-image {
+        width: 256px;
+    }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    img.logo-image {
+        width: 320px;
+    }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    img.logo-image {
+        width: 320px;
     }
 }
 

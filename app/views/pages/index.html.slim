@@ -1,6 +1,7 @@
 .row
-    .col-md-8
-        h1 Welcome to Rocket Fuel Leak
+    .col-md-9
+        h1 Welcome to Rocket Fuel Leak!
+        = image_tag 'logo_pink_transparent.png', class: 'pull-right img-responsive logo-image'
         p &hellip; Where the Raids are fun and the boys are gay, having laughs in chat every day!
         p The raids are epic and the dungeons are fast, when it comes to Warcraft, we're upper class!
         p
@@ -26,13 +27,13 @@
         p
          | If you want to raid with us, you will have to apply to join on this site, and wait for someone to accept
            your application before you are able to raid with us. You can still join us as a social member in the meantime,
-           though.
+           though. (You have to have created an account on this site and signed in to be able to create an application.)
         - if can_apply?
             p
              | To apply for our raiding team now, just use the button below! And again, if you just want to be social,
                there's no need to create an application.
             .text-center = link_to 'Apply now!', new_application_path, class: 'btn btn-success btn-lg'
-    .col-md-3.col-md-offset-1
+    .col-md-3
         .col-md-12
             h3.text-center News
             - if @posts.empty?
