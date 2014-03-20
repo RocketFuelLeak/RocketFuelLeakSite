@@ -30,6 +30,10 @@ body {
     background-size: cover;
 }
 
+.clear {
+    clear: both;
+}
+
 #site-header {
     margin-bottom: 10px;
 }
@@ -262,5 +266,6 @@ textarea.markdown-box {
 @import "comments";
 @import "users";
 @import "epgp";
+@import "social";
 @import "wow/base";
 @import "wowprogress/base";

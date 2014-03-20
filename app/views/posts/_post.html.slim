@@ -1,26 +1,34 @@
 .news-post
-      h1.news-post-title = link_to post.title, post
-      p.news-post-meta
-       i.fa.fa-clock-o>
-       => time_ago_abbr(post.published? ? post.published_at : post.created_at)
-       | by
-       = link_to post.user, class: "news-post-author-link #{post.user.confirmed_character? && class_link_class(post.user.character.class_id)}" do
-            = image_tag post.user.profile_image, class: 'avatar-tiny img-rounded'
-            = post.user
-       - if can? :read, Comment, post
+    h1.news-post-title = link_to post.title, post
+    p.news-post-meta
+        i.fa.fa-clock-o>
+        => time_ago_abbr(post.published? ? post.published_at : post.created_at)
+        | by
+        = link_to post.user, class: "news-post-author-link #{post.user.confirmed_character? && class_link_class(post.user.character.class_id)}" do
+         = image_tag post.user.profile_image, class: 'avatar-tiny img-rounded'
+         = post.user
+        - if can? :read, Comment, post
            = link_to "#{post_path(post)}#comments", class: 'news-post-comments-link' do
-                i.fa class="#{post.comments.size > 0 ? 'fa-comments' : 'fa-comment'}"
-                = zero_pluralize(post.comments.size, 'comment', 'No')
-       - unless post.published
-            span.label.label-danger< This post has not been published
-       - if can? :update, post
-            |  &middot;
-            =< link_to 'Edit', edit_post_path(post)
-       - if can? :destroy, post
-            |  &middot;
-            =< link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }
-      .news-post-content
-          - if @truncate_posts
-                = markdown_with_youtube(truncate(post.content, length: 1000, separator: ' ', omission: "... [*Continue reading*](#{post_path(post)})", escape: false))
-          - else
-                = markdown_with_youtube(post.content)
+            i.fa class="#{post.comments.size > 0 ? 'fa-comments' : 'fa-comment'}"
+            = zero_pluralize(post.comments.size, 'comment', 'No')
+        - unless post.published
+           span.label.label-danger< This post has not been published
+        - if can? :update, post
+           = link_to edit_post_path(post), class: 'news-post-edit-link' do
+            i.fa.fa-edit
+            | Edit
+        - if can? :destroy, post
+           = link_to post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'news-post-delete-link' do
+            i.fa.fa-trash-o
+            | Delete
+    .news-post-content
+        - if @truncate_posts
+            = markdown_with_youtube(truncate(post.content, length: 1000, separator: ' ',
+                                    omission: "... [*Continue reading*](#{post_path(post)})", escape: false))
+        - else
+            = markdown_with_youtube(post.content)
+            .news-post-social-container
+                .fb-like data-href=post_url(post) data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"
+                a.twitter-share-button[href="https://twitter.com/share" data-url=post_url(post) data-text=post.title
+                    data-via="RocketFuelLeak" data-hashtags="RFLNews" data-lang="en" data-count="horizontal"] Tweet
+                div.g-plusone data-href=post_url(post) data-size="medium" data-annotation="bubble"

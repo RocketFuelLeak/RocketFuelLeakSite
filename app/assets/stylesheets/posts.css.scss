@@ -3,7 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .news-post {
-    margin-bottom: 60px;
+    margin-bottom: 10px;
+
+    &:not(:nth-of-type(1)) {
+        margin-top: 50px;
+    }
 
     .news-post-content img {
         @extend .img-responsive-thumbnail-centered;
@@ -14,10 +18,23 @@
         margin-right: 3px;
     }
 
-    a.news-post-comments-link > i {
-        color: $text-color;
-        margin-left: 5px;
-        margin-right: 5px;
+    a.news-post-comments-link, a.news-post-edit-link, a.news-post-delete-link {
+        > i {
+            color: $text-color;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    }
+
+    .news-post-social-container {
+        //margin-right: auto;
+        //margin-left: auto;
+        margin-top: 20px;
+        //width: 58px;
+
+        .fb-like {
+            vertical-align: top;
+        }
     }
 }
 
