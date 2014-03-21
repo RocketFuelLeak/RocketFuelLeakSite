@@ -9,6 +9,8 @@ html
         meta name="author" content="Adam Hellberg <sharparam@sharparam.com>"
         title = content_for?(:title) ? yield(:title) : 'Rocket Fuel Leak'
         == stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+        script type="text/javascript" src="https://apis.google.com/js/plusone.js"
+         | {"parsetags": "explicit"}
         == javascript_include_tag "application", "data-turbolinks-track" => true
         == favicon_link_tag "/favicon.ico"
         == csrf_meta_tags
@@ -23,6 +25,5 @@ html
             footer
                 = render 'layouts/footer'
         = render 'layouts/signin_modal'
-        = render 'layouts/plusone_button'
         = render 'layouts/tweet_button'
         = render 'layouts/analytics'
