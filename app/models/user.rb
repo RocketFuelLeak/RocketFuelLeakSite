@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
     has_many :posts, dependent: :destroy
     has_many :comments, dependent: :destroy
+    has_many :forum_topics, class_name: "Forum::Topic", foreign_key: "user_id", dependent: :destroy
+    has_many :forum_posts, class_name: "Forum::Post", foreign_key: "user_id", dependent: :destroy
 
     validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[A-Za-z0-9]{3,16}\z/ } #,format: { with: /\A[A-Z][a-z]+\z/ }
 

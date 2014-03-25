@@ -39,6 +39,10 @@ module ApplicationHelper
         end
     end
 
+    def user_link(user)
+        link_to user, user
+    end
+
     def time_ago_abbr(date)
         content_tag :abbr, "#{time_ago_in_words(date)} ago", title: date, data: { toggle: 'tooltip' }
     end

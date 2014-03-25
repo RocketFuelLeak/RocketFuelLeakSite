@@ -1,0 +1,13 @@
+- content_for :content do
+    .row
+        .col-md-9
+            ol#forum-navigation.breadcrumb
+                - if current_page?(forum_root_path)
+                    li.active Index
+                - else
+                    li = link_to 'Index', forum_root_path
+                == yield(:forum_navigation)
+            == yield
+        .col-md-3 = render 'forum/sidebar'
+
+= render template: 'layouts/application'

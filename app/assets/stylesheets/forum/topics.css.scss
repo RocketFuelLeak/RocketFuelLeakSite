@@ -1,0 +1,10 @@
+table.topics-table td {
+    > p.topic-title {
+        font-size: large;
+    }
+
+    > p.topic-meta {
+        @extend .small;
+        @extend .text-muted;
+    }
+}

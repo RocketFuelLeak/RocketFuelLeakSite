@@ -1,0 +1,18 @@
+= simple_form_for(@forum_topic) do |f|
+    = f.error_notification
+
+    .form-inputs
+    
+        = f.input :title
+    
+        = f.input :locked
+    
+        = f.input :pinned
+    
+        = f.association :forum_forum
+    
+        = f.association :user
+    
+
+    .form-actions
+        = f.button :submit

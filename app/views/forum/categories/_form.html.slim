@@ -1,0 +1,14 @@
+= simple_form_for(@forum_category) do |f|
+    = f.error_notification
+
+    .form-inputs
+    
+        = f.input :name
+    
+        = f.input :order
+    
+        = f.input :access
+    
+
+    .form-actions
+        = f.button :submit

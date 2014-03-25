@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Content:
+  = @forum_post.content
+p
+  strong Forum topic:
+  = @forum_post.forum_topic
+p
+  strong User:
+  = @forum_post.user
+
+= link_to 'Edit', edit_forum_post_path(@forum_post)
+'|
+= link_to 'Back', forum_posts_path

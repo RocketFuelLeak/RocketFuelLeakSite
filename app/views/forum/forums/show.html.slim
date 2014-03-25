@@ -1,0 +1,18 @@
+- title "Forum: #{@forum.name}"
+h1.forum-title
+    = @forum.name
+    small.forum-meta = @forum.description
+- if can? :update, @forum
+    p = link_to 'Edit forum', edit_forum_forum_path(@forum)
+- if @topics.present?
+    table.table.table-striped.topics-table
+        thead
+            th Title
+            th Last post
+            th Posts
+        tbody
+            = render @topics
+    = paginate @topics
+- else
+    h3.text-center.text-muted There are no topics :(
+.text-center = link_to 'Back', forum_forums_path, class: 'btn btn-link'

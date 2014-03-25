@@ -10,6 +10,19 @@ RocketFuelLeakSite::Application.routes.draw do
   get 'privacy' => 'pages#privacy'
   get 'terms' => 'pages#terms'
 
+  namespace :forums, module: :forum, as: :forum do
+    root 'pages#index'
+
+    resources :categories
+    resources :forums, path: '/', except: :index do
+      collection do
+        get 'forums' => 'forums#index'
+      end
+    end
+    resources :topics
+    resources :posts
+  end
+
   resources :addons
 
   resources :users, except: [:new, :create] do

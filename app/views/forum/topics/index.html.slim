@@ -1,0 +1,27 @@
+h1 Listing forum_topics
+
+table
+  tr
+    th Title
+    th Locked
+    th Pinned
+    th Forum forum
+    th User
+    th
+    th
+    th
+
+  - @forum_topics.each do |forum_topic|
+    tr
+      td = forum_topic.title
+      td = forum_topic.locked
+      td = forum_topic.pinned
+      td = forum_topic.forum_forum
+      td = forum_topic.user
+      td = link_to 'Show', forum_topic
+      td = link_to 'Edit', edit_forum_topic_path(forum_topic)
+      td = link_to 'Destroy', forum_topic, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Topic', new_forum_topic_path
