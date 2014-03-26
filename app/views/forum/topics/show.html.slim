@@ -1,21 +1,19 @@
-p#notice = notice
-
 p
   strong Title:
-  = @forum_topic.title
+  = @topic.title
 p
   strong Locked:
-  = @forum_topic.locked
+  = @topic.locked
 p
   strong Pinned:
-  = @forum_topic.pinned
+  = @topic.pinned
 p
   strong Forum forum:
-  = @forum_topic.forum_forum
+  = @topic.forum
 p
   strong User:
-  = @forum_topic.user
+  = @topic.user
 
-= link_to 'Edit', edit_forum_topic_path(@forum_topic)
+= link_to 'Edit', edit_forum_topic_path(@topic)
 '|
 = link_to 'Back', forum_topics_path

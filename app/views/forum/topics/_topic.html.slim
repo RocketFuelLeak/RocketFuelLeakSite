@@ -1,5 +1,5 @@
 td
     p.topic-title = link_to topic, topic
     p.topic-meta Created by #{topic.user} #{time_ago_abbr(topic.created_at)}
-td #{topic.posts.last.user} #{time_ago_abbr(topic.posts.last.created_at)}
+td #{user_link(topic.posts.last.user)} #{time_ago_abbr(topic.posts.last.created_at)}
 td = topic.posts.size
