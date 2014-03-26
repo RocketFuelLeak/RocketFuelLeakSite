@@ -1,2 +1,3 @@
-h3.text-center Forum sidebar
-p This is where recent topics/posts will be shown later, and also some other info.
+h3.text-center Latest topics
+- @latest_topics.each do |topic|
+    p #{link_to(topic, topic)} by #{user_link(topic.user)} #{time_ago_abbr(topic.created_at)}

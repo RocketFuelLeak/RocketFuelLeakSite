@@ -1,6 +1,9 @@
 class Forum::TopicsController < ForumController
-    before_action :load_forum_topic, only: :create
+    layout 'forum/topics'
+
+    before_action :load_topic, only: :create
     load_and_authorize_resource
+    before_action :load_additional, only: [:show, :new, :edit]
 
     # GET /forum/topics
     # GET /forum/topics.json
@@ -10,6 +13,7 @@ class Forum::TopicsController < ForumController
     # GET /forum/topics/1
     # GET /forum/topics/1.json
     def show
+        @posts = @topic.posts.page(params[:page]).per(25)
     end
 
     # GET /forum/topics/new
@@ -58,13 +62,51 @@ class Forum::TopicsController < ForumController
         end
     end
 
+    # PATCH /forum/topics/1/lock
+    # PATCH /forum/topics/1/lock.json
+    def lock
+        authorize! :lock, @topic
+        @topic.lock
+        respond_to do |format|
+            if @topic.save
+                format.html { redirect_to @topic, notice: 'Topic was successfully locked.' }
+                format.json { head :no_content }
+            else
+                format.html { redirect_to @topic, flash: { error: 'Unable to lock topic.' } }
+                format.json { render json: 'Unable to lock topic.', status: :unprocessable_entity }
+            end
+        end
+    end
+
+    # PATCH /forum/topics/1/pin
+    # PATCH /forum/topics/1/pin.json
+    def lock
+        authorize! :pin, @topic
+        @topic.pin
+        respond_to do |format|
+            if @topic.save
+                format.html { redirect_to @topic, notice: 'Topic was successfully pinned.' }
+                format.json { head :no_content }
+            else
+                format.html { redirect_to @topic, flash: { error: 'Unable to pin topic.' } }
+                format.json { render json: 'Unable to pin topic.', status: :unprocessable_entity }
+            end
+        end
+    end
+
     private
         # Only allow a trusted parameter "white list" through.
-        def forum_topic_params
-            params.require(:forum_topic).permit(:title, :locked, :pinned, :forum_forum_id, :user_id)
+        def topic_params
+            params.require(:forum_topic).permit(:title, :locked, :pinned, :forum_forum_id)
         end
 
-        def load_forum_topic
-            @forum_topic = Forum::Topic.new(forum_topic_params)
+        def load_topic
+            @topic = Forum::Topic.new(topic_params)
+            @topic.user = current_user
+        end
+
+        def load_additional
+            @forum = @topic.forum
+            @category = @forum.category
         end
 end

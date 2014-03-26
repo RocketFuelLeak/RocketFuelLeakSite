@@ -1,0 +1,8 @@
+- content_for :forum_navigation do
+    - if @topic.present?
+        li = link_to @category, @category
+        li = link_to @forum, @forum
+        li.active = truncate(@topic.title, length: 144, omission: '...')
+    - else
+        li.active Topic listing
+= render template: 'layouts/forum'

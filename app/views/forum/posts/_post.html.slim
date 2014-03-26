@@ -1,0 +1,23 @@
+.forum-post id="forum-post-#{post.id}"
+    .forum-post-meta
+        h4.forum-post-author = link_to post.user do
+            - if post.user.confirmed_character?
+                = class_link post.user, post.user, post.user.character.class_id
+            - else
+                = link_to post.user, post.user
+        = image_tag post.user.profile_image(64), class: 'forum-post-author-avatar avatar-64 img-rounded'
+        p.forum-post-author-stats = pluralize(post.user.forum_posts.size, 'post', 'posts')
+    .forum-post-body
+        .forum-post-content
+            = markdown_with_youtube(post.content)
+        p.forum-post-footer
+         | #{time_ago_in_words post.created_at} ago &middot;
+         - if post.edited?
+            |  Edited &middot;
+         =<> link_to 'Permalink', post
+         - if can? :update, post
+            | &middot;
+            =<> link_to 'Edit', edit_forum_post_path(post)
+         - if can? :destroy, post
+            | &middot;
+            =< link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }

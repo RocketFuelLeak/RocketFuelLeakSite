@@ -1,18 +1,10 @@
-= simple_form_for(@forum_forum) do |f|
+= simple_form_for(@forum) do |f|
     = f.error_notification
-
     .form-inputs
-    
         = f.input :name
-    
         = f.input :order
-    
         = f.input :read_access
-    
         = f.input :write_access
-    
-        = f.association :forum/category
-    
-
+        = f.association :category
     .form-actions
         = f.button :submit

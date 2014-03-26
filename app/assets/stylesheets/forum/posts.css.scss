@@ -1,3 +1,55 @@
-// Place all the styles related to the forum/posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.forum-post {
+    @extend .row;
+
+    display: flex;
+
+    flex-flow: row;
+    flex-direction: row;
+    
+    .forum-post-meta {
+        @extend .col-sm-2;
+
+        .forum-post-author {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .forum-post-author-avatar {
+            //@extend .img-responsive-centered;
+        }
+
+        .forum-post-author-stats {
+            @extend .small;
+        }
+    }
+
+    .forum-post-body {
+        @extend .col-sm-10;
+
+        display: -ms-flex;
+        display: -webkit-flex;
+        display: flex;
+
+        flex-flow: column;
+        flex-direction: column;
+
+        justify-content: left;
+
+        .forum-post-content {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        p:nth-last-child(2) {
+            margin-bottom: 20px;
+        }
+
+        p.forum-post-footer {
+            @extend .text-muted;
+            @extend .small;
+
+            position: absolute;
+            bottom: 0;
+        }
+    }
+}

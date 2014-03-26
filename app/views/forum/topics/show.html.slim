@@ -1,19 +1,5 @@
-p
-  strong Title:
-  = @topic.title
-p
-  strong Locked:
-  = @topic.locked
-p
-  strong Pinned:
-  = @topic.pinned
-p
-  strong Forum forum:
-  = @topic.forum
-p
-  strong User:
-  = @topic.user
-
-= link_to 'Edit', edit_forum_topic_path(@topic)
-'|
-= link_to 'Back', forum_topics_path
+h1 = @topic.title
+- if can? :update, @topic
+    p = link_to 'Edit topic', edit_forum_topic_path(@topic)
+= render @posts
+.text-center = link_to 'Back', forum_topics_path, class: 'btn btn-link'
