@@ -2,10 +2,10 @@
     .row
         .col-md-9
             ol#forum-navigation.breadcrumb
-                - if current_page?(forum_root_path)
+                - if current_page?(forum_categories_path)
                     li.active Index
                 - else
-                    li = link_to 'Index', forum_root_path
+                    li = link_to 'Index', forum_categories_path
                 == yield(:forum_navigation)
             == yield
         .col-md-3 = render 'forum/sidebar'

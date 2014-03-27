@@ -1,6 +1,12 @@
 class Forum::PostsController < ForumController
-    before_action :load_forum_post, only: :create
+    layout 'forum/posts'
+
+    load_resource :category, class: 'Forum::Category', only: [:index, :new, :create]
+    load_resource :forum, class: 'Forum::Forum', only: [:index, :new, :create]
+    load_resource :topic, class: 'Forum::Topic', only: [:index, :new, :create]
+    before_action :load_post, only: :create
     load_and_authorize_resource
+    before_action :load_additional, only: [:show, :edit]
 
     # GET /forum/posts
     # GET /forum/posts.json
@@ -61,11 +67,18 @@ class Forum::PostsController < ForumController
     private
         # Only allow a trusted parameter "white list" through.
         def post_params
-            params.require(:forum_post).permit(:content, :forum_topic_id)
+            params.require(:post).permit(:content)
         end
 
         def load_post
-            @post = Forum::Post.new(post_params)
+            #@post = Forum::Post.new(post_params)
+            @post = @topic.posts.build(post_params)
             @post.user = current_user
+        end
+
+        def load_additional
+            @topic = @post.topic
+            @forum = @topic.forum
+            @category = @forum.category
         end
 end

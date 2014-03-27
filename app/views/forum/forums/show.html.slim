@@ -15,4 +15,4 @@ h1.forum-title
     = paginate @topics
 - else
     h3.text-center.text-muted There are no topics :(
-.text-center = link_to 'Back', forum_forums_path, class: 'btn btn-link'
+.text-center = link_to 'Back', forum_category_path(@category), class: 'btn btn-link'

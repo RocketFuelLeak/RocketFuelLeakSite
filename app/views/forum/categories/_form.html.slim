@@ -1,8 +1,9 @@
 = simple_form_for(@category) do |f|
     = f.error_notification
     .form-inputs
-        = f.input :name
-        = f.input :order
-        = f.input :access
+        = f.input :name, label: false, placeholder: 'Name'
+        = f.input :order, label: false, placeholder: 'Order'
+        = f.input :access, collection: Forum::Category::ACCESS_TYPES.map { |k, v| [v.to_s.humanize, k] },
+          default: Forum::Category::ACCESS_IDS[:everyone], label: false
     .form-actions
-        = f.button :submit
+        = f.button :submit, class: 'btn-primary btn-block'

@@ -1,9 +1,10 @@
 class Forum::ForumsController < ForumController
     layout 'forum/forums'
 
+    load_resource :category, class: 'Forum::Category', only: [:index, :new, :create]
     before_action :load_forum, only: :create
     load_and_authorize_resource
-    before_action :load_category, only: [:show, :new, :edit]
+    before_action :load_category, only: [:show, :edit]
 
     # GET /forums
     # GET /forums.json
@@ -65,11 +66,12 @@ class Forum::ForumsController < ForumController
     private
         # Only allow a trusted parameter "white list" through.
         def forum_params
-            params.require(:forum).permit(:name, :order, :read_access, :write_access, :forum_category_id)
+            params.require(:forum).permit(:name, :order, :read_access, :write_access)
         end
 
         def load_forum
-            @forum = Forum::Forum.new(forum_params)
+            #@forum = Forum::Forum.new(forum_params)
+            @forum = @category.forums.build(forum_params)
         end
 
         def load_category

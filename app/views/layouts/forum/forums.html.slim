@@ -1,7 +1,7 @@
 - content_for :forum_navigation do
+    li = link_to @category, @category
     - if @forum.present?
-        li = link_to @category, @category
         li.active = @forum
     - else
-        li.active Forum listing
+        li.active Forums
 = render template: 'layouts/forum'

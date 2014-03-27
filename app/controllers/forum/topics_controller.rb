@@ -1,9 +1,11 @@
 class Forum::TopicsController < ForumController
     layout 'forum/topics'
 
+    load_resource :category, class: 'Forum::Category', only: [:index, :new, :create]
+    load_resource :forum, class: 'Forum::Forum', only: [:index, :new, :create]
     before_action :load_topic, only: :create
     load_and_authorize_resource
-    before_action :load_additional, only: [:show, :new, :edit]
+    before_action :load_additional, only: [:show, :edit]
 
     # GET /forum/topics
     # GET /forum/topics.json
@@ -97,11 +99,12 @@ class Forum::TopicsController < ForumController
     private
         # Only allow a trusted parameter "white list" through.
         def topic_params
-            params.require(:forum_topic).permit(:title, :locked, :pinned, :forum_forum_id)
+            params.require(:topic).permit(:title, :locked, :pinned)
         end
 
         def load_topic
-            @topic = Forum::Topic.new(topic_params)
+            #@topic = Forum::Topic.new(topic_params)
+            @topic = @forum.topics.build(topic_params)
             @topic.user = current_user
         end
 

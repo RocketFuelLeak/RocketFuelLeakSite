@@ -7,6 +7,7 @@ class Forum::CategoriesController < ForumController
     # GET /forum/categories
     # GET /forum/categories.json
     def index
+        @categories = @categories.includes(:forums).ordered
     end
 
     # GET /forum/categories/1

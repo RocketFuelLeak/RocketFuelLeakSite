@@ -2,4 +2,4 @@ h1 = @topic.title
 - if can? :update, @topic
     p = link_to 'Edit topic', edit_forum_topic_path(@topic)
 = render @posts
-.text-center = link_to 'Back', forum_topics_path, class: 'btn btn-link'
+.text-center = link_to 'Back', forum_forum_path(@forum), class: 'btn btn-link'

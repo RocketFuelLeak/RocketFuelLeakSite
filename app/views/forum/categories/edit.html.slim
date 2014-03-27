@@ -1,8 +1,6 @@
-h1 Editing forum_category
-
-== render 'form'
-
-= link_to 'Show', @forum_category
-'|
-= link_to 'Back', forum_categories_path
-
+.col-md-6.col-md-offset-3
+    h1 Editing forum category
+    == render 'form'
+    .text-center
+        = link_to 'Show', @category, class: 'btn btn-link'
+        =< link_to 'Back', forum_categories_path, class: 'btn btn-link'

@@ -1,8 +1,9 @@
 - content_for :forum_navigation do
     li = link_to @category, @category
     li = link_to @forum, @forum
-    - if @topic.present?
-        li.active = @topic #truncate(@topic.title, length: 144, omission: '...')
+    li = link_to @topic, @topic
+    - if @post.present?
+        li.active #{@post.user}'s post
     - else
-        li.active Topics
+        li.active Posts
 = render template: 'layouts/forum'

@@ -11,16 +11,19 @@ RocketFuelLeakSite::Application.routes.draw do
   get 'terms' => 'pages#terms'
 
   namespace :forums, module: :forum, as: :forum do
-    root 'pages#index'
+    resources :categories, path: '/', only: :index
 
-    resources :categories
-    resources :forums, path: '/', except: :index do
-      collection do
-        get 'forums' => 'forums#index'
+    resources :categories, except: :index do
+      resources :forums, only: [:index, :new, :create] do
+        resources :topics, only: [:index, :new, :create] do
+          resources :posts, only: [:index, :new, :create]
+        end
       end
     end
-    resources :topics
-    resources :posts
+
+    resources :forums, path: '/', only: [:show, :edit, :update, :destroy]
+    resources :topics, only: [:show, :edit, :update, :destroy]
+    resources :posts, only: [:show, :edit, :update, :destroy]
   end
 
   resources :addons

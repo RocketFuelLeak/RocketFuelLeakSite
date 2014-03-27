@@ -8,7 +8,7 @@ class Forum::Topic < ActiveRecord::Base
     has_many :posts, class_name: "Forum::Post", foreign_key: "forum_topic_id"
   
     def to_s
-        title
+        new_record? ? 'New topic' : title
     end
 
     def to_param

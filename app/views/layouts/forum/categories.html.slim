@@ -1,6 +1,4 @@
 - content_for :forum_navigation do
     - if @category.present?
         li.active = @category
-    - else
-        li.active Category listing
 = render template: 'layouts/forum'

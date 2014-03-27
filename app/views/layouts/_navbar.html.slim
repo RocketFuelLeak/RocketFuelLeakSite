@@ -11,7 +11,7 @@
             ul.nav.navbar-nav
                 li class="#{current_page?(root_path) && 'active'}" = link_to 'Home', root_path
                 li class="#{current_page?(posts_path) && 'active'}" = link_to 'News', posts_path
-                li class="#{current_page?(forum_root_path) && 'active'}" = link_to 'Forums', forum_root_path
+                li class="#{current_page?(forum_categories_path) && 'active'}" = link_to 'Forums', forum_categories_path
                 - if can? :read, Application
                     li class="#{current_page?(applications_path) && 'active'}" = link_to 'Applications', applications_path
                 li
