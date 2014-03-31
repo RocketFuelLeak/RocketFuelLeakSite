@@ -11,7 +11,7 @@ class Forum::Category < ActiveRecord::Base
 
     scope :ordered, -> { order(order: :asc) }
 
-    has_many :forums, class_name: "Forum::Forum", foreign_key: "forum_category_id"
+    has_many :forums, class_name: "Forum::Forum", foreign_key: "forum_category_id", dependent: :destroy
 
     validates :name, presence: true
     validates :order, presence: true

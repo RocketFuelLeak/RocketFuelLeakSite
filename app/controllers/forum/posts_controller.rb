@@ -5,12 +5,15 @@ class Forum::PostsController < ForumController
     load_resource :forum, class: 'Forum::Forum', only: [:index, :new, :create]
     load_resource :topic, class: 'Forum::Topic', only: [:index, :new, :create]
     before_action :load_post, only: :create
-    load_and_authorize_resource
-    before_action :load_additional, only: [:show, :edit]
+    load_and_authorize_resource through: :topic, only: [:index, :new, :create]
+    load_and_authorize_resource except: [:index, :new, :create]
+    before_action :load_additional, only: [:show, :new, :edit]
 
     # GET /forum/posts
     # GET /forum/posts.json
     def index
+        @post = @topic.posts.build
+        @post_form_url = forum_category_forum_topic_posts_path(@category, @forum, @topic)
     end
 
     # GET /forum/posts/1
@@ -20,6 +23,7 @@ class Forum::PostsController < ForumController
 
     # GET /forum/posts/new
     def new
+        @post_form_url = forum_category_forum_topic_posts_path(@category, @forum, @topic)
     end
 
     # GET /forum/posts/1/edit
@@ -67,11 +71,10 @@ class Forum::PostsController < ForumController
     private
         # Only allow a trusted parameter "white list" through.
         def post_params
-            params.require(:post).permit(:content)
+            params.require(:forum_post).permit(:content)
         end
 
         def load_post
-            #@post = Forum::Post.new(post_params)
             @post = @topic.posts.build(post_params)
             @post.user = current_user
         end

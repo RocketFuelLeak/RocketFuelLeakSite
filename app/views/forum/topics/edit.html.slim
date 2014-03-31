@@ -1,8 +1,6 @@
-h1 Editing forum_topic
-
-== render 'form'
-
-= link_to 'Show', @forum_topic
-'|
-= link_to 'Back', forum_topics_path
-
+.col-md-8.col-md-offset-2
+    h1 Editing #{@topic}
+    == render 'form'
+    .text-center
+        = link_to 'Show', @topic, class: 'btn btn-link'
+        = link_to 'Back', @forum, class: 'btn btn-link'

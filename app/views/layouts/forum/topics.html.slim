@@ -2,7 +2,7 @@
     li = link_to @category, @category
     li = link_to @forum, @forum
     - if @topic.present?
-        li.active = @topic #truncate(@topic.title, length: 144, omission: '...')
+        li.active = @topic
     - else
         li.active Topics
 = render template: 'layouts/forum'

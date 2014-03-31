@@ -1,5 +1,11 @@
 h1 = @topic.title
-- if can? :update, @topic
-    p = link_to 'Edit topic', edit_forum_topic_path(@topic)
+p
+    - if can? :update, @topic
+        = link_to 'Edit topic', edit_forum_topic_path(@topic)
+    - if can? :destroy, @topic
+        =< link_to 'Delete topic', @topic, method: :delete, data: { confirm: 'Are you sure?' }
 = render @posts
+- if can? :create, @topic => Post
+    h2 Post a reply
+    = render 'forum/posts/form'
 .text-center = link_to 'Back', forum_forum_path(@forum), class: 'btn btn-link'

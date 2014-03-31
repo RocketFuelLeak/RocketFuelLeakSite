@@ -1,15 +1,3 @@
-p#notice = notice
-
-p
-  strong Content:
-  = @forum_post.content
-p
-  strong Forum topic:
-  = @forum_post.forum_topic
-p
-  strong User:
-  = @forum_post.user
-
-= link_to 'Edit', edit_forum_post_path(@forum_post)
-'|
-= link_to 'Back', forum_posts_path
+h2 #{link_to "#{@post.user}'s", @post.user} post on #{link_to @topic, @topic}
+= render @post
+.text-center = link_to 'Back', @topic, class: 'btn btn-link'

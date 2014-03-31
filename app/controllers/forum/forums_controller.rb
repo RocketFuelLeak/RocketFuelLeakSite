@@ -3,7 +3,8 @@ class Forum::ForumsController < ForumController
 
     load_resource :category, class: 'Forum::Category', only: [:index, :new, :create]
     before_action :load_forum, only: :create
-    load_and_authorize_resource
+    load_and_authorize_resource through: :category, only: [:index, :new, :create]
+    load_and_authorize_resource except: [:index, :new, :create]
     before_action :load_category, only: [:show, :edit]
 
     # GET /forums
@@ -14,7 +15,7 @@ class Forum::ForumsController < ForumController
     # GET /forums/1
     # GET /forums/1.json
     def show
-        @topics = @forum.topics.page(params[:page]).per(30)
+        @topics = @forum.topics.recent.page(params[:page]).per(30)
     end
 
     # GET /forums/new

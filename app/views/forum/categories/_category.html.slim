@@ -1,5 +1,9 @@
 h2 = link_to category, category
-p = link_to 'Edit category', edit_forum_category_path(category)
+p
+    - if can? :update, category
+        = link_to 'Edit category', edit_forum_category_path(category)
+    - if can? :create, category => Forum::Forum
+        =< link_to 'Create new forum', new_forum_category_forum_path(category)
 table.table.table-striped
     thead
         th Name

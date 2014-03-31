@@ -1,5 +1,4 @@
-h1 New forum_topic
-
-== render 'form'
-
-= link_to 'Back', forum_topics_path
+.col-md-8.col-md-offset-2
+    h1 New forum topic
+    == render 'form'
+    .text-center = link_to 'Back', @forum, class: 'btn btn-link'

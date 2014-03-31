@@ -13,7 +13,7 @@ class Forum::Forum < ActiveRecord::Base
 
     belongs_to :category, class_name: "Forum::Category", foreign_key: "forum_category_id"
 
-    has_many :topics, class_name: "Forum::Topic", foreign_key: "forum_forum_id"
+    has_many :topics, class_name: "Forum::Topic", foreign_key: "forum_forum_id", dependent: :destroy
 
     validates :name, presence: true
     validates :description, presence: true

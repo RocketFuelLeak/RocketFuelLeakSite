@@ -2,7 +2,7 @@
     li = link_to @category, @category
     li = link_to @forum, @forum
     li = link_to @topic, @topic
-    - if @post.present?
+    - if @post.present? and !@post.new_record?
         li.active #{@post.user}'s post
     - else
         li.active Posts

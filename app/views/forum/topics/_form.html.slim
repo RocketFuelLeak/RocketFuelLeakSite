@@ -1,10 +1,13 @@
-= simple_form_for(@topic) do |f|
+= simple_form_for(@topic, url: @topic_form_url) do |f|
     = f.error_notification
     .form-inputs
-        = f.input :title
-        = f.input :locked
-        = f.input :pinned
-        = f.association :forum
-        = f.association :user
+        = f.input :title, label: false, placeholder: 'Topic title'
+        - if can? :lock, @topic
+            = f.input :locked
+        - if can? :pin, @topic
+            = f.input :pinned
+        - if @topic.new_record?
+            = f.simple_fields_for :posts do |p|
+                = p.input :content, label: false, placeholder: 'Post content'
     .form-actions
-        = f.button :submit
+        = f.button :submit, class: 'btn-primary btn-block'
