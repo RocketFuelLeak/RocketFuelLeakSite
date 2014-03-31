@@ -1,4 +1,5 @@
 - title @post.title
+- description truncate(@post.content.squish, length: 256, separator: ' ', omission: "...")
 = render @post
 - if @comments
     #comments.col-md-12
