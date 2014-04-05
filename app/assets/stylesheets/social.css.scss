@@ -1,0 +1,11 @@
+.news-post-social-container {
+    > * {
+        vertical-align: middle !important;
+    }
+
+    > input.form-control[readonly] {
+        cursor: inherit;
+        width: auto;
+        display: inline;
+    }
+}
