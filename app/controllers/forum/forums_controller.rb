@@ -20,6 +20,7 @@ class Forum::ForumsController < ForumController
 
     # GET /forums/new
     def new
+        @forum_form_url = forum_category_forums_path(@category)
     end
 
     # GET /forums/1/edit
@@ -67,7 +68,7 @@ class Forum::ForumsController < ForumController
     private
         # Only allow a trusted parameter "white list" through.
         def forum_params
-            params.require(:forum).permit(:name, :order, :read_access, :write_access)
+            params.require(:forum_forum).permit(:name, :description, :order, :read_access, :write_access)
         end
 
         def load_forum

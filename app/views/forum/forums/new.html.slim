@@ -1,5 +1,3 @@
-h1 New forum_forum
-
+h2 New forum in #{link_to @category, @category}
 == render 'form'
-
-= link_to 'Back', forum_forums_path
+.text-center = link_to 'Back', forum_categories_path, class: 'btn btn-link'

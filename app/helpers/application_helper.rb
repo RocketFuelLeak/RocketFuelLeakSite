@@ -1,4 +1,6 @@
 module ApplicationHelper
+    REDIS = Redis.new
+
     class HTMLWithPygments < Redcarpet::Render::HTML
         def block_code(code, language)
             sha = Digest::SHA1.hexdigest(code)
@@ -41,6 +43,22 @@ module ApplicationHelper
 
     def user_link(user)
         link_to user, user
+    end
+
+    def short_url(url)
+        short = REDIS.get('shorturl:cache:' + url)
+
+        unless short
+            begin
+                short = RflUrlShortener::API.get(url)
+            rescue RflUrlShortener::ApiError
+                short = nil
+            end
+
+            REDIS.set('shorturl:cache:' + url, short)
+        end
+
+        short or url
     end
 
     def time_ago_abbr(date)

@@ -28,7 +28,8 @@
         - else
             = markdown_with_youtube(post.content)
             .news-post-social-container
-                .fb-like data-href=post_url(post) data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"
-                a.twitter-share-button[href="https://twitter.com/share" data-url=post_url(post) data-text=post.title
+                .fb-like data-href=short_url(post_url(post)) data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"
+                a.twitter-share-button[href="https://twitter.com/share" data-url=short_url(post_url(post)) data-text=post.title
                     data-via="RocketFuelLeak" data-hashtags="RFLNews" data-lang="en" data-count="horizontal"] Tweet
-                div.g-plusone data-href=post_url(post) data-size="medium" data-annotation="bubble"
+                div.g-plusone data-href=short_url(post_url(post)) data-size="medium" data-annotation="bubble"
+                input.form-control.input-sm.news-post-url-box type="text" readonly="readonly" value=short_url(post_url(post))

@@ -17,6 +17,7 @@ class Forum::CategoriesController < ForumController
 
     # GET /forum/categories/new
     def new
+        @category_form_url = forum_categories_path
     end
 
     # GET /forum/categories/1/edit

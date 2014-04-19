@@ -1,5 +1,3 @@
-h1 New forum_post
-
+h2 Replying to #{link_to @topic, @topic}
 == render 'form'
-
-= link_to 'Back', forum_posts_path
+.text-center = link_to 'Back', @topic, class: 'btn btn-link'

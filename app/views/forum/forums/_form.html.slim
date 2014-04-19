@@ -1,10 +1,12 @@
-= simple_form_for(@forum) do |f|
+= simple_form_for(@forum, url: @forum_form_url) do |f|
     = f.error_notification
     .form-inputs
-        = f.input :name
-        = f.input :order
-        = f.input :read_access
-        = f.input :write_access
-        = f.association :category
+        = f.input :name, label: false, placeholder: 'Name'
+        = f.input :description, label: false, placeholder: 'Description'
+        = f.input :order, label: false, placeholder: 'Order'
+        ruby:
+            access_collection = Forum::Forum::ACCESS_TYPES.map { |k, v| [v.to_s.humanize, k] }
+        = f.input :read_access, collection: access_collection, default: Forum::Forum::ACCESS_IDS[:everyone]
+        = f.input :write_access, collection: access_collection, default: Forum::Forum::ACCESS_IDS[:everyone]
     .form-actions
-        = f.button :submit
+        = f.button :submit, class: 'btn-block btn-primary'

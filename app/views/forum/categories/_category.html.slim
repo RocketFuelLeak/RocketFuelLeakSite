@@ -1,11 +1,26 @@
 h2 = link_to category, category
 p
     - if can? :update, category
-        = link_to 'Edit category', edit_forum_category_path(category)
+        = link_to edit_forum_category_path(category), class: 'forum-icon-link' do
+            i.fa.fa-edit
+            | Edit category
+    - if can? :destroy, category
+        = link_to category, method: 'delete', data: { confirm: 'Are you sure?' }, class: 'forum-icon-link'
+            i.fa.fa-trash-o
+            | Delete category
     - if can? :create, category => Forum::Forum
-        =< link_to 'Create new forum', new_forum_category_forum_path(category)
-table.table.table-striped
-    thead
-        th Name
-        th Last topic
-    tbody = render category.forums
+        =< link_to new_forum_category_forum_path(category), class: 'forum-icon-link' do
+            i.fa.fa-plus
+            | Create new forum
+- if category.forums.present?
+    table.table.table-striped
+        thead
+            th Name
+            th Last topic
+        /tbody = render category.forums
+        tbody
+            - category.forums.each do |forum|
+                - if can? :read, forum
+                    = render forum
+- else
+    h3.text-center.text-muted There are no forums :(

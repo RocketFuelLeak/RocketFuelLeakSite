@@ -11,6 +11,10 @@ $ ->
     $(document).on 'page:load', ->
         gapi.plusone.go()
 
+$(document).on 'ready page:load', ->
+    $('.news-post-social-container input.news-post-url-box').on 'focus', ->
+        $(this).select()
+
 bindFacebookEvents = ->
     $(document)
         .on('page:fetch', saveFacebookRoot)

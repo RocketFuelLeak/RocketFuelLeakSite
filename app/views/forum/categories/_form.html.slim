@@ -1,4 +1,4 @@
-= simple_form_for(@category) do |f|
+= simple_form_for(@category, url: @category_form_url) do |f|
     = f.error_notification
     .form-inputs
         = f.input :name, label: false, placeholder: 'Name'

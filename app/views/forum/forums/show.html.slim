@@ -2,9 +2,17 @@
 h1.forum-title
     = @forum.name
     small.forum-meta = @forum.description
-- if can? :update, @forum
-    p = link_to 'Edit forum', edit_forum_forum_path(@forum)
-- if can? :create, @forum => Forum::Topic
+p
+    - if can? :update, @forum
+        = link_to edit_forum_forum_path(@forum), class: 'forum-icon-link'
+            i.fa.fa-edit
+            | Edit forum
+    - if can? :destroy, @forum
+        =< link_to @forum, method: :delete, data: { confirm: 'Are you sure?' }, class: 'forum-icon-link'
+            i.fa.fa-trash-o
+            | Delete forum
+/- if can? :create, @forum => Forum::Topic
+- if can? :create, @forum.topics.build
     = link_to 'Create new topic', new_forum_category_forum_topic_path(@category, @forum), class: 'btn btn-success btn-block'
 - if @topics.present?
     table.table.table-striped.topics-table

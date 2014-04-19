@@ -1,11 +1,12 @@
-td
-    = link_to forum do
-        strong = forum.name
-    p = forum.description
-td
-    - if forum.topics.empty?
-        | Never
-    - else
-        => link_to forum.last_topic, forum.last_topic
-        | #{time_ago_abbr(forum.last_topic.created_at)} by
-        =< user_link forum.last_topic.user
+tr
+    td
+        = link_to forum do
+            strong = forum.name
+        p = forum.description
+    td
+        - if forum.topics.empty?
+            | Never
+        - else
+            => link_to forum.last_topic, forum.last_topic
+            | #{time_ago_abbr(forum.last_topic.created_at)} by
+            =< user_link forum.last_topic.user

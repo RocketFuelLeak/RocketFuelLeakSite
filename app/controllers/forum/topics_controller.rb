@@ -16,6 +16,9 @@ class Forum::TopicsController < ForumController
     # GET /forum/topics/1
     # GET /forum/topics/1.json
     def show
+        if not @topic.forum
+            @topic.forum = @forum
+        end
         @posts = @topic.posts.page(params[:page]).per(25)
         @post = @topic.posts.build
         @post_form_url = forum_category_forum_topic_posts_path(@category, @forum, @topic)

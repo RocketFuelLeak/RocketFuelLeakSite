@@ -1,11 +1,15 @@
 h1 = @topic.title
 p
     - if can? :update, @topic
-        = link_to 'Edit topic', edit_forum_topic_path(@topic)
+        = link_to edit_forum_topic_path(@topic), class: 'forum-icon-link' do
+            i.fa.fa-edit
+            | Edit topic
     - if can? :destroy, @topic
-        =< link_to 'Delete topic', @topic, method: :delete, data: { confirm: 'Are you sure?' }
+        =< link_to @topic, method: :delete, data: { confirm: 'Are you sure?' }, class: 'forum-icon-link'
+            i.fa.fa-trash-o
+            | Delete topic
 = render @posts
-- if can? :create, @topic => Post
+- if can? :create, @post
     h2 Post a reply
     = render 'forum/posts/form'
 .text-center = link_to 'Back', forum_forum_path(@forum), class: 'btn btn-link'
