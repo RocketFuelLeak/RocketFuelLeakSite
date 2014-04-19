@@ -30,6 +30,7 @@ class Forum::ForumsController < ForumController
     # POST /forums
     # POST /forums.json
     def create
+        @forum_form_url = forum_category_forums_path(@category)
         respond_to do |format|
             if @forum.save
                 format.html { redirect_to @forum, notice: 'Forum was successfully created.' }
@@ -45,7 +46,7 @@ class Forum::ForumsController < ForumController
     # PATCH/PUT /forums/1.json
     def update
         respond_to do |format|
-            if @forum.update(forum_forum_params)
+            if @forum.update(forum_params)
                 format.html { redirect_to @forum, notice: 'Forum was successfully updated.' }
                 format.json { head :no_content }
             else
@@ -60,7 +61,7 @@ class Forum::ForumsController < ForumController
     def destroy
         @forum.destroy
         respond_to do |format|
-            format.html { redirect_to forum_forums_url, notice: 'Forum was successfully destroyed.' }
+            format.html { redirect_to @forum.category, notice: 'Forum was successfully destroyed.' }
             format.json { head :no_content }
         end
     end

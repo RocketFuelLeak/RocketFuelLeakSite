@@ -27,6 +27,7 @@ class Forum::CategoriesController < ForumController
     # POST /forum/categories
     # POST /forum/categories.json
     def create
+        @category_form_url = forum_categories_path
         respond_to do |format|
             if @category.save
                 format.html { redirect_to @category, notice: 'Category was successfully created.' }
