@@ -19,7 +19,7 @@ p
             th Last topic
         /tbody = render category.forums
         tbody
-            - category.forums.each do |forum|
+            - category.forums.ordered.each do |forum|
                 - if can? :read, forum
                     = render forum
 - else
