@@ -48,7 +48,7 @@ class Forum::PostsController < ForumController
     # PATCH/PUT /forum/posts/1.json
     def update
         respond_to do |format|
-            if @post.update(forum_post_params)
+            if @post.update(post_params)
                 format.html { redirect_to @post.topic, notice: 'Post was successfully updated.' }
                 format.json { head :no_content }
             else
