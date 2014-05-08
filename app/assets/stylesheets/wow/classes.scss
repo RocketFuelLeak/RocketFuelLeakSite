@@ -69,7 +69,7 @@ a.link-warlock {
 
 a.link-monk {
     color: darken($monk-color, 10%) !important;
-    &:hover { @extend .monk-druid; }
+    &:hover { @extend .text-monk; }
 }
 
 a.link-druid {
