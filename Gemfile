@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.0.4'
 
 gem 'slim-rails'
 
-gem 'simple_form'
+gem 'simple_form', '~> 3.1.0.rc1'
 gem 'country_select'
 
 gem 'pygments.rb'
@@ -48,7 +48,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 #gem 'cancan'
-gem 'cancancan', '~> 1.7'
+gem 'cancancan', '~> 1.8'
 gem 'rolify'
 
 gem 'sitemap_generator'

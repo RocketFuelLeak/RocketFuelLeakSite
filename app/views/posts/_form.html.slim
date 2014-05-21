@@ -29,6 +29,6 @@
                 p.text-center: strong Please note that this preview may not be 100% accurate.
                 .news-post.well.well-sm
                     #post-preview-target
-        = f.input :published, hint: 'Published posts will be visible to everyone'
+        = f.input :published, label: false, inline_label: 'Published', hint: 'Published posts will be visible to everyone'
     .form-actions
         = f.button :submit, class: 'btn-primary btn-block'
