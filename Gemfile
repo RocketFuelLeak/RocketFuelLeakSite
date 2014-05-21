@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.0.4'
 
 gem 'slim-rails'
 
-gem 'simple_form'
+gem 'simple_form', '~> 3.1.0.rc1'
 gem 'country_select'
 
 gem 'pygments.rb'
