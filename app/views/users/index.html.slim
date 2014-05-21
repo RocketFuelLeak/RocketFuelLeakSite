@@ -5,6 +5,7 @@
          | Userlist
          /= link_to 'New user', new_user_path, class: 'btn btn-success pull-right'
 
+        /! email_off
         table.table
             thead: tr
                 th.text-right #
@@ -52,4 +53,5 @@
                                             li = link_to toggle_role_user_path(user, role), method: :patch do
                                                 i.fa.fa-fw class="#{user.has_role?(role) ? 'fa-check-square' : 'fa-square'}"
                                                 =< role.to_s.titleize
+        /! /email_off
         = paginate @users
