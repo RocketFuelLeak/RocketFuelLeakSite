@@ -25,4 +25,4 @@ html
         #footer-wrap.container
             footer
                 = render 'layouts/footer'
-        = render 'layouts/signin_modal'
+        = render 'layouts/signin_modal' unless user_signed_in?

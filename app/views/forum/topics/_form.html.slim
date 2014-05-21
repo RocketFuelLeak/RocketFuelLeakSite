@@ -3,9 +3,9 @@
     .form-inputs
         = f.input :title, label: false, placeholder: 'Topic title'
         - if can? :lock, @topic
-            = f.input :locked
+            = f.input :locked, label: false, inline_label: 'Locked'
         - if can? :pin, @topic
-            = f.input :pinned
+            = f.input :pinned, as: :boolean, label: false, inline_label: 'Pinned'
         - if @topic.new_record?
             = f.simple_fields_for :posts do |p|
                 = p.input :content, label: false, placeholder: 'Post content'
