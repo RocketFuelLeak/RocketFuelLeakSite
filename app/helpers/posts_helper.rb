@@ -8,6 +8,6 @@ module PostsHelper
     end
 
     def feed_markdown(text)
-        markdown_with_youtube(text).gsub(/<img /, '<img style="max-width: 100%; height: auto; display: block;" ').html_safe
+        markdown_with_youtube(text).gsub(/<img /, '<img style="max-width: 565px; height: auto; display: block;" ').html_safe
     end
 end
