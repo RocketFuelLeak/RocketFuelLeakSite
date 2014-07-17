@@ -6,5 +6,5 @@ tr
         - if topic.posts.empty?
             | Never
         - else
-            #{user_link(topic.posts.last.user)} #{time_ago_abbr(topic.posts.last.created_at)}
+            | #{user_link(topic.posts.last.user)} #{time_ago_abbr(topic.posts.last.created_at)}
     td = topic.posts.size
