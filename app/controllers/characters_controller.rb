@@ -94,6 +94,7 @@ class CharactersController < ApplicationController
         if current_user.character
             flash[:error] = 'You have already connected a character, please go to your profile page to confirm it.'
             redirect_to root_path
+            return
         end
         respond_to do |format|
             if @character.save
