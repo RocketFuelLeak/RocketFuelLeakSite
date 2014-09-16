@@ -1,5 +1,4 @@
 /*
- *= require font-awesome
  *= require_self
  *= require select2
  *= require main
@@ -7,3 +6,6 @@
  *= require pygments
  *= require wowdb/tooltip
  */
+
+@import "font-awesome-sprockets";
+@import "font-awesome";

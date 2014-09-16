@@ -23,7 +23,7 @@ set :log_level, :info
 #set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/secrets.yml config/github.yml config/facebook.yml config/twitter.yml config/google.yml config/devise.yml config/smtp.yml config/recaptcha.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml config/github.yml config/facebook.yml config/twitter.yml config/google.yml config/devise.yml config/smtp.yml config/recaptcha.yml config/newrelic.yml}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -61,6 +61,7 @@ namespace :deploy do
       upload! "config/devise.yml.example", "#{shared_path}/config/devise.yml"
       upload! "config/smtp.yml.example", "#{shared_path}/config/smtp.yml"
       upload! "config/recaptcha.yml.example", "#{shared_path}/config/recaptcha.yml"
+      upload! "config/newrelic.yml.example", "#{shared_path}/config/newrelic.yml"
       puts "Now edit the config files in #{shared_path}."
       puts "Execute the following commands:"
       puts "sudo ln -nfs #{current_path}/config/nginx_#{rails_env}.conf /etc/nginx/sites-enabled/#{application}_#{rails_env}"

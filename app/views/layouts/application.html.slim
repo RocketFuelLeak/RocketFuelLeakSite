@@ -26,3 +26,4 @@ html
             footer
                 = render 'layouts/footer'
         = render 'layouts/signin_modal' unless user_signed_in?
+        audio#lovesong preload="none" src="#{asset_path('love.mp3')}" volume="1.0"
