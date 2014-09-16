@@ -5,7 +5,6 @@ max = sequence.length
 active = false
 
 play = ->
-    console.log 'playing song'
     index = 0
     audio = $('audio#lovesong')
     active = true
@@ -18,7 +17,7 @@ $ ->
 $(document).on 'keypress', (e) ->
     if active then return
     code = e.keyCode or e.charCode
-    if index >= max - 1
-        play()
-    else if code == sequence[index]
+    if code == sequence[index]
         index++;
+        if index >= max
+            play()
