@@ -59,6 +59,9 @@ config/smtp.yml
 # reCAPTCHA config
 config/recaptcha.yml
 
+# NewRelic config
+config/newrelic.yml
+
 # Ignore old capistrano config backup
 /old_cap
 

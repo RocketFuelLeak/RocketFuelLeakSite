@@ -136,6 +136,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
+    newrelic_rpm (3.9.4.245)
     oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
@@ -301,6 +302,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mail_form
+  newrelic_rpm
   omniauth-facebook
   omniauth-github
   omniauth-google-oauth2
