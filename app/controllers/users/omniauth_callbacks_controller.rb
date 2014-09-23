@@ -4,6 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
         if user.persisted?
             set_flash_message(:notice, :success, kind: "service") if is_navigational_format?
+            user.remember_me = true
             sign_in_and_redirect user, event: :authentication
         else
             session["devise.user_attributes"] = user.attributes
