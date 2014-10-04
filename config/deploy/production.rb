@@ -2,7 +2,7 @@ set :whenever_roles, ->{ :app }
 
 set :stage, :production
 set :rails_env, 'production'
-set :branch, 'production'
+set :branch, 'master'
 
 server 'prod.rocketfuelleak.com', user: 'rails', roles: %w{web app db},
     ssh_options: {

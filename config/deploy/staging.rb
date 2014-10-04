@@ -1,6 +1,6 @@
 set :stage, :staging
 set :rails_env, 'staging'
-set :branch, 'staging'
+set :branch, 'master'
 
 server 'staging.rocketfuelleak.com', user: 'rails', roles: %w{web app db},
     ssh_options: {
