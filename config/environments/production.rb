@@ -90,6 +90,7 @@ RocketFuelLeakSite::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'rocketfuelleak.com' }
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
 end
