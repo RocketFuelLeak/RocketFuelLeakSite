@@ -4,8 +4,7 @@ require 'json'
 class PagesController < ApplicationController
     def index
         @posts = Post.recently_published.limit(5)
-        redis = Redis.new
-        data = redis.get "wowprogress"
+        data = REDIS.get "wowprogress"
         @wowprogress = JSON.parse(data) if data
         if @wowprogress
             @score = @wowprogress["score"]

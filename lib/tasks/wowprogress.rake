@@ -8,8 +8,7 @@ namespace :wowprogress do
             rankings = WoWProgress::API.get()
             data = rankings
             data["fetched_at"] = Time.now
-            redis = Redis.new
-            redis.set "wowprogress", data.to_json
+            REDIS.set "wowprogress", data.to_json
         rescue WoWProgress::APIError => e
             puts "wowprogress:update_rankings: APIError: #{e}"
         rescue JSON::ParserError => e
