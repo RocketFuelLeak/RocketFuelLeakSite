@@ -17,7 +17,9 @@ namespace :deploy do
         end
     end
 
-    after :deploy, :update_members
+    # Disabled due to Battle.net API bug
+    # Expected fix date: 2014-11-07
+    #after :deploy, :update_members
     after :deploy, :update_rankings
 end
 
