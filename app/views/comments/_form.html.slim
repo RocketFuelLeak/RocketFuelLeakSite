@@ -4,4 +4,4 @@
     .form-inputs
         = f.input :content, label: false, placeholder: 'Write your comment', input_html: { rows: 2 }
     .form-actions
-        = f.button :submit, class: 'btn btn-primary btn-block'
+        = f.button :submit, class: 'btn btn-primary btn-block comment-submit-btn', data: { 'loading-text' => 'Creating...' }

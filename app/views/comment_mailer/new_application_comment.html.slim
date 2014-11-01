@@ -1,0 +1,9 @@
+doctype 5
+html
+    head
+        meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+    body
+        h1 = @title
+        p The content of the comment is:
+        p: em = @content
+        p = link_to 'Go to the comment page', application_url(@app)
