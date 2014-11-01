@@ -85,6 +85,8 @@ group :development do
     gem 'guard-rails'
     gem 'guard-livereload'
 
+    gem 'better_errors'
+
     # Use Capistrano for deployment
     gem 'capistrano', '~> 3.0', require: false
     gem 'capistrano-rails', '~> 1.1', require: false
