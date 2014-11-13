@@ -4,7 +4,7 @@ module WoW
         SLOTS = [:head, :neck, :shoulder, :back, :chest, :shirt, :tabard, :wrist, :hands, :waist,
                  :legs, :feet, :finger1, :finger2, :trinket1, :trinket2, :mainHand, :offHand]
         PROFILE_URL = "http://%{region}.battle.net/wow/en/character/%{realm}/%{name}/advanced"
-        THUMBNAIL_URL = "http://%{region}.battle.net/static-render/%{region}/%{thumbnail}"
+        THUMBNAIL_URL = "https://%{region}.battle.net/static-render/%{region}/%{thumbnail}"
 
         attr_accessor :name, :realm, :class_id, :thumbnail, :thumbnail_url, :guild, :equipment
 
