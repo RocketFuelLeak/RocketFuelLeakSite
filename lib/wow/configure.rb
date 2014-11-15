@@ -8,6 +8,10 @@ module WoW
             @@api_key
         end
 
+        def api_key=(key)
+            @@api_key = key
+        end
+
         def region
             @@region
         end
