@@ -68,3 +68,13 @@ config/wowapi.yml
 # Ignore old capistrano config backup
 /old_cap
 
+### https://raw.github.com/github/gitignore/1a6b68c0068c6909206047b6eecaecb22ad67f64/Global/vim.gitignore
+
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+
