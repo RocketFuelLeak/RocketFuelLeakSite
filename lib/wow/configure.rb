@@ -4,6 +4,10 @@ module WoW
             yield self if block_given?
         end
 
+        def api_key
+            @@api_key
+        end
+
         def region
             @@region
         end

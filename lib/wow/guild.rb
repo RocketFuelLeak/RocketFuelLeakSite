@@ -1,6 +1,6 @@
 module WoW
     class Guild
-        RESOURCE = "/guild/%{realm}/%{name}?fields=%{fields}".freeze
+        RESOURCE = "/guild/%{realm}/%{name}".freeze
         PROFILE_URL = "http://%{region}.battle.net/wow/en/guild/%{realm}/%{name}/"
 
         attr_accessor :name, :realm, :members
@@ -24,8 +24,8 @@ module WoW
         end
 
         def self.find(name = WoW.guild, realm = WoW.realm, region = WoW.region, fields = WoW.guild_fields)
-            resource = RESOURCE % { realm: realm, name: name, fields: fields }
-            data = API.get(resource, region)
+            resource = RESOURCE % { realm: realm, name: name }
+            data = API.get(resource, {fields: fields}, region)
             new(data)
         end
 

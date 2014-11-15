@@ -1,6 +1,6 @@
 module WoW
     class Character
-        RESOURCE = "/character/%{realm}/%{name}?fields=%{fields}"
+        RESOURCE = "/character/%{realm}/%{name}"
         SLOTS = [:head, :neck, :shoulder, :back, :chest, :shirt, :tabard, :wrist, :hands, :waist,
                  :legs, :feet, :finger1, :finger2, :trinket1, :trinket2, :mainHand, :offHand]
         PROFILE_URL = "http://%{region}.battle.net/wow/en/character/%{realm}/%{name}/advanced"
@@ -25,8 +25,8 @@ module WoW
         end
 
         def self.find(name, realm = WoW.realm, region = WoW.region, fields = WoW.character_fields)
-            resource = RESOURCE % { realm: realm, name: name, fields: fields }
-            data = API.get(resource, region)
+            resource = RESOURCE % { realm: realm, name: name }
+            data = API.get(resource, {fields: fields}, region)
             new(data)
         end
 

@@ -62,6 +62,9 @@ config/recaptcha.yml
 # NewRelic config
 config/newrelic.yml
 
+# Battle.net API config
+config/wowapi.yml
+
 # Ignore old capistrano config backup
 /old_cap
 

@@ -9,6 +9,7 @@ TWITTER_CONFIG = YAML.load_file("#{::Rails.root}/config/twitter.yml")[::Rails.en
 GOOGLE_CONFIG = YAML.load_file("#{::Rails.root}/config/google.yml")[::Rails.env]
 SMTP_CONFIG = YAML.load_file("#{::Rails.root}/config/smtp.yml")[::Rails.env]
 RECAPTCHA_CONFIG = YAML.load_file("#{::Rails.root}/config/recaptcha.yml")[::Rails.env]
+WOWAPI_CONFIG = YML.load_file("#{::Rails.root}/config/wowapi.yml")[::Rails.env]
 
 # Initialize the Rails application.
 RocketFuelLeakSite::Application.initialize!
