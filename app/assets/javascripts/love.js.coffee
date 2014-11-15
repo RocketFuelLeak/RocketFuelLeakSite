@@ -18,6 +18,8 @@ $(document).on 'keypress', (e) ->
     if active then return
     code = e.keyCode or e.charCode
     if code == sequence[index]
-        index++;
+        index++
         if index >= max
             play()
+    else
+        index = 0
