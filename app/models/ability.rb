@@ -31,7 +31,9 @@ class Ability
                     %w[Post Application].include? comment.commentable_type
                 end
 
-                can :read, Application
+                can [:read, :create], Application
+                can :destroy, Application, user_id: user.id
+                can :update, Application, { user_id: user.id, status: Application::STATUS_IDS[:open] }
 
                 can :read, [Forum::Category, Forum::Forum]
                 can [:read, :create], [Forum::Topic, Forum::Post]
