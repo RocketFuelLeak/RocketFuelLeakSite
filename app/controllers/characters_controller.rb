@@ -91,7 +91,7 @@ class CharactersController < ApplicationController
     # POST /characters/connect
     # POST /characters/connect.json
     def post_connect
-        if current_user.character
+        if current_user.character and not current_user.character.new_record?
             flash[:error] = 'You have already connected a character, please go to your profile page to confirm it.'
             redirect_to root_path
             return
