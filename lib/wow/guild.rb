@@ -13,11 +13,17 @@ module WoW
                 data['members'].map do |member|
                     name = member['character']['name']
                     realm = member['character']['realm']
+                    has_spec = member['character'].key? 'spec'
+                    spec = has_spec ? member['character']['spec']['name'] : 'Unknown'
+                    role = has_spec ? member['character']['spec']['role'] : 'N/A'
                     id = "#{name}-#{realm}"
                     @members[id] = {
                         name: name,
                         realm: realm,
-                        rank: member['rank']
+                        rank: member['rank'],
+                        class_id: member['character']['class'],
+                        spec: spec,
+                        role: role
                     }
                 end
             end

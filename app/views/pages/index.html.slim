@@ -33,108 +33,27 @@
              | To apply for our raiding team now, just use the button below! And again, if you just want to be social,
                there's no need to create an application.
             .text-center = link_to 'Apply now!', new_application_path, class: 'btn btn-success btn-lg'
-        h2 Warlords of Draenor raiding information!
-        p
-         | We've started preparing for raiding and accepted several people as trial raiders.
-           The preliminary list of raiders is as follows.
-        table.table.table-condensed
-            thead
-                tr
-                    th Member
-                    th Status
-                    th Role
-                    th Class
-            tbody
-                tr
-                    td Wóóp
-                    td Confirmed
-                    td DPS
-                    td Shaman
-                tr
-                    td Seylaina
-                    td Confirmed
-                    td Healer
-                    td Druid
-                tr
-                    td Vintra
-                    td Confirmed
-                    td Tank/Healer
-                    td Warrior/Shaman
-                tr
-                    td Tasee
-                    td Confirmed
-                    td Tank/Healer
-                    td Paladin
-                tr
-                    td Ishootthings
-                    td Confirmed
-                    td DPS
-                    td Hunter
-                tr
-                    td Vital
-                    td Confirmed
-                    td Healer
-                    td Paladin
-                tr
-                    td Xantr
-                    td Trial
-                    td DPS
-                    td Druid (balance)
-                tr
-                    td Awesomeninja
-                    td Trial
-                    td DPS
-                    td Rogue
-                tr
-                    td Ironbow
-                    td Trial
-                    td DPS
-                    td Hunter
-                tr
-                    td Reiko
-                    td Trial
-                    td DPS
-                    td Warlock
-                tr
-                    td Hecaton
-                    td Trial
-                    td DPS
-                    td Death Knight
-                tr
-                    td Shisha
-                    td Trial
-                    td DPS
-                    td Hunter
-                tr
-                    td Yjin
-                    td Trial
-                    td DPS
-                    td Priest (shadow)
-                tr
-                    td Kateparry
-                    td Trial
-                    td Tank
-                    td Warrior
-                tr
-                    td Lillokomotic
-                    td Trial
-                    td Tank
-                    td Paladin
-                tr
-                    td Broxigal
-                    td Trial
-                    td Tank
-                    td Death Knight
-                tr
-                    td Hâvoc
-                    td Trial
-                    td Tank
-                    td Death Knight
-                tr
-                    td Jamji
-                    td Trial
-                    td DPS/Healer
-                    td Shaman
+        - cache(cache_key_for_raid_roster) do
+            h2 Warlords of Draenor raiding information!
+            p
+             | We are currently raiding WoD content at all levels.
+               The list of raiders is as follows.
+            table.table.table-condensed
+                thead
+                    tr
+                        th Member
+                        th Status
+                        th Role
+                        th Class
+                tbody
+                    - @roster.each do |entry|
+                        tr
+                            td = entry[:character].name
+                            td = entry[:status]
+                            td = entry[:character].role.capitalize
+                            td
+                             ' #{entry[:character].spec}
+                               #{WoW::Constants::CLASS_NAMES[entry[:character].class_id].to_s.capitalize}
     .col-md-3
         .col-md-12
             h3.text-center News

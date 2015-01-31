@@ -24,6 +24,8 @@ class Character < ActiveRecord::Base
             character.name = wow_char.name
             character.realm = wow_char.realm
             character.class_id = wow_char.class_id
+            character.role = wow_char.role
+            character.spec = wow_char.spec
             character.avatar = wow_char.thumbnail_url
             character.guild_name = wow_char.guild[:name]
             character.guild_realm = wow_char.guild[:realm]

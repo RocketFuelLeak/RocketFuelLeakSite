@@ -6,7 +6,7 @@ module WoW
         PROFILE_URL = "http://%{region}.battle.net/wow/en/character/%{realm}/%{name}/advanced"
         THUMBNAIL_URL = "https://%{region}.battle.net/static-render/%{region}/%{thumbnail}"
 
-        attr_accessor :name, :realm, :class_id, :thumbnail, :thumbnail_url, :guild, :equipment
+        attr_accessor :name, :realm, :class_id, :thumbnail, :thumbnail_url, :guild, :equipment, :role, :spec
 
         def initialize(data)
             @name = data['name']
@@ -21,6 +21,11 @@ module WoW
                 SLOTS.each do |slot|
                     @equipment[slot] = items[slot.to_s]['id'] if items.key? slot.to_s
                 end
+            end
+            if data.key? 'talents'
+                selected = data['talents'].find{|spec| spec['selected']}
+                @role = selected['spec']['role']
+                @spec = selected['spec']['name']
             end
         end
 

@@ -13,6 +13,14 @@ class PagesController < ApplicationController
             @realm_rank = @wowprogress["realm_rank"]
             @ranks_fetched_at = @wowprogress["fetched_at"]
         end
+        @roster = User.includes(:character)
+                      .with_any_role(:raider, :trial)
+                      .map { |user| {status: user.has_role?(:trial) ? 'Trial' : 'Raider', character: user.character} }
+                      .sort do |a, b|
+                        (a[:status] <=> b[:status]).nonzero? ||
+                        (b[:character].role <=> a[:character].role).nonzero? ||
+                        (a[:character].name <=> b[:character].name)
+                      end
     end
 
     def rules
