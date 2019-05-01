@@ -50,8 +50,7 @@ GEM
       sass (>= 3.2.19)
     builder (3.2.2)
     cancancan (1.10.1)
-    capistrano (3.3.5)
-      capistrano-stats (~> 1.1.0)
+    capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
@@ -64,7 +63,6 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capistrano-stats (1.1.1)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     chronic (0.10.2)
@@ -76,7 +74,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.0)
-    colorize (0.7.5)
+    colorize (0.8.1)
+    concurrent-ruby (1.1.5)
     countries (0.10.0)
       currencies (~> 0.4.2)
     country_select (2.1.0)
@@ -130,7 +129,8 @@ GEM
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    i18n (0.7.0)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -169,9 +169,9 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.9.2)
+    net-scp (2.0.0)
+      net-ssh (>= 2.6.5, < 6.0.0)
+    net-ssh (5.2.0)
     newrelic_rpm (3.9.9.275)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -188,8 +188,6 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
-    omniauth-facebook (2.0.0)
-      omniauth-oauth2 (~> 1.2)
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
@@ -249,7 +247,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
-    rake (10.4.2)
+    rake (12.3.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -300,7 +298,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.10)
-    sshkit (1.6.1)
+    sshkit (1.7.1)
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -340,7 +338,7 @@ DEPENDENCIES
   better_errors
   bootstrap-sass (~> 3.3)
   cancancan (~> 1.8)
-  capistrano (~> 3.0)
+  capistrano (~> 3.2.1)
   capistrano-bundler (~> 1.1)
   capistrano-rails (~> 1.1)
   capistrano-rvm (~> 0.1)
@@ -359,7 +357,6 @@ DEPENDENCIES
   lograge
   mail_form
   newrelic_rpm
-  omniauth-facebook
   omniauth-github
   omniauth-google-oauth2
   omniauth-twitter
@@ -378,9 +375,13 @@ DEPENDENCIES
   sitemap_generator
   slim-rails
   sqlite3
+  sshkit (= 1.7.1)
   therubyracer
   turbolinks
   turnout
   uglifier (~> 2.7.0)
   unicorn
   whenever
+
+BUNDLED WITH
+   1.17.3

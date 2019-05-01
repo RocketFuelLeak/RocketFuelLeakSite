@@ -87,7 +87,8 @@ group :development do
     gem 'better_errors'
 
     # Use Capistrano for deployment
-    gem 'capistrano', '~> 3.0', require: false
+    gem 'sshkit', '1.7.1', require: false
+    gem 'capistrano', '~> 3.2.1', require: false
     gem 'capistrano-rails', '~> 1.1', require: false
     gem 'capistrano-bundler', '~> 1.1', require: false
     gem 'capistrano-rvm', '~> 0.1', require: false
