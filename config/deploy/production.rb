@@ -9,18 +9,6 @@ server 'prod.rocketfuelleak.com', user: 'rails', roles: %w{web app db},
         port: 2553
     }
 
-namespace :deploy do
-    Rake::Task["deploy:refresh_sitemaps"].clear
-    after :deploy, :refresh_sitemaps do
-        on roles(:app) do
-            env_rake 'sitemap:refresh'
-        end
-    end
-
-    after :deploy, :update_members
-    after :deploy, :update_rankings
-end
-
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
 # you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)
