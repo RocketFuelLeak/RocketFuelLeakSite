@@ -23,7 +23,7 @@ set :log_level, :info
 #set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/secrets.yml config/github.yml config/facebook.yml config/twitter.yml config/google.yml config/devise.yml config/smtp.yml config/recaptcha.yml config/newrelic.yml config/wowapi.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml config/github.yml config/twitter.yml config/google.yml config/devise.yml config/smtp.yml config/recaptcha.yml config/newrelic.yml config/wowapi.yml}
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -55,7 +55,6 @@ namespace :deploy do
       upload! "config/database.yml.example", "#{shared_path}/config/database.yml"
       upload! "config/secrets.yml.example", "#{shared_path}/config/secrets.yml"
       upload! "config/github.yml.example", "#{shared_path}/config/github.yml"
-      upload! "config/facebook.yml.example", "#{shared_path}/config/facebook.yml"
       upload! "config/twitter.yml.example", "#{shared_path}/config/twitter.yml"
       upload! "config/google.yml.example", "#{shared_path}/config/google.yml"
       upload! "config/devise.yml.example", "#{shared_path}/config/devise.yml"

@@ -1,10 +1,6 @@
-fb_root = null
-fb_events_bound = false
 twttr_events_bound = false
 
 $ ->
-    loadFacebookSDK()
-    bindFacebookEvents() unless fb_events_bound
     bindTwitterEventHandlers() unless twttr_events_bound
     window.___gcfg = {lang: 'en-GB'}
     gapi.plusone.go()
@@ -14,36 +10,6 @@ $ ->
 $(document).on 'ready page:load', ->
     $('.news-post-social-container input.news-post-url-box').on 'focus', ->
         $(this).select()
-
-bindFacebookEvents = ->
-    $(document)
-        .on('page:fetch', saveFacebookRoot)
-        .on('page:change', restoreFacebookRoot)
-        .on('page:load', ->
-            FB?.XFBML.parse()
-        )
-    fb_events_bound = true
-
-saveFacebookRoot = ->
-    fb_root = $('#fb-root').detach()
-
-restoreFacebookRoot = ->
-    if $('#fb-root').length > 0
-        $('#fb-root').replaceWith fb_root
-    else
-        $('body').append fb_root
-
-loadFacebookSDK = ->
-    window.fbAsyncInit = initializeFacebookSDK
-    $.getScript("//connect.facebook.net/en_US/all.js#xfbml=1")
-
-initializeFacebookSDK = ->
-    FB.init
-        appId: "<%= FACEBOOK_CONFIG['app_id'] %>"
-        channelUrl: "//#{window.location.host}/channel.html"
-        status: true
-        cookie: true
-        xfbml: true
 
 bindTwitterEventHandlers = ->
     $(document).on 'page:load', renderTweetButtons

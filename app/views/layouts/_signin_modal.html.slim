@@ -9,9 +9,7 @@
                     .modal-body
                         p Sign in with a provider:
                         p.text-center
-                            = link_to omniauth_authorize_path(resource_name, :facebook), class: 'btn btn-primary' do
-                                i.fa.fa-facebook.fa-2x.fa-fw
-                            =< link_to omniauth_authorize_path(resource_name, :twitter), class: 'btn btn-primary' do
+                            = link_to omniauth_authorize_path(resource_name, :twitter), class: 'btn btn-primary' do
                                 i.fa.fa-twitter.fa-2x.fa-fw
                             =< link_to omniauth_authorize_path(resource_name, :google_oauth2), class: 'btn btn-danger' do
                                 i.fa.fa-google-plus.fa-2x.fa-fw
