@@ -89,24 +89,6 @@ namespace :deploy do
       # end
     end
   end
-
-  after :deploy, :refresh_sitemaps do
-    on roles(:app) do
-      env_rake 'sitemap:refresh:no_ping'
-    end
-  end
-
-  task :update_members do
-    on roles(:app) do
-      env_rake 'wow:update_members'
-    end
-  end
-
-  task :update_rankings do
-    on roles(:app) do
-      env_rake 'wowprogress:update_rankings'
-    end
-  end
 end
 
 namespace :nginx do
